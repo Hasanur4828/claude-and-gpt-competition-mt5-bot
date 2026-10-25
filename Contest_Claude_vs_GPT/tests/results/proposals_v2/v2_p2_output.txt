@@ -1,0 +1,61 @@
+PASS boundary  boundary × offset (60টা: ৬ সময় × ১০ offset, সব tick তাজা)
+      expected: G2 সব সঠিক (P2 v1-এর মতোই)
+      actual:   সঠিক: v1.0 23/60 · P2 v1 60/60 · G2 60/60
+PASS tick_age  tick বয়স 0/120/299/−120 সেকেন্ড = জানা; 301/900 = অজানা (৪ offset × ৬)
+      expected: জানা হলে সঠিক সংখ্যা, অজানা হলে None (UNKNOWN) — কোনো অনুমান নয়
+      actual:   -5h/0s→2 -5h/120s→2 -5h/299s→2 -5h/301s→None -5h/900s→None -5h/-120s→2 0h/0s→2 0h/120s→2 0h/299s→2 0h/301s→None 0h/900s→None 0h/-120s→2 3h/0s→2 3h/120s→2 3h/299s→2 3h/301s→None 3h/900s→None 3h/-120s→2 5.5h/0s→2 5.5h/120s→2 5.5h/299s→2 5.5h/301s→None 5.5h/900s→None 5.5h/-120s→2
+PASS unknown   [G2] কোনো tick নেই
+      expected: None (UNKNOWN)
+      actual:   G2=None · (তুলনা: v1.0=2, P2 v1=3)
+PASS unknown   [G2] সব tick ২০ মিনিট পুরনো
+      expected: None (UNKNOWN)
+      actual:   G2=None · (তুলনা: v1.0=2, P2 v1=3)
+PASS unknown   [G2] ৫:৪৫ ঘণ্টার offset (আধা-ঘণ্টা নয়)
+      expected: None (UNKNOWN)
+      actual:   G2=None · (তুলনা: v1.0=2, P2 v1=3)
+PASS unknown   [G2] অসংগত: BTC তাজা +3h, XAU তাজা +2h
+      expected: None (UNKNOWN)
+      actual:   G2=None · (তুলনা: v1.0=2, P2 v1=3)
+PASS unknown   [G2] অসংগত: BTC +3h, ETH +3.5h
+      expected: None (UNKNOWN)
+      actual:   G2=None · (তুলনা: v1.0=2, P2 v1=3)
+PASS unknown   [G2] XAU ও ETH নেই, শুধু BTC তাজা
+      expected: সঠিক 3
+      actual:   G2=3 · (তুলনা: v1.0=2, P2 v1=3)
+PASS unknown   [G2] XAU পুরনো (সপ্তাহান্তের মতো), BTC তাজা
+      expected: সঠিক 3
+      actual:   G2=3 · (তুলনা: v1.0=2, P2 v1=3)
+PASS unknown   [G2] XAU ঠিক ২ ঘণ্টা ৭ সেকেন্ড পুরনো (তাজা +1h-এর মতো দেখায়), BTC তাজা +3h
+      expected: None (UNKNOWN)
+      actual:   G2=None · (তুলনা: v1.0=2, P2 v1=3)
+PASS unknown   [G2] history_deals_get None
+      expected: None (UNKNOWN); v1.0 ও P2 v1 ০ দেয় (= লস নেই ধরে ট্রেড চালিয়ে যায়)
+      actual:   G2=None · v1.0=0 · P2 v1=0
+PASS unknown   [G2] account_info None
+      expected: None (UNKNOWN); v1.0 ও P2 v1 ০ দেয় (= লস নেই ধরে ট্রেড চালিয়ে যায়)
+      actual:   G2=None · v1.0=0 · P2 v1=0
+PASS dst       [G2] DST: offset +2 তারপর +3
+      expected: দুটোতেই 3
+      actual:   [3, 3]
+PASS evaluate  [G2] evaluate_symbol: সব tick ২০ মিনিট পুরনো (offset অজানা)
+      expected: NO_TRADE / SKIP_DAILY_LOSS_UNKNOWN (v1.0 এগিয়ে যায়)
+      actual:   G2=SKIP_DAILY_LOSS_UNKNOWN · v1.0=NO_RECENT_BOS
+PASS evaluate  [G2] evaluate_symbol: deal history None
+      expected: NO_TRADE / SKIP_DAILY_LOSS_UNKNOWN (v1.0 এগিয়ে যায়)
+      actual:   G2=SKIP_DAILY_LOSS_UNKNOWN · v1.0=NO_RECENT_BOS
+PASS evaluate  [G2] evaluate_symbol: সব ঠিক (offset +3 জানা)
+      expected: SKIP_DAILY_LOSS_UNKNOWN নয়
+      actual:   G2=NO_RECENT_BOS
+PASS ALL       পরীক্ষার আগে-পরে ফাইল SHA-256
+      expected: অপরিবর্তিত
+      actual:   same=True
+{
+ "total": 17,
+ "passed": 17,
+ "sha256": {
+  "v1.0": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+  "P2_v1": "3556dd076812f5293d5b127ccecf5686dda6e7f692af0b07c4a2df6f285efd17",
+  "G2": "64308ee75bd727de0ffcc7ecc12e07a8f92809c78c6f643513a6fea544d7064a"
+ },
+ "SIMULATED_ONLY": true
+}

@@ -22,6 +22,16 @@ VARIANTS = {
     "GPT_COMBINED": {GPTF: G("COMBINED_v1_1_all_four")},
     "GPT_COMBINED+P6b": {GPTF: G("COMBINED_v1_1_all_four"), CLF: CF("P6b_claude_close_verification_plus_tp1_state")},
 }
+ADF = "gpt_contest_adapter.py"
+V2 = os.path.join(P, "v2")
+if os.environ.get("VARIANT_SET") == "v2":          # v2 প্রস্তাব (G2 core + A1 adapter + P6c)
+    VARIANTS = {
+        "v5_active": {},
+        "P6c": {CLF: os.path.join(V2, "P6c_claude_close_tp1_be_reconcile", CLF)},
+        "G2+A1": {GPTF: os.path.join(V2, "G2_gpt_core_combined", GPTF), ADF: os.path.join(V2, "A1_adapter_position_state", ADF)},
+        "G2+A1+P6c": {GPTF: os.path.join(V2, "G2_gpt_core_combined", GPTF), ADF: os.path.join(V2, "A1_adapter_position_state", ADF),
+                      CLF: os.path.join(V2, "P6c_claude_close_tp1_be_reconcile", CLF)},
+    }
 H_BEFORE = {f: sha(os.path.join(PKG, f)) for f in (GPTF, CLF, "contest_preflight.py", "gpt_contest_adapter.py")}
 
 
@@ -57,7 +67,7 @@ for name, repl in VARIANTS.items():
     d = build(name, repl)
     od = os.path.join(OUTD, name)
     os.makedirs(od, exist_ok=True)
-    res = {"files": {f: sha(os.path.join(d, f)) for f in (GPTF, CLF)}}
+    res = {"files": {f: sha(os.path.join(d, f)) for f in (GPTF, CLF, "gpt_contest_adapter.py")}}
     work = os.path.join(od, "sim")
     rc = run([sys.executable, os.path.join(TESTS, "run_contest_sim.py"), d, work], os.path.join(od, "e2e_output.txt"))
     R = json.load(open(os.path.join(work, "sim_report.json"), encoding="utf-8")) if rc == 0 else {}

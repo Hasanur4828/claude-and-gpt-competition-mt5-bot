@@ -1,0 +1,140 @@
+
+=== G2  sha 64308ee75bd727de…  base gpt_liquidity_fibonacci_scalper_v1.py 4d41a0ea7e751760…
+identical parts: 24 | changed: ['GPTLiquidityFibonacciScalper.__init__', 'GPTLiquidityFibonacciScalper._daily_loss_count', 'GPTLiquidityFibonacciScalper._has_position', 'GPTLiquidityFibonacciScalper._send_order', 'GPTLiquidityFibonacciScalper._setup', 'GPTLiquidityFibonacciScalper.evaluate_symbol'] | added: ['GPTLiquidityFibonacciScalper._check_exec_unknown', 'GPTLiquidityFibonacciScalper._deal_window', 'GPTLiquidityFibonacciScalper._exec_snapshot', 'GPTLiquidityFibonacciScalper._execution_unknown', 'GPTLiquidityFibonacciScalper._fill_info', 'GPTLiquidityFibonacciScalper._load_exec_state', 'GPTLiquidityFibonacciScalper._reconcile', 'GPTLiquidityFibonacciScalper._save_exec_state', 'GPTLiquidityFibonacciScalper._server_offset_seconds', 'assign EXEC_STATE_FILE', 'assign MAX_TICK_AGE_SEC', 'assign OFFSET_SYMBOLS', 'assign UNCERTAIN_RETCODES', 'assign UNKNOWN_RESOLVE_SEC', 'import import json', 'import import os'] | removed: []
+  [GPTLiquidityFibonacciScalper.__init__] statement diff:
+     + self._exec_state_file = EXEC_STATE_FILE
+     + self._exec_state_error: Optional[str] = None
+     + self._exec_unknown: Dict[str, Dict[str, Any]] = self._load_exec_state()
+  [GPTLiquidityFibonacciScalper._daily_loss_count] statement diff:
+     - def _daily_loss_count(symbols: tuple) -> int:
+     - deals = mt5.history_deals_get(start, now)
+     - return 0
+     - return 0
+     + def _daily_loss_count(symbols: tuple) -> Optional[int]:
+     + """[P2r] Returns today's (UTC day) losing-position count, or None = UNKNOWN
+     + (offset unknown/inconsistent, deal history or account unavailable).
+     + The caller must not open new trades while the count is UNKNOWN."""
+     + offset = GPTLiquidityFibonacciScalper._server_offset_seconds()
+     + if offset is None:
+     + return None
+     + q_from = datetime.fromtimestamp(start.timestamp() - 86400, tz=timezone.utc)
+     + q_to = datetime.fromtimestamp(now.timestamp() + 2 * 86400, tz=timezone.utc)
+     + deals = mt5.history_deals_get(q_from, q_to)
+     + return None
+     + lo = start.timestamp() + offset
+     + deals = [d for d in deals if float(getattr(d, 'time', 0)) >= lo]
+     + return None
+  [GPTLiquidityFibonacciScalper._has_position] statement diff:
+     - def _has_position(self, symbol: str) -> bool:
+     - return False
+     + def _has_position(self, symbol: str) -> Optional[bool]:
+     + """[H] True = position(s) found, False = query OK and no position,
+     + None = query failed / state UNKNOWN (caller must not trade)."""
+     + return None
+  [GPTLiquidityFibonacciScalper._send_order] statement diff:
+     - if result is not None and result.retcode in (mt5.TRADE_RETCODE_DONE, mt5.TRADE_RETCODE_PLACED, mt5.TRADE_RETCODE_DONE_PARTIAL):
+     - return {'status': 'OPENED', 'ticket': int(result.order), 'deal': int(result.deal), 'symbol': symbol, 'side': side, 'volume': volume, 'entry': price, 'sl': sl, 'tp': tp, 'risk_percent': self.cfg.risk_percent, 'magic': MAGIC}
+     + blocked = self._check_exec_unknown(symbol)
+     + if blocked is not None:
+     + return {'status': 'SKIPPED', 'reason': blocked['reason'], 'reconcile': blocked.get('reconcile')}
+     + if not (float(tick.bid) > 0 and float(tick.ask) > 0 and (float(tick.ask) >= float(tick.bid))):
+     + return {'status': 'SKIPPED', 'reason': 'SKIP_INVALID_TICK'}
+     + offset = self._server_offset_seconds()
+     + if offset is None:
+     + return {'status': 'SKIPPED', 'reason': 'SKIP_TICK_AGE_UNKNOWN'}
+     + tick_age = datetime.now(timezone.utc).timestamp() + offset - float(getattr(tick, 'time', 0))
+     + if tick_age > MAX_TICK_AGE_SEC:
+     + return {'status': 'SKIPPED', 'reason': 'SKIP_STALE_TICK', 'tick_age_sec': round(tick_age, 1)}
+     + snap = self._exec_snapshot(symbol)
+     + if snap is None:
+     + return {'status': 'SKIPPED', 'reason': 'SKIP_PRECHECK_QUERY_FAILED', 'last_error': str(mt5.last_error())}
+     + if result is None or result.retcode in UNCERTAIN_RETCODES:
+     + return self._execution_unknown(symbol, snap, {'reason': 'ORDER_SEND_NONE' if result is None else f'UNCERTAIN_RETCODE_{result.retcode}', 'symbol': symbol, 'side': side, 'requested_volume': volume, 'type_filling': filling, 'magic': MAGIC})
+     + if result.retcode in (mt5.TRADE_RETCODE_DONE, mt5.TRADE_RETCODE_PLACED, mt5.TRADE_RETCODE_DONE_PARTIAL):
+     + out = {'status': 'OPENED', 'ticket': int(result.order), 'deal': int(result.deal), 'symbol': symbol, 'side': side, 'volume': volume, 'entry': price, 'sl': sl, 'tp': tp, 'risk_percent': self.cfg.risk_percent, 'magic': MAGIC}
+     + out.update(self._fill_info(result, volume))
+     + return out
+  [GPTLiquidityFibonacciScalper._setup] statement diff:
+     - entry = float(mt5.symbol_info_tick(symbol).ask)
+     + tick = mt5.symbol_info_tick(symbol)
+     + if tick is None:
+     + return {'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}
+     + entry = float(tick.ask)
+  [GPTLiquidityFibonacciScalper.evaluate_symbol] statement diff:
+     - if self._daily_loss_count(self.cfg.symbols) >= self.cfg.max_daily_losses:
+     - if self._has_position(symbol):
+     + losses = self._daily_loss_count(self.cfg.symbols)
+     + if losses is None:
+     + return {'signal': 'NO_TRADE', 'reason': 'SKIP_DAILY_LOSS_UNKNOWN', 'last_error': str(mt5.last_error())}
+     + if losses >= self.cfg.max_daily_losses:
+     + blocked = self._check_exec_unknown(symbol)
+     + if blocked is not None:
+     + return blocked
+     + has_pos = self._has_position(symbol)
+     + if has_pos is None:
+     + return {'signal': 'NO_TRADE', 'reason': 'SKIP_POSITION_STATE_UNKNOWN', 'last_error': str(mt5.last_error())}
+     + if has_pos:
+SCOPE OK: True
+
+=== A1  sha 0709cf15dd2f3bad…  base gpt_contest_adapter.py bfb2b4aef7626c7b…
+identical parts: 8 | changed: ['GPTContestAdapter._has_position', 'module docstring'] | added: ['import from typing import Any, Dict, List, Optional'] | removed: ['import from typing import Any, Dict, List']
+  [GPTContestAdapter._has_position] statement diff:
+     - def _has_position(self, symbol: str) -> bool:
+     - positions = mt5.positions_get(symbol=symbol) or ()
+     + def _has_position(self, symbol: str) -> Optional[bool]:
+     + positions = mt5.positions_get(symbol=symbol)
+     + if positions is None:
+     + return None
+SCOPE OK: True
+
+=== P6c  sha d10f490a9609694f…  base claude_pullback_v1.py 0516a96f508db10a…
+identical parts: 81 | changed: ['ClaudePullbackV1.__init__', 'ClaudePullbackV1._close', 'ClaudePullbackV1._manage_open_trades', 'ClaudePullbackV1.manage_open_trades'] | added: ['ClaudePullbackV1._adopt_orphans', 'ClaudePullbackV1._confirm_close', 'assign (CLOSE_CONFIRM_TRIES, CLOSE_CONFIRM_DELAY)', 'assign BE_MAX_TRIES', 'import import time'] | removed: []
+  [ClaudePullbackV1.__init__] statement diff:
+     + self.sleep = time.sleep
+  [ClaudePullbackV1._close] statement diff:
+     - ok = self._send({'action': mt5.TRADE_ACTION_DEAL, 'symbol': pos.symbol, 'volume': volume, 'type': otype}, pos.symbol, d, position=pos.ticket) is not None
+     - self.log(f'[{NAME}] {pos.symbol} #{pos.ticket} {reason} {volume} lot')
+     + before = float(pos.volume)
+     + sent = self._send({'action': mt5.TRADE_ACTION_DEAL, 'symbol': pos.symbol, 'volume': volume, 'type': otype}, pos.symbol, d, position=pos.ticket) is not None
+     + if not sent:
+     + return False
+     + ok, state = self._confirm_close(int(pos.ticket), before, float(volume))
+     + self.log(f'[{NAME}] {pos.symbol} #{pos.ticket} {reason} {volume} lot — confirmed ({state})')
+     + else:
+     + self.log(f'[{NAME}] WARNING {pos.symbol} #{pos.ticket} {reason}: broker reported success but close NOT confirmed ({state}) — not counted as done')
+     + self.notify(f'⚠️ {NAME}: {pos.symbol} #{pos.ticket} {reason} broker-এ নিশ্চিত হয়নি ({state})')
+  [ClaudePullbackV1._manage_open_trades] statement diff:
+     - self._close(pos, plan[0], 'EXIT_TP1')
+     - pos2 = self._position(int(key))
+     - if pos2 is not None:
+     - self._modify_sl(pos2, round(t['entry'], int(si.digits)), pos2.tp)
+     + if t.get('tp1_partial') == 'unconfirmed' and float(pos.volume) < float(t['lot']) - 1e-09:
+     + t['tp1_partial'] = 'ok (reconciled)'
+     + changed = True
+     + self.log(f"[{NAME}] {t['symbol']} #{key} TP1 partial close reconciled: volume now {pos.volume}")
+     + t['tp1_partial'] = 'ok' if self._close(pos, plan[0], 'EXIT_TP1') else 'unconfirmed'
+     + t['tp1_partial'] = 'skipped'
+     + t['be_pending'], t['be_tries'] = (True, 0)
+     + self._save()
+     + if t.get('be_pending'):
+     + pos2 = self._position(int(key))
+     + if pos2 is None:
+     + t['be_pending'] = False
+     + elif self._modify_sl(pos2, round(t['entry'], int(si.digits)), pos2.tp):
+     + t['be_pending'] = False
+     + else:
+     + t['be_tries'] = int(t.get('be_tries', 0)) + 1
+     + self.log(f"[{NAME}] WARNING {t['symbol']} #{key} SL→BE failed (try {t['be_tries']}/{BE_MAX_TRIES})")
+     + if t['be_tries'] >= BE_MAX_TRIES:
+     + t['be_pending'] = False
+     + self.notify(f"⚠️ {NAME}: {t['symbol']} #{key} SL→breakeven বসানো যায়নি — হাতে দেখুন")
+     + changed = True
+  [ClaudePullbackV1.manage_open_trades] statement diff:
+     - if not self.trades:
+     - return
+     + self._adopt_orphans()
+     + if not self.trades:
+     + return
+SCOPE OK: True
+
+ALL SCOPE OK: True

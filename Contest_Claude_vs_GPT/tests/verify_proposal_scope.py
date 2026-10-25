@@ -33,6 +33,24 @@ SPEC = [
      {"run_checks"}, set()),
 ]
 
+if os.environ.get("VARIANT_SET") == "v2":
+    V2 = os.path.join(P, "v2")
+    SPEC = [
+        ("G2", G10, os.path.join(V2, "G2_gpt_core_combined", "gpt_liquidity_fibonacci_scalper_v1.py"),
+         {K + "__init__", K + "_setup", K + "_daily_loss_count", K + "_has_position", K + "_send_order", K + "evaluate_symbol"},
+         {K + "_server_offset_seconds", K + "_deal_window", K + "_exec_snapshot", K + "_reconcile", K + "_execution_unknown",
+          K + "_check_exec_unknown", K + "_fill_info", "assign UNCERTAIN_RETCODES", "assign UNKNOWN_RESOLVE_SEC",
+          "assign MAX_TICK_AGE_SEC", "assign OFFSET_SYMBOLS", "assign EXEC_STATE_FILE", "import import json",
+          "import import os", K + "_load_exec_state", K + "_save_exec_state"}),
+        ("A1", os.path.join(PKG, "gpt_contest_adapter.py"), os.path.join(V2, "A1_adapter_position_state", "gpt_contest_adapter.py"),
+         {"GPTContestAdapter._has_position", "module docstring"},
+         {"import from typing import Any, Dict, List, Optional"}, {"import from typing import Any, Dict, List"}),
+        ("P6c", C5, os.path.join(V2, "P6c_claude_close_tp1_be_reconcile", "claude_pullback_v1.py"),
+         {CK + "__init__", CK + "_close", CK + "_manage_open_trades", CK + "manage_open_trades"},
+         {CK + "_confirm_close", CK + "_adopt_orphans", "import import time",
+          "assign (CLOSE_CONFIRM_TRIES, CLOSE_CONFIRM_DELAY)", "assign BE_MAX_TRIES"}),
+    ]
+
 
 def parts(path):
     tree = ast.parse(open(path, encoding="utf-8").read())
@@ -62,12 +80,16 @@ def parts(path):
                 key = "assign " + ast.unparse(node.target)
             elif isinstance(node, (ast.Import, ast.ImportFrom)):
                 key = "import " + ast.unparse(node)
+            elif isinstance(node, ast.If):
+                key = "if " + ast.unparse(node.test)          # যেমন: if __name__ == '__main__' (অবস্থান নয়, বিষয়বস্তু দিয়ে চেনা)
             out[key] = ast.dump(node, include_attributes=False)
     return out, src
 
 
 RES, ALL_OK = {}, True
-for pid, a, b, allowed_changed, allowed_new in SPEC:
+for spec in SPEC:
+    pid, a, b, allowed_changed, allowed_new = spec[:5]
+    allowed_removed = spec[5] if len(spec) > 5 else set()
     pa, sa = parts(a)
     pb, sb = parts(b)
     same, changed, added, removed = [], [], [], []
@@ -85,7 +107,7 @@ for pid, a, b, allowed_changed, allowed_new in SPEC:
                  if not l.startswith(("---", "+++", "@@"))]
             stmt[k] = {"added_or_changed": [l[1:].strip() for l in d if l.startswith("+")],
                        "removed_or_changed": [l[1:].strip() for l in d if l.startswith("-")]}
-    ok = set(changed) <= allowed_changed and set(added) <= allowed_new and not removed
+    ok = set(changed) <= allowed_changed and set(added) <= allowed_new and set(removed) <= allowed_removed
     ALL_OK &= ok
     RES[pid] = {"base": os.path.basename(a), "base_sha256": hashlib.sha256(open(a, "rb").read()).hexdigest(),
                 "proposal_sha256": hashlib.sha256(open(b, "rb").read()).hexdigest(),

@@ -1,0 +1,218 @@
+PASS setup evaluate_symbol signal bar খোঁজা (v1.0, BTC)
+      expected: অন্তত ১টা
+      actual:   [(3080, 'BUY'), (3380, 'BUY')]
+PASS H    [core v1.0] GPT পজিশন খোলা আছে, positions_get None, signal bar
+      expected: আগের/অসম্পূর্ণ অবস্থা দেখানো: 'পজিশন নেই' ধরে signal দেয় (run_once-এ দ্বিতীয় order যেত)
+      actual:   signal=BUY reason=H1_TREND + RECENT_BOS + FIB_PULLBACK + LIQUIDITY_SWEEP + CLOSE_CONFIRM
+PASS H    [core G2] GPT পজিশন খোলা আছে, positions_get None, signal bar
+      expected: নিরাপদ: SKIP_POSITION_STATE_UNKNOWN, signal নয়
+      actual:   signal=NO_TRADE reason=SKIP_POSITION_STATE_UNKNOWN
+PASS H    [adapter active + v1.0] GPT পজিশন খোলা আছে, positions_get None, signal bar
+      expected: আগের/অসম্পূর্ণ অবস্থা দেখানো: 'পজিশন নেই' ধরে signal দেয় (run_once-এ দ্বিতীয় order যেত)
+      actual:   signal=BUY reason=H1_TREND + RECENT_BOS + FIB_PULLBACK + LIQUIDITY_SWEEP + CLOSE_CONFIRM
+PASS H    [adapter active + G2] GPT পজিশন খোলা আছে, positions_get None, signal bar
+      expected: আগের/অসম্পূর্ণ অবস্থা দেখানো: 'পজিশন নেই' ধরে signal দেয় (run_once-এ দ্বিতীয় order যেত)
+      actual:   signal=BUY reason=H1_TREND + RECENT_BOS + FIB_PULLBACK + LIQUIDITY_SWEEP + CLOSE_CONFIRM
+PASS H    [adapter A1 + v1.0] GPT পজিশন খোলা আছে, positions_get None, signal bar
+      expected: আগের/অসম্পূর্ণ অবস্থা দেখানো: 'পজিশন নেই' ধরে signal দেয় (run_once-এ দ্বিতীয় order যেত)
+      actual:   signal=BUY reason=H1_TREND + RECENT_BOS + FIB_PULLBACK + LIQUIDITY_SWEEP + CLOSE_CONFIRM
+PASS H    [adapter A1 + G2] GPT পজিশন খোলা আছে, positions_get None, signal bar
+      expected: নিরাপদ: SKIP_POSITION_STATE_UNKNOWN, signal নয়
+      actual:   signal=NO_TRADE reason=SKIP_POSITION_STATE_UNKNOWN
+PASS H    [core G2] তিন অবস্থা: পজিশন আছে / query ঠিক কিন্তু নেই / query ব্যর্থ
+      expected: SKIP_POSITION_EXISTS · signal দেয় · _has_position: False তারপর None
+      actual:   SKIP_POSITION_EXISTS · BUY · False / None
+PASS H    [adapter A1 + G2] তিন অবস্থা: পজিশন আছে / query ঠিক কিন্তু নেই / query ব্যর্থ
+      expected: SKIP_POSITION_EXISTS · signal দেয় · _has_position: False তারপর None
+      actual:   SKIP_POSITION_EXISTS · BUY · False / None
+PASS H    [adapter A1 + G2] শুধু Claude-এর পজিশন আছে
+      expected: উপেক্ষা করে signal দেয় (আগের মতো)
+      actual:   signal=BUY
+PASS H    [G2] _send_order: pre-send snapshot-এ positions_get None
+      expected: SKIPPED SKIP_PRECHECK_QUERY_FAILED, ০ order
+      actual:   status=SKIPPED reason=SKIP_PRECHECK_QUERY_FAILED orders=0
+PASS H    [G2] _send_order: pre-send snapshot-এ history_deals_get None
+      expected: SKIPPED SKIP_PRECHECK_QUERY_FAILED, ০ order
+      actual:   status=SKIPPED reason=SKIP_PRECHECK_QUERY_FAILED orders=0
+PASS P1r  [v1.0] None অথচ খোলে (BUY)
+      expected: আগের অবস্থা: ৩ send, ৩ পজিশন
+      actual:   sends=3 positions=3 status=FAILED
+PASS P1r  [G2] None অথচ খোলে (BUY)
+      expected: ১ send, ১ পজিশন, reconcile করে OPENED_RECONCILED, filled = broker-এর আসল, block নেই
+      actual:   sends=1 positions=1 status=OPENED_RECONCILED filled=0.29 real=0.29 pos_ids=[5001] block=False
+PASS P1r  [v1.0] None অথচ খোলে (SELL)
+      expected: আগের অবস্থা: ৩ send, ৩ পজিশন
+      actual:   sends=3 positions=3 status=FAILED
+PASS P1r  [G2] None অথচ খোলে (SELL)
+      expected: ১ send, ১ পজিশন, reconcile করে OPENED_RECONCILED, filled = broker-এর আসল, block নেই
+      actual:   sends=1 positions=1 status=OPENED_RECONCILED filled=0.29 real=0.29 pos_ids=[5001] block=False
+PASS P1r  [G2] None, কিছুই খোলেনি
+      expected: status UNKNOWN, ১ send, block বসে, last_error আছে
+      actual:   status=UNKNOWN sends=1 block=True reconcile=NOT_FOUND
+PASS P1r  [G2] block থাকা অবস্থায় (০ সেকেন্ড) আবার order / evaluate
+      expected: SKIPPED SKIP_EXECUTION_UNKNOWN, নতুন send নয়; evaluate NO_TRADE
+      actual:   send2=SKIPPED/SKIP_EXECUTION_UNKNOWN sends=1 evaluate=NO_TRADE/SKIP_EXECUTION_UNKNOWN
+PASS P1r  [G2] ≥৬০ সেকেন্ড পরে, query ঠিক, কিছু পাওয়া যায়নি
+      expected: একবার EXECUTION_UNKNOWN_RESOLVED_NOT_EXECUTED (NO_TRADE), তারপর block নেই
+      actual:   eval=EXECUTION_UNKNOWN_RESOLVED_NOT_EXECUTED block=False next=BUY/H1_TREND + RECENT_BOS + FIB_PULLBACK + LIQUIDITY_SWEEP + CLOSE_CONFIRM
+PASS P1r  [G2] None, order পরে দেরিতে খোলে (৬০ সেকেন্ডের মধ্যে)
+      expected: প্রথমে UNKNOWN; পরের evaluate-এ EXECUTION_UNKNOWN_RESOLVED_OPENED; তারপর SKIP_POSITION_EXISTS; মোট ১ পজিশন
+      actual:   UNKNOWN → EXECUTION_UNKNOWN_RESOLVED_OPENED → SKIP_POSITION_EXISTS · positions=1 bot sends=1 (broker পরে নিজে ১টা execute করেছে)
+PASS P1r  [G2] UNKNOWN-এর পরে reconcile query-ও ব্যর্থ (৪৫০ সেকেন্ড)
+      expected: block থাকে (SKIP_EXECUTION_UNKNOWN, reconcile UNKNOWN); query ঠিক হলে তবেই মীমাংসা
+      actual:   while failing: SKIP_EXECUTION_UNKNOWN/UNKNOWN · after: EXECUTION_UNKNOWN_RESOLVED_NOT_EXECUTED
+PASS P1r  [G2] None, order খুলে সাথে সাথে SL-এ বন্ধ (পজিশন নেই, শুধু deal)
+      expected: deal history থেকে OPENED_RECONCILED, still_open False, block নেই
+      actual:   status=OPENED_RECONCILED still_open=False deals=[5002] block=False
+PASS P1r  [v1.0] retcode 10031, broker-এ আসলে খোলে
+      expected: আগের অবস্থা: পরের filling-এ আবার পাঠায় (৩ send) → ৩ পজিশন
+      actual:   sends=3 positions=3 status=FAILED
+PASS P1r  [G2] retcode 10031, broker-এ আসলে খোলে
+      expected: ১ send, OPENED_RECONCILED, পজিশন ১
+      actual:   sends=1 positions=1 status=OPENED_RECONCILED reason=UNCERTAIN_RETCODE_10031
+PASS P1r  [v1.0] retcode 10031, broker-এ খোলে না
+      expected: আগের অবস্থা: পরের filling-এ আবার পাঠায় (৩ send)
+      actual:   sends=3 positions=0 status=FAILED
+PASS P1r  [G2] retcode 10031, broker-এ খোলে না
+      expected: ১ send, UNKNOWN, পজিশন ০
+      actual:   sends=1 positions=0 status=UNKNOWN reason=UNCERTAIN_RETCODE_10031
+PASS P1r  [v1.0] retcode 10012, broker-এ আসলে খোলে
+      expected: আগের অবস্থা: পরের filling-এ আবার পাঠায় (৩ send) → ৩ পজিশন
+      actual:   sends=3 positions=3 status=FAILED
+PASS P1r  [G2] retcode 10012, broker-এ আসলে খোলে
+      expected: ১ send, OPENED_RECONCILED, পজিশন ১
+      actual:   sends=1 positions=1 status=OPENED_RECONCILED reason=UNCERTAIN_RETCODE_10012
+PASS P1r  [v1.0] retcode 10012, broker-এ খোলে না
+      expected: আগের অবস্থা: পরের filling-এ আবার পাঠায় (৩ send)
+      actual:   sends=3 positions=0 status=FAILED
+PASS P1r  [G2] retcode 10012, broker-এ খোলে না
+      expected: ১ send, UNKNOWN, পজিশন ০
+      actual:   sends=1 positions=0 status=UNKNOWN reason=UNCERTAIN_RETCODE_10012
+PASS P1r  [G2] স্বাভাবিক FOK BUY: v1.0-এর সাথে তুলনা
+      expected: একই request ক্রম ও ফল (নতুন fill key বাদে)
+      actual:   v1.0 OPENED sends=1 · G2 OPENED sends=1 · same=True
+PASS P1r  [G2] স্বাভাবিক FOK SELL: v1.0-এর সাথে তুলনা
+      expected: একই request ক্রম ও ফল (নতুন fill key বাদে)
+      actual:   v1.0 OPENED sends=1 · G2 OPENED sends=1 · same=True
+PASS P1r  [G2] শুধু RETURN (FOK, IOC → 10030) BUY: v1.0-এর সাথে তুলনা
+      expected: একই request ক্রম ও ফল (নতুন fill key বাদে)
+      actual:   v1.0 OPENED sends=3 · G2 OPENED sends=3 · same=True
+PASS P1r  [G2] শুধু RETURN (FOK, IOC → 10030) SELL: v1.0-এর সাথে তুলনা
+      expected: একই request ক্রম ও ফল (নতুন fill key বাদে)
+      actual:   v1.0 OPENED sends=3 · G2 OPENED sends=3 · same=True
+PASS P1r  [G2] কোনো filling গ্রহণ নয় BUY: v1.0-এর সাথে তুলনা
+      expected: একই request ক্রম ও ফল (নতুন fill key বাদে)
+      actual:   v1.0 FAILED sends=3 · G2 FAILED sends=3 · same=True
+PASS P1r  [G2] কোনো filling গ্রহণ নয় SELL: v1.0-এর সাথে তুলনা
+      expected: একই request ক্রম ও ফল (নতুন fill key বাদে)
+      actual:   v1.0 FAILED sends=3 · G2 FAILED sends=3 · same=True
+PASS P3r  [G2] আংশিক fill (DONE_PARTIAL)
+      expected: fill_status PARTIAL, source deal_history, filled = broker-এর আসল (অজানা হলে None)
+      actual:   requested=0.29 filled=0.14 real=0.14 status=PARTIAL source=deal_history position_id=5001
+PASS P3r  [G2] result-এ volume নেই (deal আছে)
+      expected: fill_status FULL, source deal_history, filled = broker-এর আসল (অজানা হলে None)
+      actual:   requested=0.29 filled=0.29 real=0.29 status=FULL source=deal_history position_id=5001
+PASS P3r  [G2] আংশিক + result-এ volume নেই
+      expected: fill_status PARTIAL, source deal_history, filled = broker-এর আসল (অজানা হলে None)
+      actual:   requested=0.29 filled=0.14 real=0.14 status=PARTIAL source=deal_history position_id=5001
+PASS P3r  [G2] result-এ ভুল deal নম্বর, volume আছে
+      expected: fill_status FULL, source order_result, filled = broker-এর আসল (অজানা হলে None)
+      actual:   requested=0.29 filled=0.29 real=0.29 status=FULL source=order_result position_id=None
+PASS P3r  [G2] ভুল deal নম্বর + volume নেই
+      expected: fill_status UNKNOWN_FILL, source None, filled = broker-এর আসল (অজানা হলে None)
+      actual:   requested=0.29 filled=None real=0.29 status=UNKNOWN_FILL source=None position_id=None
+PASS P3r  [G2] স্বাভাবিক
+      expected: fill_status FULL, source deal_history, filled = broker-এর আসল (অজানা হলে None)
+      actual:   requested=0.29 filled=0.29 real=0.29 status=FULL source=deal_history position_id=5001
+PASS P3r  [G2] broker সব filling প্রত্যাখ্যান করে
+      expected: FAILED, কোনো filled_volume দাবি নেই, ০ পজিশন
+      actual:   status=FAILED retcode=10030 filled=False positions=0
+PASS P4r  [G2] BTCUSDm bar 1535: BUY setup-এ tick None
+      expected: NO_TRADE / SKIP_NO_TICK, exception নয়, ০ order
+      actual:   result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'} err=None orders=0
+PASS P4r  [G2] BTCUSDm bar 1560: BUY setup-এ tick None
+      expected: NO_TRADE / SKIP_NO_TICK, exception নয়, ০ order
+      actual:   result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'} err=None orders=0
+PASS P4r  [G2] BTCUSDm bar 2322: BUY setup-এ tick None
+      expected: NO_TRADE / SKIP_NO_TICK, exception নয়, ০ order
+      actual:   result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'} err=None orders=0
+PASS P4r  [G2] XAUUSDm bar 515: BUY setup-এ tick None
+      expected: NO_TRADE / SKIP_NO_TICK, exception নয়, ০ order
+      actual:   result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'} err=None orders=0
+PASS P4r  [G2] XAUUSDm bar 1066: BUY setup-এ tick None
+      expected: NO_TRADE / SKIP_NO_TICK, exception নয়, ০ order
+      actual:   result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'} err=None orders=0
+PASS P4r  [G2] XAUUSDm bar 1447: BUY setup-এ tick None
+      expected: NO_TRADE / SKIP_NO_TICK, exception নয়, ০ order
+      actual:   result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'} err=None orders=0
+PASS P4r  [G2] _send_order: ask = 0
+      expected: SKIP_INVALID_TICK, ০ order
+      actual:   status=SKIPPED reason=SKIP_INVALID_TICK orders=0
+PASS P4r  [G2] _send_order: bid < 0
+      expected: SKIP_INVALID_TICK, ০ order
+      actual:   status=SKIPPED reason=SKIP_INVALID_TICK orders=0
+PASS P4r  [G2] _send_order: ask < bid
+      expected: SKIP_INVALID_TICK, ০ order
+      actual:   status=SKIPPED reason=SKIP_INVALID_TICK orders=0
+PASS P4r  [G2] _send_order: BTC tick ৩০০ সেকেন্ড পুরনো
+      expected: SKIP_STALE_TICK, ০ order
+      actual:   status=SKIPPED reason=SKIP_STALE_TICK orders=0
+PASS P4r  [G2] _send_order: BTC tick ১২১ সেকেন্ড পুরনো
+      expected: SKIP_STALE_TICK, ০ order
+      actual:   status=SKIPPED reason=SKIP_STALE_TICK orders=0
+PASS P4r  [G2] _send_order: সব tick ২০ মিনিট পুরনো (offset অজানা)
+      expected: SKIP_TICK_AGE_UNKNOWN, ০ order
+      actual:   status=SKIPPED reason=SKIP_TICK_AGE_UNKNOWN orders=0
+PASS P4r  [G2] _send_order: BTC tick ৬০ সেকেন্ড পুরনো
+      expected: OPENED
+      actual:   status=OPENED reason=None orders=1
+PASS P4r  [G2] _send_order: BTC tick ১২০ সেকেন্ড পুরনো
+      expected: OPENED
+      actual:   status=OPENED reason=None orders=1
+PASS EQ   [G2] আচরণগত সমতা: 7908টা _setup/evaluate_symbol কল
+      expected: v1.0-এর সাথে ০ পার্থক্য
+      actual:   পার্থক্য=0, v1.0 signal=3
+PASS ALL  পরীক্ষার আগে-পরে ফাইল SHA-256
+      expected: অপরিবর্তিত
+      actual:   {'v1.0': '4d41a0ea7e751760', 'G2': '64308ee75bd727de', 'adapter_active': 'bfb2b4aef7626c7b', 'A1': '0709cf15dd2f3bad'} same=True
+{
+ "total": 59,
+ "passed": 59,
+ "per_group": {
+  "setup": [
+   1,
+   1
+  ],
+  "H": [
+   11,
+   11
+  ],
+  "P1r": [
+   24,
+   24
+  ],
+  "P3r": [
+   7,
+   7
+  ],
+  "P4r": [
+   14,
+   14
+  ],
+  "EQ": [
+   1,
+   1
+  ],
+  "ALL": [
+   1,
+   1
+  ]
+ },
+ "sha256": {
+  "v1.0": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+  "G2": "64308ee75bd727de0ffcc7ecc12e07a8f92809c78c6f643513a6fea544d7064a",
+  "adapter_active": "bfb2b4aef7626c7bc65752c2fbb994a775d7df629fd3c71c4405571f4529f436",
+  "A1": "0709cf15dd2f3badddf0eeba6f8c723d275e9c8fca04dae6cb9579525b358dbc"
+ },
+ "SIMULATED_ONLY": true
+}

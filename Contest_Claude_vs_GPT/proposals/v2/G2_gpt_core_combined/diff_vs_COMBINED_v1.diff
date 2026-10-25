@@ -1,0 +1,372 @@
+--- COMBINED_v1/gpt_liquidity_fibonacci_scalper_v1.py
++++ G2/gpt_liquidity_fibonacci_scalper_v1.py
+@@ -29,6 +29,8 @@
+ 
+ from __future__ import annotations
+ 
++import json
++import os
+ from dataclasses import dataclass
+ from datetime import datetime, timezone
+ from typing import Any, Dict, Optional, List
+@@ -41,6 +43,14 @@
+ MAGIC = 26102402
+ ORDER_COMMENT = "GPT_LF_SCALP_v1"
+ 
++# [v2 proposal] execution-safety constants (no strategy parameter changed)
++UNCERTAIN_RETCODES = (10012, 10031)   # TRADE_RETCODE_TIMEOUT, TRADE_RETCODE_CONNECTION: outcome not certain
++UNKNOWN_RESOLVE_SEC = 60              # [P1r] min. age before "nothing found" may clear an UNKNOWN order
++MAX_TICK_AGE_SEC = 120                # [P4r] never send an order from a tick older than this
++OFFSET_SYMBOLS = ("BTCUSDm", "XAUUSDm", "ETHUSDm")
++# [P1r] unresolved-order blocks survive a restart (file next to this module; written only when a block exists)
++EXEC_STATE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gpt_exec_unknown_state.json")
++
+ 
+ @dataclass
+ class StrategyConfig:
+@@ -72,6 +82,38 @@
+     def __init__(self, config: Optional[StrategyConfig] = None):
+         self.cfg = config or StrategyConfig()
+         self._last_m15_bar: Dict[str, int] = {}
++        # [P1r] symbol -> unresolved order whose outcome is unknown; blocks new orders on that symbol
++        self._exec_state_file = EXEC_STATE_FILE
++        self._exec_state_error: Optional[str] = None
++        self._exec_unknown: Dict[str, Dict[str, Any]] = self._load_exec_state()
++
++    def _load_exec_state(self) -> Dict[str, Dict[str, Any]]:
++        """[P1r] Missing file = no unresolved orders. Unreadable file = state UNKNOWN:
++        no new orders on any symbol until the file is checked (fail safe)."""
++        try:
++            with open(self._exec_state_file, "r", encoding="utf-8") as f:
++                data = json.load(f)
++            if not isinstance(data, dict):
++                raise ValueError("not a JSON object")
++            return data
++        except FileNotFoundError:
++            return {}
++        except Exception as e:
++            self._exec_state_error = f"{type(e).__name__}: {e}"
++            return {}
++
++    def _save_exec_state(self) -> None:
++        """[P1r] Atomic write; the file is removed when no block remains."""
++        if not self._exec_unknown:
++            try:
++                os.remove(self._exec_state_file)
++            except FileNotFoundError:
++                pass
++            return
++        tmp = self._exec_state_file + ".tmp"
++        with open(tmp, "w", encoding="utf-8") as f:
++            json.dump(self._exec_unknown, f, indent=1, default=str)
++        os.replace(tmp, self._exec_state_file)
+ 
+     # ---------- Market data / indicators ----------
+ 
+@@ -353,46 +395,49 @@
+ 
+     @staticmethod
+     def _server_offset_seconds() -> Optional[int]:
+-        """v1.1 helper: broker server time minus UTC, rounded to 30 minutes
+-        (brokers use whole/half-hour offsets). MT5 history timestamps are broker
+-        server time, not UTC. Estimated from the freshest tick; returns None if no
+-        tick is within ~5 minutes of a 30-minute offset."""
++        """[P2r] Broker server time minus UTC, rounded to 30 minutes (brokers use
++        whole/half-hour offsets). MT5 history timestamps are broker server time, not UTC.
++        Only fresh ticks (within ~5 minutes of a 30-minute offset) are used; stale or
++        missing symbols are skipped. Returns None (UNKNOWN) if no fresh tick exists or if
++        fresh ticks disagree - an offset is never assumed."""
+         now_ts = datetime.now(timezone.utc).timestamp()
+-        best = None
+-        for sym in ("BTCUSDm", "XAUUSDm", "ETHUSDm"):
++        found = set()
++        for sym in OFFSET_SYMBOLS:
+             tick = mt5.symbol_info_tick(sym)
+             if tick is None or not getattr(tick, "time", 0):
+                 continue
+             raw = float(tick.time) - now_ts
+             off = int(round(raw / 1800.0)) * 1800
+             if abs(raw - off) <= 300 and -14 * 3600 <= off <= 14 * 3600:
+-                best = off if best is None else max(best, off)
+-        return best
++                found.add(off)
++        if len(found) != 1:
++            return None
++        return found.pop()
+ 
+     @staticmethod
+-    def _daily_loss_count(symbols: tuple) -> int:
++    def _daily_loss_count(symbols: tuple) -> Optional[int]:
++        """[P2r] Returns today's (UTC day) losing-position count, or None = UNKNOWN
++        (offset unknown/inconsistent, deal history or account unavailable).
++        The caller must not open new trades while the count is UNKNOWN."""
+         now = datetime.now(timezone.utc)
+         start = datetime(now.year, now.month, now.day, tzinfo=timezone.utc)
+-        # v1.1: wide query window (yesterday .. now + 2 days) so recent deals are never
+-        # cut off when broker server time != UTC; then keep only today's deals.
+         offset = GPTLiquidityFibonacciScalper._server_offset_seconds()
++        if offset is None:
++            return None
++        # Wide query window (yesterday .. now + 2 days) so recent deals are never cut off
++        # when broker server time != UTC; then keep only today's deals.
+         q_from = datetime.fromtimestamp(start.timestamp() - 86400, tz=timezone.utc)
+         q_to = datetime.fromtimestamp(now.timestamp() + 2 * 86400, tz=timezone.utc)
+         deals = mt5.history_deals_get(q_from, q_to)
+         if deals is None:
+-            return 0
+-        if offset is None:
+-            # Offset unknown: conservative - may also count late-yesterday losses
+-            # (stops earlier, never later).
+-            lo = start.timestamp() - 14 * 3600
+-        else:
+-            lo = start.timestamp() + offset   # today's UTC midnight in server time
++            return None
++        lo = start.timestamp() + offset   # today's UTC midnight in server time
+         deals = [d for d in deals if float(getattr(d, "time", 0)) >= lo]
+         # Count unique strategy position IDs whose total net P/L is <= -0.2R.
+         # This conservative implementation approximates R by 1% of balance at close.
+         acc = mt5.account_info()
+         if acc is None:
+-            return 0
++            return None
+         threshold = -0.002 * float(acc.balance)
+         totals: Dict[int, float] = {}
+         for d in deals:
+@@ -439,23 +484,138 @@
+             return 0.0
+         return self._normalize_volume(symbol, risk_money / loss_per_lot)
+ 
+-    def _has_position(self, symbol: str) -> bool:
++    def _has_position(self, symbol: str) -> Optional[bool]:
++        """[H] True = position(s) found, False = query OK and no position,
++        None = query failed / state UNKNOWN (caller must not trade)."""
+         positions = mt5.positions_get(symbol=symbol)
+         if positions is None:
+-            return False
++            return None
+         # Do not stack strategies on the same symbol.
+         return len(positions) > 0
+ 
++    @staticmethod
++    def _deal_window() -> tuple:
++        """[P1r] UTC query window wide enough for any broker offset (+/-14h)."""
++        now_ts = datetime.now(timezone.utc).timestamp()
++        return (datetime.fromtimestamp(now_ts - 2 * 86400, tz=timezone.utc),
++                datetime.fromtimestamp(now_ts + 2 * 86400, tz=timezone.utc))
++
++    def _exec_snapshot(self, symbol: str) -> Optional[Dict[str, Any]]:
++        """[P1r] State before sending: own positions on the symbol and the highest deal ticket.
++        None if either query fails (then no order is sent - it could not be reconciled)."""
++        ps = mt5.positions_get(symbol=symbol)
++        q_from, q_to = self._deal_window()
++        ds = mt5.history_deals_get(q_from, q_to)
++        if ps is None or ds is None:
++            return None
++        return {"positions": sorted(int(p.ticket) for p in ps if getattr(p, "magic", None) == MAGIC),
++                "max_deal": max((int(d.ticket) for d in ds), default=0),
++                "time": datetime.now(timezone.utc).timestamp()}
++
++    def _reconcile(self, symbol: str, snap: Dict[str, Any]) -> Dict[str, Any]:
++        """[P1r] After an ambiguous result: did our order execute? Compares positions and deal
++        history with the pre-send snapshot. state: OPENED / NOT_FOUND / UNKNOWN (query failed)."""
++        ps = mt5.positions_get(symbol=symbol)
++        q_from, q_to = self._deal_window()
++        ds = mt5.history_deals_get(q_from, q_to)
++        if ps is None or ds is None:
++            return {"state": "UNKNOWN", "last_error": str(mt5.last_error())}
++        before = set(snap["positions"])
++        new_pos = [p for p in ps if getattr(p, "magic", None) == MAGIC and int(p.ticket) not in before]
++        entry_in = getattr(mt5, "DEAL_ENTRY_IN", 0)
++        new_deals = [d for d in ds if int(d.ticket) > snap["max_deal"] and getattr(d, "magic", None) == MAGIC
++                     and getattr(d, "symbol", "") == symbol and getattr(d, "entry", entry_in) == entry_in]
++        if new_pos or new_deals:
++            return {"state": "OPENED",
++                    "position_ids": sorted({int(p.ticket) for p in new_pos} | {int(d.position_id) for d in new_deals}),
++                    "deal_tickets": sorted(int(d.ticket) for d in new_deals),
++                    "filled_volume": round(sum(float(d.volume) for d in new_deals), 8) if new_deals else None,
++                    "still_open": bool(new_pos)}
++        return {"state": "NOT_FOUND"}
++
++    def _execution_unknown(self, symbol: str, snap: Dict[str, Any], base: Dict[str, Any]) -> Dict[str, Any]:
++        """[P1r] Ambiguous order result: never resend. Reconcile now; if still uncertain,
++        block new orders on this symbol until a later reconciliation resolves it."""
++        rec = self._reconcile(symbol, snap)
++        out = dict(base, reconcile=rec, last_error=str(mt5.last_error()))
++        if rec["state"] == "OPENED":
++            out.update(status="OPENED_RECONCILED", filled_volume=rec["filled_volume"],
++                       fill_status="UNKNOWN_FILL" if rec["filled_volume"] is None else
++                       ("PARTIAL" if rec["filled_volume"] + 1e-9 < base["requested_volume"] else "FULL"))
++            return out
++        self._exec_unknown[symbol] = {"snap": snap, "since": snap["time"], "detail": base}
++        self._save_exec_state()
++        out.update(status="UNKNOWN",
++                   note="order outcome unknown; not resent; new orders on this symbol blocked until reconciled")
++        return out
++
++    def _check_exec_unknown(self, symbol: str) -> Optional[Dict[str, Any]]:
++        """[P1r] Called before any new order. Returns a NO_TRADE dict while an earlier
++        order on this symbol is still unresolved; None when the symbol is clear."""
++        if self._exec_state_error is not None:
++            return {"signal": "NO_TRADE", "reason": "SKIP_EXEC_STATE_UNREADABLE", "detail": self._exec_state_error,
++                    "file": self._exec_state_file}
++        pend = self._exec_unknown.get(symbol)
++        if pend is None:
++            return None
++        rec = self._reconcile(symbol, pend["snap"])
++        age = datetime.now(timezone.utc).timestamp() - pend["since"]
++        if rec["state"] == "OPENED":
++            del self._exec_unknown[symbol]
++            self._save_exec_state()
++            return {"signal": "NO_TRADE", "reason": "EXECUTION_UNKNOWN_RESOLVED_OPENED", "reconcile": rec}
++        if rec["state"] == "NOT_FOUND" and age >= UNKNOWN_RESOLVE_SEC:
++            del self._exec_unknown[symbol]
++            self._save_exec_state()
++            return {"signal": "NO_TRADE", "reason": "EXECUTION_UNKNOWN_RESOLVED_NOT_EXECUTED", "reconcile": rec}
++        return {"signal": "NO_TRADE", "reason": "SKIP_EXECUTION_UNKNOWN", "reconcile": rec, "age_sec": round(age, 1)}
++
++    def _fill_info(self, result: Any, requested: float) -> Dict[str, Any]:
++        """[P3r] Filled volume from the broker's deal record (preferred), else from the
++        result; never assumed to equal the requested volume."""
++        filled, source, position_id = None, None, None
++        deal = int(getattr(result, "deal", 0) or 0)
++        if deal > 0:
++            ds = mt5.history_deals_get(ticket=deal)
++            if ds:
++                filled = round(sum(float(d.volume) for d in ds), 8)
++                source = "deal_history"
++                position_id = int(getattr(ds[0], "position_id", 0)) or None
++        if filled is None:
++            v = getattr(result, "volume", None)
++            if v:
++                filled, source = float(v), "order_result"
++        if filled is None:
++            status = "UNKNOWN_FILL"
++        elif filled + 1e-9 < requested or result.retcode == mt5.TRADE_RETCODE_DONE_PARTIAL:
++            status = "PARTIAL"
++        else:
++            status = "FULL"
++        return {"requested_volume": requested, "filled_volume": filled, "fill_status": status,
++                "fill_source": source, "position_id": position_id}
++
+     def _send_order(self, signal: Dict[str, Any]) -> Dict[str, Any]:
+         symbol = signal["symbol"]
+         side = signal["signal"]
+         entry = float(signal["entry"])
+         sl = float(signal["stop_loss"])
+         tp = float(signal["take_profit"])
++        blocked = self._check_exec_unknown(symbol)          # [P1r] never stack on an unresolved order
++        if blocked is not None:
++            return {"status": "SKIPPED", "reason": blocked["reason"], "reconcile": blocked.get("reconcile")}
+         info = mt5.symbol_info(symbol)
+         tick = mt5.symbol_info_tick(symbol)
+         if info is None or tick is None:
+             return {"status": "FAILED", "reason": "SKIP_SYMBOL_INFO"}
++        # [P4r] never price an order from an invalid or stale tick
++        if not (float(tick.bid) > 0 and float(tick.ask) > 0 and float(tick.ask) >= float(tick.bid)):
++            return {"status": "SKIPPED", "reason": "SKIP_INVALID_TICK"}
++        offset = self._server_offset_seconds()
++        if offset is None:
++            return {"status": "SKIPPED", "reason": "SKIP_TICK_AGE_UNKNOWN"}
++        tick_age = datetime.now(timezone.utc).timestamp() + offset - float(getattr(tick, "time", 0))
++        if tick_age > MAX_TICK_AGE_SEC:
++            return {"status": "SKIPPED", "reason": "SKIP_STALE_TICK", "tick_age_sec": round(tick_age, 1)}
+ 
+         volume = self._calc_lot(symbol, side, entry, sl)
+         if volume <= 0:
+@@ -477,6 +637,10 @@
+         if abs(price - sl) < min_distance or abs(tp - price) < min_distance:
+             return {"status": "SKIPPED", "reason": "SKIP_BROKER_STOP_LEVEL"}
+ 
++        snap = self._exec_snapshot(symbol)                   # [P1r] needed to reconcile an ambiguous result
++        if snap is None:
++            return {"status": "SKIPPED", "reason": "SKIP_PRECHECK_QUERY_FAILED", "last_error": str(mt5.last_error())}
++
+         order_type = mt5.ORDER_TYPE_BUY if side == "BUY" else mt5.ORDER_TYPE_SELL
+         filling_candidates = []
+         for mode in (mt5.ORDER_FILLING_FOK, mt5.ORDER_FILLING_IOC, mt5.ORDER_FILLING_RETURN):
+@@ -501,52 +665,33 @@
+             }
+             result = mt5.order_send(request)
+             last_result = result
+-            if result is None:
+-                # [P1] Outcome unknown (the order may have reached the broker).
++            if result is None or result.retcode in UNCERTAIN_RETCODES:
++                # [P1r] Outcome unknown (the order may have reached the broker).
+                 # Never resend with another filling mode - that could open a duplicate position.
+-                return {
+-                    "status": "UNKNOWN",
+-                    "reason": "ORDER_SEND_NONE",
+-                    "symbol": symbol,
+-                    "side": side,
+-                    "requested_volume": volume,
+-                    "type_filling": filling,
+-                    "magic": MAGIC,
+-                    "last_error": str(mt5.last_error()),
+-                    "note": "order_send returned None; not resent - check MT5 positions/history",
+-                }
+-            if result is not None and result.retcode in (
++                return self._execution_unknown(symbol, snap, {
++                    "reason": "ORDER_SEND_NONE" if result is None else f"UNCERTAIN_RETCODE_{result.retcode}",
++                    "symbol": symbol, "side": side, "requested_volume": volume,
++                    "type_filling": filling, "magic": MAGIC})
++            if result.retcode in (
+                 mt5.TRADE_RETCODE_DONE,
+                 mt5.TRADE_RETCODE_PLACED,
+                 mt5.TRADE_RETCODE_DONE_PARTIAL,
+             ):
+-                # [P3] Report requested and actually filled volume separately.
+-                # If the broker result carries no volume, the fill is reported as unknown
+-                # (never assumed to be the requested volume).
+-                filled = getattr(result, "volume", None)
+-                filled = float(filled) if filled else None
+-                if filled is None:
+-                    fill_status = "UNKNOWN_FILL"
+-                elif filled + 1e-9 < volume or result.retcode == mt5.TRADE_RETCODE_DONE_PARTIAL:
+-                    fill_status = "PARTIAL"
+-                else:
+-                    fill_status = "FULL"
+-                return {
++                out = {
+                     "status": "OPENED",
+                     "ticket": int(result.order),
+                     "deal": int(result.deal),
+                     "symbol": symbol,
+                     "side": side,
+                     "volume": volume,
+-                    "requested_volume": volume,
+-                    "filled_volume": filled,
+-                    "fill_status": fill_status,
+                     "entry": price,
+                     "sl": sl,
+                     "tp": tp,
+                     "risk_percent": self.cfg.risk_percent,
+                     "magic": MAGIC,
+                 }
++                out.update(self._fill_info(result, volume))   # [P3r]
++                return out
+ 
+         return {
+             "status": "FAILED",
+@@ -568,10 +713,20 @@
+         if not self._session_allowed(symbol):
+             return {"signal": "NO_TRADE", "reason": "SKIP_SESSION"}
+ 
+-        if self._daily_loss_count(self.cfg.symbols) >= self.cfg.max_daily_losses:
++        losses = self._daily_loss_count(self.cfg.symbols)
++        if losses is None:                                     # [P2r] fail safe: count unknown
++            return {"signal": "NO_TRADE", "reason": "SKIP_DAILY_LOSS_UNKNOWN", "last_error": str(mt5.last_error())}
++        if losses >= self.cfg.max_daily_losses:
+             return {"signal": "NO_TRADE", "reason": "SKIP_DAILY_LOSS_LIMIT"}
+ 
+-        if self._has_position(symbol):
++        blocked = self._check_exec_unknown(symbol)             # [P1r] earlier order still unresolved
++        if blocked is not None:
++            return blocked
++
++        has_pos = self._has_position(symbol)
++        if has_pos is None:                                    # [H] fail safe: position state unknown
++            return {"signal": "NO_TRADE", "reason": "SKIP_POSITION_STATE_UNKNOWN", "last_error": str(mt5.last_error())}
++        if has_pos:
+             return {"signal": "NO_TRADE", "reason": "SKIP_POSITION_EXISTS"}
+ 
+         trend, adx, trend_reason = self._trend(symbol)
