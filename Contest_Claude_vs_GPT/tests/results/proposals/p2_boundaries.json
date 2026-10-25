@@ -1,0 +1,1902 @@
+{
+ "summary": {
+  "boundary_offset_cases": 60,
+  "correct": {
+   "v1.0": 23,
+   "P2": 60,
+   "COMBINED": 60
+  },
+  "tick_age_cases": 24,
+  "tick_age_pass": 24,
+  "unknown_offset_cases": 138,
+  "unknown_offset_never_under": true,
+  "unknown_offset_overcount_cases": 92,
+  "dst_switch_ok": true,
+  "P2_equals_COMBINED_everywhere": true,
+  "files_unchanged": true,
+  "sha256": {
+   "v1.0": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+   "P2": "3556dd076812f5293d5b127ccecf5686dda6e7f692af0b07c4a2df6f285efd17",
+   "COMBINED": "f49bdc0da25bb75cd446953a64b2a6552e8166060e4377614f11afc2b73e393e"
+  },
+  "SIMULATED_ONLY": true
+ },
+ "rows": [
+  {
+   "group": "boundary×offset",
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": -12,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": -5,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": -3.5,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 0,
+   "expected": 1,
+   "v1.0": 1,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 2,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 3,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 3.5,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 5.5,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 10,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 14,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": -12,
+   "expected": 0,
+   "v1.0": 0,
+   "P2": 0,
+   "COMBINED": 0
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": -5,
+   "expected": 0,
+   "v1.0": 0,
+   "P2": 0,
+   "COMBINED": 0
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": -3.5,
+   "expected": 0,
+   "v1.0": 0,
+   "P2": 0,
+   "COMBINED": 0
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 0,
+   "expected": 0,
+   "v1.0": 0,
+   "P2": 0,
+   "COMBINED": 0
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 2,
+   "expected": 0,
+   "v1.0": 0,
+   "P2": 0,
+   "COMBINED": 0
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 3,
+   "expected": 0,
+   "v1.0": 0,
+   "P2": 0,
+   "COMBINED": 0
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 3.5,
+   "expected": 0,
+   "v1.0": 0,
+   "P2": 0,
+   "COMBINED": 0
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 5.5,
+   "expected": 0,
+   "v1.0": 0,
+   "P2": 0,
+   "COMBINED": 0
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 10,
+   "expected": 0,
+   "v1.0": 0,
+   "P2": 0,
+   "COMBINED": 0
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 14,
+   "expected": 0,
+   "v1.0": 0,
+   "P2": 0,
+   "COMBINED": 0
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": -12,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": -5,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": -3.5,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 0,
+   "expected": 1,
+   "v1.0": 1,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 2,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 3,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 3.5,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 5.5,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 10,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 14,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": -12,
+   "expected": 2,
+   "v1.0": 1,
+   "P2": 2,
+   "COMBINED": 2
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": -5,
+   "expected": 2,
+   "v1.0": 1,
+   "P2": 2,
+   "COMBINED": 2
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": -3.5,
+   "expected": 2,
+   "v1.0": 1,
+   "P2": 2,
+   "COMBINED": 2
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 0,
+   "expected": 2,
+   "v1.0": 2,
+   "P2": 2,
+   "COMBINED": 2
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 2,
+   "expected": 2,
+   "v1.0": 2,
+   "P2": 2,
+   "COMBINED": 2
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 3,
+   "expected": 2,
+   "v1.0": 2,
+   "P2": 2,
+   "COMBINED": 2
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 3.5,
+   "expected": 2,
+   "v1.0": 2,
+   "P2": 2,
+   "COMBINED": 2
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 5.5,
+   "expected": 2,
+   "v1.0": 2,
+   "P2": 2,
+   "COMBINED": 2
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 10,
+   "expected": 2,
+   "v1.0": 2,
+   "P2": 2,
+   "COMBINED": 2
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 14,
+   "expected": 2,
+   "v1.0": 2,
+   "P2": 2,
+   "COMBINED": 2
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": -12,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": -5,
+   "expected": 1,
+   "v1.0": 1,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": -3.5,
+   "expected": 1,
+   "v1.0": 1,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 0,
+   "expected": 1,
+   "v1.0": 1,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 2,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 3,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 3.5,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 5.5,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 10,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 14,
+   "expected": 1,
+   "v1.0": 0,
+   "P2": 1,
+   "COMBINED": 1
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": -12,
+   "expected": 3,
+   "v1.0": 1,
+   "P2": 3,
+   "COMBINED": 3
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": -5,
+   "expected": 3,
+   "v1.0": 2,
+   "P2": 3,
+   "COMBINED": 3
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": -3.5,
+   "expected": 3,
+   "v1.0": 2,
+   "P2": 3,
+   "COMBINED": 3
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 0,
+   "expected": 3,
+   "v1.0": 3,
+   "P2": 3,
+   "COMBINED": 3
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 2,
+   "expected": 3,
+   "v1.0": 2,
+   "P2": 3,
+   "COMBINED": 3
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 3,
+   "expected": 3,
+   "v1.0": 2,
+   "P2": 3,
+   "COMBINED": 3
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 3.5,
+   "expected": 3,
+   "v1.0": 2,
+   "P2": 3,
+   "COMBINED": 3
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 5.5,
+   "expected": 3,
+   "v1.0": 2,
+   "P2": 3,
+   "COMBINED": 3
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 10,
+   "expected": 3,
+   "v1.0": 1,
+   "P2": 3,
+   "COMBINED": 3
+  },
+  {
+   "group": "boundary×offset",
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 14,
+   "expected": 3,
+   "v1.0": 1,
+   "P2": 3,
+   "COMBINED": 3
+  }
+ ],
+ "tick_age": [
+  {
+   "offset_h": -5,
+   "tick_age_s": 0,
+   "offset_detected": -18000,
+   "expected_detected": -18000,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": -5,
+   "tick_age_s": 120,
+   "offset_detected": -18000,
+   "expected_detected": -18000,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": -5,
+   "tick_age_s": 299,
+   "offset_detected": -18000,
+   "expected_detected": -18000,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": -5,
+   "tick_age_s": 301,
+   "offset_detected": null,
+   "expected_detected": null,
+   "count": 3,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": -5,
+   "tick_age_s": 900,
+   "offset_detected": null,
+   "expected_detected": null,
+   "count": 3,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": -5,
+   "tick_age_s": -120,
+   "offset_detected": -18000,
+   "expected_detected": -18000,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 0,
+   "tick_age_s": 0,
+   "offset_detected": 0,
+   "expected_detected": 0,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 0,
+   "tick_age_s": 120,
+   "offset_detected": 0,
+   "expected_detected": 0,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 0,
+   "tick_age_s": 299,
+   "offset_detected": 0,
+   "expected_detected": 0,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 0,
+   "tick_age_s": 301,
+   "offset_detected": null,
+   "expected_detected": null,
+   "count": 3,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 0,
+   "tick_age_s": 900,
+   "offset_detected": null,
+   "expected_detected": null,
+   "count": 3,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 0,
+   "tick_age_s": -120,
+   "offset_detected": 0,
+   "expected_detected": 0,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 3,
+   "tick_age_s": 0,
+   "offset_detected": 10800,
+   "expected_detected": 10800,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 3,
+   "tick_age_s": 120,
+   "offset_detected": 10800,
+   "expected_detected": 10800,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 3,
+   "tick_age_s": 299,
+   "offset_detected": 10800,
+   "expected_detected": 10800,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 3,
+   "tick_age_s": 301,
+   "offset_detected": null,
+   "expected_detected": null,
+   "count": 3,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 3,
+   "tick_age_s": 900,
+   "offset_detected": null,
+   "expected_detected": null,
+   "count": 3,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 3,
+   "tick_age_s": -120,
+   "offset_detected": 10800,
+   "expected_detected": 10800,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 5.5,
+   "tick_age_s": 0,
+   "offset_detected": 19800,
+   "expected_detected": 19800,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 5.5,
+   "tick_age_s": 120,
+   "offset_detected": 19800,
+   "expected_detected": 19800,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 5.5,
+   "tick_age_s": 299,
+   "offset_detected": 19800,
+   "expected_detected": 19800,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 5.5,
+   "tick_age_s": 301,
+   "offset_detected": null,
+   "expected_detected": null,
+   "count": 3,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 5.5,
+   "tick_age_s": 900,
+   "offset_detected": null,
+   "expected_detected": null,
+   "count": 3,
+   "expected": 2,
+   "pass": true
+  },
+  {
+   "offset_h": 5.5,
+   "tick_age_s": -120,
+   "offset_detected": 19800,
+   "expected_detected": 19800,
+   "count": 2,
+   "expected": 2,
+   "pass": true
+  }
+ ],
+ "unknown_offset": [
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": -12,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": -12,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": -5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": -5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": -3.5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": -3.5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 0,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 0,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 2,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 2,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 3,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 3,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 3.5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 3.5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 5.5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 5.5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 10,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 10,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 14,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 14,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 5.75,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 5.75,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন ঠিক 00:00:00; লস গতকাল 23:59:59 ও আজ 00:00:00",
+   "offset_h": 5.75,
+   "mode": "odd_offset",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": -12,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": -12,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": -5,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": -5,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": -3.5,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": -3.5,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 0,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 0,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 2,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 2,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 3,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 3,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 3.5,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 3.5,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 5.5,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 5.5,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 10,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 10,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 14,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 14,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 5.75,
+   "mode": "no_ticks",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 5.75,
+   "mode": "stale_1200s",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30 (মধ্যরাতের ঠিক পরে); লস গতকাল 23:50, 23:59:59",
+   "offset_h": 5.75,
+   "mode": "odd_offset",
+   "expected": 0,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": -12,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": -12,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": -5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": -5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": -3.5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": -3.5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 0,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 0,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 2,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 2,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 3,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 3,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 3.5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 3.5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 5.5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 5.5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 10,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 10,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 14,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 14,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 5.75,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 5.75,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 00:00:30; লস গতকাল 23:59:59 ও আজ 00:00:10",
+   "offset_h": 5.75,
+   "mode": "odd_offset",
+   "expected": 1,
+   "P2": 2,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": -12,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": -12,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": -5,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": -5,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": -3.5,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": -3.5,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 0,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 0,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 2,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 2,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 3,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 3,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 3.5,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 3.5,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 5.5,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 5.5,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 10,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 10,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 14,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 14,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 5.75,
+   "mode": "no_ticks",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 5.75,
+   "mode": "stale_1200s",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 23:59:59; লস আজ 00:00:00, 23:59:30 আর গতকাল 23:59:59",
+   "offset_h": 5.75,
+   "mode": "odd_offset",
+   "expected": 2,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": -12,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": -12,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": -5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": -5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": -3.5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": -3.5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 0,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 0,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 2,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 2,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 3,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 3,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 3.5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 3.5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 5.5,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 5.5,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 10,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 10,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 14,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 14,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 5.75,
+   "mode": "no_ticks",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 5.75,
+   "mode": "stale_1200s",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 12:00; লস আজ 11:59:59 ও জয় 11:00, ছোট লস −10 (−0.1R, গোনা হবে না)",
+   "offset_h": 5.75,
+   "mode": "odd_offset",
+   "expected": 1,
+   "P2": 1,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": -12,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": -12,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": -5,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": -5,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": -3.5,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": -3.5,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 0,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 0,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 2,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 2,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 3,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 3,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 3.5,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 3.5,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 5.5,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 5.5,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 10,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 10,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 14,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 14,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 5.75,
+   "mode": "no_ticks",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 5.75,
+   "mode": "stale_1200s",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  },
+  {
+   "case": "এখন 18:00; আজ ৩টা লস (02:00, 09:00, 17:59)",
+   "offset_h": 5.75,
+   "mode": "odd_offset",
+   "expected": 3,
+   "P2": 3,
+   "not_under": true
+  }
+ ],
+ "dst": [
+  {
+   "offset_h": 2,
+   "expected": 3,
+   "P2": 3
+  },
+  {
+   "offset_h": 3,
+   "expected": 3,
+   "P2": 3
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+--- v1.0/gpt_liquidity_fibonacci_scalper_v1.py
++++ P2_daily_loss_server_time/gpt_liquidity_fibonacci_scalper_v1.py
+@@ -348,12 +348,42 @@
+         return True
+ 
+     @staticmethod
++    def _server_offset_seconds() -> Optional[int]:
++        """v1.1 helper: broker server time minus UTC, rounded to 30 minutes
++        (brokers use whole/half-hour offsets). MT5 history timestamps are broker
++        server time, not UTC. Estimated from the freshest tick; returns None if no
++        tick is within ~5 minutes of a 30-minute offset."""
++        now_ts = datetime.now(timezone.utc).timestamp()
++        best = None
++        for sym in ("BTCUSDm", "XAUUSDm", "ETHUSDm"):
++            tick = mt5.symbol_info_tick(sym)
++            if tick is None or not getattr(tick, "time", 0):
++                continue
++            raw = float(tick.time) - now_ts
++            off = int(round(raw / 1800.0)) * 1800
++            if abs(raw - off) <= 300 and -14 * 3600 <= off <= 14 * 3600:
++                best = off if best is None else max(best, off)
++        return best
++
++    @staticmethod
+     def _daily_loss_count(symbols: tuple) -> int:
+         now = datetime.now(timezone.utc)
+         start = datetime(now.year, now.month, now.day, tzinfo=timezone.utc)
+-        deals = mt5.history_deals_get(start, now)
++        # v1.1: wide query window (yesterday .. now + 2 days) so recent deals are never
++        # cut off when broker server time != UTC; then keep only today's deals.
++        offset = GPTLiquidityFibonacciScalper._server_offset_seconds()
++        q_from = datetime.fromtimestamp(start.timestamp() - 86400, tz=timezone.utc)
++        q_to = datetime.fromtimestamp(now.timestamp() + 2 * 86400, tz=timezone.utc)
++        deals = mt5.history_deals_get(q_from, q_to)
+         if deals is None:
+             return 0
++        if offset is None:
++            # Offset unknown: conservative - may also count late-yesterday losses
++            # (stops earlier, never later).
++            lo = start.timestamp() - 14 * 3600
++        else:
++            lo = start.timestamp() + offset   # today's UTC midnight in server time
++        deals = [d for d in deals if float(getattr(d, "time", 0)) >= lo]
+         # Count unique strategy position IDs whose total net P/L is <= -0.2R.
+         # This conservative implementation approximates R by 1% of balance at close.
+         acc = mt5.account_info()

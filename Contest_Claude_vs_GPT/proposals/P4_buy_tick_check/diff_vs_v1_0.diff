@@ -1,0 +1,15 @@
+--- v1.0/gpt_liquidity_fibonacci_scalper_v1.py
++++ P4_buy_tick_check/gpt_liquidity_fibonacci_scalper_v1.py
+@@ -260,7 +260,11 @@
+                     "fib_zone": [zone_low, zone_high],
+                     "bos_time": int(m15["time"].iloc[bos_idx]),
+                 }
+-            entry = float(mt5.symbol_info_tick(symbol).ask)
++            tick = mt5.symbol_info_tick(symbol)
++            if tick is None:
++                # [P4] No tick: never send an order; report clearly (same as the SELL branch).
++                return {"signal": "NO_TRADE", "reason": "SKIP_NO_TICK"}
++            entry = float(tick.ask)
+             sweep_extreme = float(bar["low"])
+             sl = sweep_extreme - self.cfg.sl_atr_buffer * atr
+             risk_distance = entry - sl

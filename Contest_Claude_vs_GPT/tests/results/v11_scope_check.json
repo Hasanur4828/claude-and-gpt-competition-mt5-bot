@@ -1,0 +1,44 @@
+{
+ "v1_0_sha256": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+ "v1_1_sha256": "3556dd076812f5293d5b127ccecf5686dda6e7f692af0b07c4a2df6f285efd17",
+ "identical_parts_count": 29,
+ "identical_parts": [
+  "GPTLiquidityFibonacciScalper.__init__",
+  "GPTLiquidityFibonacciScalper._adx",
+  "GPTLiquidityFibonacciScalper._atr",
+  "GPTLiquidityFibonacciScalper._calc_lot",
+  "GPTLiquidityFibonacciScalper._confirmed_swings",
+  "GPTLiquidityFibonacciScalper._ema",
+  "GPTLiquidityFibonacciScalper._has_position",
+  "GPTLiquidityFibonacciScalper._new_closed_m15_bar",
+  "GPTLiquidityFibonacciScalper._normalize_volume",
+  "GPTLiquidityFibonacciScalper._rates",
+  "GPTLiquidityFibonacciScalper._send_order",
+  "GPTLiquidityFibonacciScalper._session_allowed",
+  "GPTLiquidityFibonacciScalper._setup",
+  "GPTLiquidityFibonacciScalper._trend",
+  "GPTLiquidityFibonacciScalper.evaluate_symbol",
+  "GPTLiquidityFibonacciScalper.run_once",
+  "assign MAGIC",
+  "assign ORDER_COMMENT",
+  "class GPTLiquidityFibonacciScalper (header + non-method body)",
+  "class StrategyConfig (header + non-method body)",
+  "import from __future__ import annotations",
+  "import from dataclasses import dataclass",
+  "import from datetime import datetime, timezone",
+  "import from typing import Any, Dict, Optional, List",
+  "import import MetaTrader5 as mt5",
+  "import import numpy as np",
+  "import import pandas as pd",
+  "module docstring",
+  "top-level #12 If"
+ ],
+ "changed": [
+  "GPTLiquidityFibonacciScalper._daily_loss_count"
+ ],
+ "added": [
+  "GPTLiquidityFibonacciScalper._server_offset_seconds"
+ ],
+ "removed": [],
+ "scope_ok": true
+}

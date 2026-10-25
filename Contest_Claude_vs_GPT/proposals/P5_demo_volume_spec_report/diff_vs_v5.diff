@@ -1,0 +1,31 @@
+--- v5/demo_verification.py
++++ P5/demo_verification.py
+@@ -504,6 +504,28 @@
+                                 f"stops_level {s_i.trade_stops_level}, filling_mode {getattr(s_i, 'filling_mode', '?')}, "
+                                 f"spread {round(tk.ask - tk.bid, s_i.digits)}")
+ 
++    # [P5] GPT-এর ৫-গ: প্রতিযোগিতার symbol-এ min lot কি GPT-এর ১%-ঝুঁকিতে আঁটে? শুধু রিপোর্ট — কোনো order নয়,
++    # GPT-এর lot নিয়ম বদলায় না। কয়েকটা SL দূরত্বে (এই পরীক্ষার নিজের ৩% সহ) min lot-এর ঝুঁকি = কত balance লাগবে।
++    acc = mt5.account_info()
++    bal = float(acc.balance) if acc else None
++    for s in ("BTCUSDm", "XAUUSDm"):
++        s_i, tk = mt5.symbol_info(s), mt5.symbol_info_tick(s)
++        if not (s_i and tk):
++            info(f"volume spec {s}", "symbol/tick পাওয়া যায়নি")
++            continue
++        vmin_s = float(s_i.volume_min)
++        rows = []
++        for pct in sorted({0.0025, 0.005, 0.01, 0.02, SLTP_PCT}):     # SLTP_PCT = এই পরীক্ষার নিজের SL দূরত্ব
++            loss = mt5.order_calc_profit(mt5.ORDER_TYPE_BUY, s, vmin_s, tk.ask, tk.ask * (1 - pct))
++            if loss is None:
++                rows.append(f"SL {pct * 100:.2f}%: order_calc_profit None")
++                continue
++            need = abs(float(loss)) / 0.01            # min lot-এর SL-লস = balance-এর ১% হতে যত balance লাগে
++            rows.append(f"SL {pct * 100:.2f}%{' (এই পরীক্ষার SL)' if pct == SLTP_PCT else ''}: min-lot risk ${abs(float(loss)):.2f} → balance ≥ ${need:,.0f} লাগবে"
++                        + ("" if bal is None else (" ✓" if bal >= need else " ✗ (GPT এই দূরত্বে ট্রেড নেবে না)")))
++        info(f"volume spec {s}", f"min {s_i.volume_min}, step {s_i.volume_step}, max {s_i.volume_max}, "
++                                 f"contract {getattr(s_i, 'trade_contract_size', '?')}, balance {bal} | " + " | ".join(rows))
++
+     si = mt5.symbol_info(TEST_SYMBOL)
+     vmin, step, vmax = float(si.volume_min), float(si.volume_step), float(si.volume_max)
+     claude_vol, plan = None, None

@@ -1,0 +1,119 @@
+[2026-10-25 10:42:00 UTC] PASS  MT5 initialize  
+[2026-10-25 10:42:00 UTC] PASS  Account info  
+[2026-10-25 10:42:00 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:42:00 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:42:00 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:42:00 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:42:00 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:42:00 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:42:00 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 180.0, 'ETHUSDm': 180.0, 'XAUUSDm': 180.0}
+[2026-10-25 10:42:00 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:42:00 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:42:00 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:42:00 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:42:00 UTC] INFO  volume spec BTCUSDm = min 0.01, step 0.01, max 100.0, contract 1.0, balance 10000.0 | SL 0.25%: min-lot risk $1.67 → balance ≥ $167 লাগবে ✓ | SL 0.50%: min-lot risk $3.34 → balance ≥ $334 লাগবে ✓ | SL 1.00%: min-lot risk $6.68 → balance ≥ $668 লাগবে ✓ | SL 2.00%: min-lot risk $13.36 → balance ≥ $1,336 লাগবে ✓ | SL 3.00% (এই পরীক্ষার SL): min-lot risk $20.04 → balance ≥ $2,004 লাগবে ✓
+[2026-10-25 10:42:00 UTC] INFO  volume spec XAUUSDm = min 0.01, step 0.01, max 100.0, contract 100.0, balance 10000.0 | SL 0.25%: min-lot risk $7.42 → balance ≥ $742 লাগবে ✓ | SL 0.50%: min-lot risk $14.85 → balance ≥ $1,485 লাগবে ✓ | SL 1.00%: min-lot risk $29.69 → balance ≥ $2,969 লাগবে ✓ | SL 2.00%: min-lot risk $59.38 → balance ≥ $5,938 লাগবে ✓ | SL 3.00% (এই পরীক্ষার SL): min-lot risk $89.07 → balance ≥ $8,907 লাগবে ✓
+[2026-10-25 10:42:00 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:42:00 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:42:00 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:42:00 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:42:00 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:42:00 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:42:00 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:42:00 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:42:00 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:42:00 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:42:00 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:42:00 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:42:00 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:42:00 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:42:00 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:42:00 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:42:00 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:42:00 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:42:00 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:42:00 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:42:00 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006, 5008]
+[2026-10-25 10:42:00 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:42:00 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5010]
+[2026-10-25 10:42:00 UTC] ---- CLEANUP ----
+[2026-10-25 10:42:00 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:42:00 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmpfajt_h3g/pkg/demo_verification_report.txt
+[2026-10-25 10:42:00 UTC] সব পাস।
+[2026-10-25 10:42:00 UTC] mt5.shutdown() called
+[2026-10-25 10:42:00 UTC] PASS  MT5 initialize  
+[2026-10-25 10:42:00 UTC] PASS  Account info  
+[2026-10-25 10:42:00 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:42:00 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:42:00 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:42:00 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:42:00 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:42:00 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:42:00 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:42:00 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:42:00 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 180.0, 'ETHUSDm': 180.0, 'XAUUSDm': 180.0}
+[2026-10-25 10:42:00 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:42:00 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.1, step 0.1, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:42:00 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:42:00 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:42:00 UTC] INFO  volume spec BTCUSDm = min 0.1, step 0.1, max 100.0, contract 1.0, balance 10000.0 | SL 0.25%: min-lot risk $16.70 → balance ≥ $1,670 লাগবে ✓ | SL 0.50%: min-lot risk $33.40 → balance ≥ $3,340 লাগবে ✓ | SL 1.00%: min-lot risk $66.80 → balance ≥ $6,680 লাগবে ✓ | SL 2.00%: min-lot risk $133.59 → balance ≥ $13,359 লাগবে ✗ (GPT এই দূরত্বে ট্রেড নেবে না) | SL 3.00% (এই পরীক্ষার SL): min-lot risk $200.39 → balance ≥ $20,039 লাগবে ✗ (GPT এই দূরত্বে ট্রেড নেবে না)
+[2026-10-25 10:42:00 UTC] INFO  volume spec XAUUSDm = min 0.01, step 0.01, max 100.0, contract 100.0, balance 10000.0 | SL 0.25%: min-lot risk $7.42 → balance ≥ $742 লাগবে ✓ | SL 0.50%: min-lot risk $14.85 → balance ≥ $1,485 লাগবে ✓ | SL 1.00%: min-lot risk $29.69 → balance ≥ $2,969 লাগবে ✓ | SL 2.00%: min-lot risk $59.38 → balance ≥ $5,938 লাগবে ✓ | SL 3.00% (এই পরীক্ষার SL): min-lot risk $89.07 → balance ≥ $8,907 লাগবে ✓
+[2026-10-25 10:42:00 UTC] GPT _send_order result: {'status': 'SKIPPED', 'reason': 'SKIP_LOT_TOO_SMALL_OR_CALC_FAILED'}
+[2026-10-25 10:42:00 UTC] GPT test SELL: order ব্যর্থ, কোনো নতুন পজিশন দেখা যায়নি
+[2026-10-25 10:42:00 UTC] FAIL  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position None state none_opened
+[2026-10-25 10:42:00 UTC] GPT-এর পজিশন নিশ্চিত হয়নি — আর কোনো order পাঠানো হবে না
+[2026-10-25 10:42:00 UTC] ---- CLEANUP ----
+[2026-10-25 10:42:00 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:42:00 UTC] ==== PASS 25 · FAIL 1 · URGENT 0 ====  /tmp/tmppt75wp01/pkg/demo_verification_report.txt
+[2026-10-25 10:42:00 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:42:00 UTC] mt5.shutdown() called
+PASS P5 বসানো কপিতে ৩২-পরিস্থিতির পরীক্ষা
+      expected: ৩২/৩২ (v5-এর মতোই)
+      actual:   32/32
+PASS স্বাভাবিক (min 0.01, balance 10,000)
+      expected: দুই symbol-এর তথ্য-লাইন, প্রতিটায় ৫ SL দূরত্ব (0.25%, 0.5%, 1%, 2%, এই পরীক্ষার 3%); P5 অংশে ০ order
+      actual:   {"volume spec BTCUSDm": "min 0.01, step 0.01, max 100.0, contract 1.0, balance 10000.0 | SL 0.25%: min-lot risk $1.67 → balance ≥ $167 লাগবে ✓ | SL 0.50%: min-lot risk $3.34 → balance ≥ $334 লাগবে ✓ | SL 1.00%: min-lot risk $6.68 → balance ≥ $668 লাগবে ✓ | SL 2.00%: min-lot risk $13.36 → balance ≥ $1,336 লাগবে ✓ | SL 3.00% (এই পরীক্ষার SL): min-lot risk $20.04 → balance ≥ $2,004 লাগবে ✓", "volume spec XAUUSDm": "min 0.01, step 0.01, max 100.0, contract 100.0, balance 10000.0 | SL 0.25%: min-lot risk $7.42 → balance ≥ $742 লাগবে ✓ | SL 0.50%: min-lot risk $14.85 → balance ≥ $1,485 লাগবে ✓ | SL 1.00%: min-lot risk $29.69 → balance ≥ $2,969 লাগবে ✓ | SL 2.00%: min-lot risk $59.38 → balance ≥ $5,938 লাগবে ✓ | SL 3.00% (এই পরীক্ষার SL): min-lot risk $89.07 → balance ≥ $8,907 লাগবে ✓", "orders_before_P5_lines": {"volume spec BTCUSDm": 0, "volume spec XAUUSDm": 0}}
+PASS BTC min 0.1, balance 10,000 (13a2-এর মতো)
+      expected: এই পরীক্ষার ৩% SL-এ ✗ (তাই 13a2-এ GPT order দেয়নি — ব্যাখ্যা মেলে), ছোট SL দূরত্বে ✓
+      actual:   min 0.1, step 0.1, max 100.0, contract 1.0, balance 10000.0 | SL 0.25%: min-lot risk $16.70 → balance ≥ $1,670 লাগবে ✓ | SL 0.50%: min-lot risk $33.40 → balance ≥ $3,340 লাগবে ✓ | SL 1.00%: min-lot risk $66.80 → balance ≥ $6,680 লাগবে ✓ | SL 2.00%: min-lot risk $133.59 → balance ≥ $13,359 লাগবে ✗ (GPT এই দূরত্বে ট্রেড নেবে না) | SL 3.00% (এই পরীক্ষার SL): min-lot risk $200.39 → balance ≥ $20,039 লাগবে ✗ (GPT এই দূরত্বে ট্রেড নেবে না)
+PASS চালু demo_verification.py অপরিবর্তিত
+      expected: SHA আগে = পরে
+      actual:   c708da0cf7394450
+{
+ "total": 4,
+ "passed": 4,
+ "P5_sha256": "bed38da8690320cb5fe1b9aaab12f7d25956684cdfaebcd16cc9d882b7e47335",
+ "SIMULATED_ONLY": true
+}

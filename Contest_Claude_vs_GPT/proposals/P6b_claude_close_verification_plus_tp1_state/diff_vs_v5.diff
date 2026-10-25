@@ -1,0 +1,107 @@
+--- v5/claude_pullback_v1.py
++++ P6b/claude_pullback_v1.py
+@@ -17,6 +17,7 @@
+ import json
+ import math
+ import os
++import time
+ from datetime import datetime, timezone, timedelta
+ from typing import Any, Callable, Dict, List, Optional, Tuple
+ 
+@@ -58,6 +59,8 @@
+ DEVIATION = 30
+ LIVE_STOP_DD = 0.20
+ LIVE_STOP_CONSEC = 8
++CLOSE_CONFIRM_TRIES, CLOSE_CONFIRM_DELAY = 5, 0.2   # [P6] বন্ধের পরে আবার যাচাই: সর্বোচ্চ ~১ সেকেন্ড
++BE_MAX_TRIES = 5                                    # [P6b] SL→BE ব্যর্থ হলে সর্বোচ্চ এতবার (প্রতি চক্রে একবার)
+ M15_SEC = 900
+ 
+ WAIT_REARM, ARMED, PB_ACTIVE, IN_TRADE = "WAIT_REARM", "ARMED", "PB_ACTIVE", "IN_TRADE"
+@@ -246,6 +249,7 @@
+         self.log = log or (lambda s: print(s))
+         self.notify = notify or (lambda s: None)
+         self.clock = clock or (lambda: datetime.now(timezone.utc))
++        self.sleep = time.sleep                                 # [P6] পরীক্ষায় বদলানো যায়
+         self.news = news or NewsFilter()
+         self.enabled = {s: True for s in SYMBOLS}
+         if symbols_enabled:
+@@ -562,12 +566,41 @@
+             return False
+         d = -1 if pos.type == mt5.POSITION_TYPE_BUY else 1   # বন্ধ করতে উল্টো order
+         otype = mt5.ORDER_TYPE_SELL if pos.type == mt5.POSITION_TYPE_BUY else mt5.ORDER_TYPE_BUY
+-        ok = self._send({"action": mt5.TRADE_ACTION_DEAL, "symbol": pos.symbol, "volume": volume,
+-                         "type": otype}, pos.symbol, d, position=pos.ticket) is not None
++        before = float(pos.volume)
++        sent = self._send({"action": mt5.TRADE_ACTION_DEAL, "symbol": pos.symbol, "volume": volume,
++                           "type": otype}, pos.symbol, d, position=pos.ticket) is not None
++        if not sent:
++            return False
++        ok, state = self._confirm_close(int(pos.ticket), before, float(volume))   # [P6]
+         if ok:
+-            self.log(f"[{NAME}] {pos.symbol} #{pos.ticket} {reason} {volume} lot")
++            self.log(f"[{NAME}] {pos.symbol} #{pos.ticket} {reason} {volume} lot — confirmed ({state})")
++        else:
++            self.log(f"[{NAME}] WARNING {pos.symbol} #{pos.ticket} {reason}: broker reported success but close "
++                     f"NOT confirmed ({state}) — not counted as done")
++            self.notify(f"⚠️ {NAME}: {pos.symbol} #{pos.ticket} {reason} broker-এ নিশ্চিত হয়নি ({state})")
+         return ok
+ 
++    def _confirm_close(self, ticket: int, before: float, volume: float):
++        """[P6] broker 'done' বললেও পজিশন সত্যিই বন্ধ/ছোট হয়েছে কি না দেখা।
++        পুরো বন্ধ: পজিশন আর নেই। আংশিক: বাকি volume = আগের − বন্ধ-অংশ।"""
++        full = volume >= before - 1e-9
++        expected_rem = round(before - volume, 8)
++        state = "no answer"
++        for i in range(CLOSE_CONFIRM_TRIES):
++            ps = mt5.positions_get(ticket=ticket)
++            if ps is None:
++                state = f"MT5 unavailable {mt5.last_error()}"
++            elif not ps:
++                return True, ("closed" if full else "position fully gone (closed elsewhere, e.g. SL/TP)")
++            else:
++                rem = float(ps[0].volume)
++                if not full and abs(rem - expected_rem) < 1e-9:
++                    return True, f"remaining {rem}"
++                state = f"still open, volume {rem} (expected {'0' if full else expected_rem})"
++            if i < CLOSE_CONFIRM_TRIES - 1:
++                self.sleep(CLOSE_CONFIRM_DELAY)
++        return False, state
++
+     def _modify_sl(self, pos, sl: float, tp: float) -> bool:
+         if pos.magic != MAGIC:
+             return False
+@@ -601,15 +634,30 @@
+             if not t["tp1_done"] and ((buy and price >= t["tp1"]) or (not buy and price <= t["tp1"])):
+                 plan, why = plan_partial_close(float(pos.volume), si)
+                 if plan:
+-                    self._close(pos, plan[0], "EXIT_TP1")
++                    t["tp1_partial"] = "ok" if self._close(pos, plan[0], "EXIT_TP1") else "unconfirmed"   # [P6]
+                 else:
++                    t["tp1_partial"] = "skipped"
+                     self.log(f"[{NAME}] {t['symbol']} #{key} TP1 partial close skipped ({why}) — SL→BE only")
+-                pos2 = self._position(int(key))
+-                if pos2 is not None:
+-                    self._modify_sl(pos2, round(t["entry"], int(si.digits)), pos2.tp)
++                # [P6b] আংশিক বন্ধের চেষ্টা হয়ে গেছে — এখনই লিখে রাখা, যাতে এর পরে সংযোগ গেলেও
++                # পরের চক্রে দ্বিতীয়বার আংশিক বন্ধ না হয়। SL→BE আলাদা ধাপে (নিচে), ব্যর্থ হলে আবার চেষ্টা।
+                 t["tp1_done"] = True
++                t["be_pending"], t["be_tries"] = True, 0
++                self._save()
+                 changed = True
+                 self.notify(f"🟦 {NAME} — TP1 ✓\n{t['symbol']} #{key}\nSL → breakeven {t['entry']}")
++            if t.get("be_pending"):                                  # [P6b] SL→BE, নিশ্চিত না হওয়া পর্যন্ত (সর্বোচ্চ ৫ বার)
++                pos2 = self._position(int(key))
++                if pos2 is None:
++                    t["be_pending"] = False
++                elif self._modify_sl(pos2, round(t["entry"], int(si.digits)), pos2.tp):
++                    t["be_pending"] = False
++                else:
++                    t["be_tries"] = int(t.get("be_tries", 0)) + 1
++                    self.log(f"[{NAME}] WARNING {t['symbol']} #{key} SL→BE failed (try {t['be_tries']}/{BE_MAX_TRIES})")
++                    if t["be_tries"] >= BE_MAX_TRIES:
++                        t["be_pending"] = False
++                        self.notify(f"⚠️ {NAME}: {t['symbol']} #{key} SL→breakeven বসানো যায়নি — হাতে দেখুন")
++                changed = True
+                 pos = self._position(int(key))
+                 if pos is None:
+                     continue

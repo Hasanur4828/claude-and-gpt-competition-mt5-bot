@@ -1,0 +1,167 @@
+
+=== P1  sha 52050515055a9758…  base gpt_liquidity_fibonacci_scalper_v1.py 4d41a0ea7e751760…
+identical parts: 29 | changed: ['GPTLiquidityFibonacciScalper._send_order'] | added: [] | removed: []
+  [GPTLiquidityFibonacciScalper._send_order] statement diff:
+     + if result is None:
+     + return {'status': 'UNKNOWN', 'reason': 'ORDER_SEND_NONE', 'symbol': symbol, 'side': side, 'requested_volume': volume, 'type_filling': filling, 'magic': MAGIC, 'last_error': str(mt5.last_error()), 'note': 'order_send returned None; not resent - check MT5 positions/history'}
+SCOPE OK: True
+
+=== P2  sha 3556dd076812f529…  base gpt_liquidity_fibonacci_scalper_v1.py 4d41a0ea7e751760…
+identical parts: 29 | changed: ['GPTLiquidityFibonacciScalper._daily_loss_count'] | added: ['GPTLiquidityFibonacciScalper._server_offset_seconds'] | removed: []
+  [GPTLiquidityFibonacciScalper._daily_loss_count] statement diff:
+     - deals = mt5.history_deals_get(start, now)
+     + offset = GPTLiquidityFibonacciScalper._server_offset_seconds()
+     + q_from = datetime.fromtimestamp(start.timestamp() - 86400, tz=timezone.utc)
+     + q_to = datetime.fromtimestamp(now.timestamp() + 2 * 86400, tz=timezone.utc)
+     + deals = mt5.history_deals_get(q_from, q_to)
+     + if offset is None:
+     + lo = start.timestamp() - 14 * 3600
+     + else:
+     + lo = start.timestamp() + offset
+     + deals = [d for d in deals if float(getattr(d, 'time', 0)) >= lo]
+SCOPE OK: True
+
+=== P3  sha 3c7df70edec92080…  base gpt_liquidity_fibonacci_scalper_v1.py 4d41a0ea7e751760…
+identical parts: 29 | changed: ['GPTLiquidityFibonacciScalper._send_order'] | added: [] | removed: []
+  [GPTLiquidityFibonacciScalper._send_order] statement diff:
+     - return {'status': 'OPENED', 'ticket': int(result.order), 'deal': int(result.deal), 'symbol': symbol, 'side': side, 'volume': volume, 'entry': price, 'sl': sl, 'tp': tp, 'risk_percent': self.cfg.risk_percent, 'magic': MAGIC}
+     + filled = getattr(result, 'volume', None)
+     + filled = float(filled) if filled else None
+     + if filled is None:
+     + fill_status = 'UNKNOWN_FILL'
+     + elif filled + 1e-09 < volume or result.retcode == mt5.TRADE_RETCODE_DONE_PARTIAL:
+     + fill_status = 'PARTIAL'
+     + else:
+     + fill_status = 'FULL'
+     + return {'status': 'OPENED', 'ticket': int(result.order), 'deal': int(result.deal), 'symbol': symbol, 'side': side, 'volume': volume, 'requested_volume': volume, 'filled_volume': filled, 'fill_status': fill_status, 'entry': price, 'sl': sl, 'tp': tp, 'risk_percent': self.cfg.risk_percent, 'magic': MAGIC}
+SCOPE OK: True
+
+=== P4  sha 65bfcc49602799b5…  base gpt_liquidity_fibonacci_scalper_v1.py 4d41a0ea7e751760…
+identical parts: 29 | changed: ['GPTLiquidityFibonacciScalper._setup'] | added: [] | removed: []
+  [GPTLiquidityFibonacciScalper._setup] statement diff:
+     - entry = float(mt5.symbol_info_tick(symbol).ask)
+     + tick = mt5.symbol_info_tick(symbol)
+     + if tick is None:
+     + return {'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}
+     + entry = float(tick.ask)
+SCOPE OK: True
+
+=== COMBINED  sha f49bdc0da25bb75c…  base gpt_liquidity_fibonacci_scalper_v1.py 4d41a0ea7e751760…
+identical parts: 27 | changed: ['GPTLiquidityFibonacciScalper._daily_loss_count', 'GPTLiquidityFibonacciScalper._send_order', 'GPTLiquidityFibonacciScalper._setup'] | added: ['GPTLiquidityFibonacciScalper._server_offset_seconds'] | removed: []
+  [GPTLiquidityFibonacciScalper._daily_loss_count] statement diff:
+     - deals = mt5.history_deals_get(start, now)
+     + offset = GPTLiquidityFibonacciScalper._server_offset_seconds()
+     + q_from = datetime.fromtimestamp(start.timestamp() - 86400, tz=timezone.utc)
+     + q_to = datetime.fromtimestamp(now.timestamp() + 2 * 86400, tz=timezone.utc)
+     + deals = mt5.history_deals_get(q_from, q_to)
+     + if offset is None:
+     + lo = start.timestamp() - 14 * 3600
+     + else:
+     + lo = start.timestamp() + offset
+     + deals = [d for d in deals if float(getattr(d, 'time', 0)) >= lo]
+  [GPTLiquidityFibonacciScalper._send_order] statement diff:
+     - return {'status': 'OPENED', 'ticket': int(result.order), 'deal': int(result.deal), 'symbol': symbol, 'side': side, 'volume': volume, 'entry': price, 'sl': sl, 'tp': tp, 'risk_percent': self.cfg.risk_percent, 'magic': MAGIC}
+     + if result is None:
+     + return {'status': 'UNKNOWN', 'reason': 'ORDER_SEND_NONE', 'symbol': symbol, 'side': side, 'requested_volume': volume, 'type_filling': filling, 'magic': MAGIC, 'last_error': str(mt5.last_error()), 'note': 'order_send returned None; not resent - check MT5 positions/history'}
+     + filled = getattr(result, 'volume', None)
+     + filled = float(filled) if filled else None
+     + if filled is None:
+     + fill_status = 'UNKNOWN_FILL'
+     + elif filled + 1e-09 < volume or result.retcode == mt5.TRADE_RETCODE_DONE_PARTIAL:
+     + fill_status = 'PARTIAL'
+     + else:
+     + fill_status = 'FULL'
+     + return {'status': 'OPENED', 'ticket': int(result.order), 'deal': int(result.deal), 'symbol': symbol, 'side': side, 'volume': volume, 'requested_volume': volume, 'filled_volume': filled, 'fill_status': fill_status, 'entry': price, 'sl': sl, 'tp': tp, 'risk_percent': self.cfg.risk_percent, 'magic': MAGIC}
+  [GPTLiquidityFibonacciScalper._setup] statement diff:
+     - entry = float(mt5.symbol_info_tick(symbol).ask)
+     + tick = mt5.symbol_info_tick(symbol)
+     + if tick is None:
+     + return {'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}
+     + entry = float(tick.ask)
+SCOPE OK: True
+
+=== P6  sha 0d3dc29da2b11e67…  base claude_pullback_v1.py 0516a96f508db10a…
+identical parts: 82 | changed: ['ClaudePullbackV1.__init__', 'ClaudePullbackV1._close', 'ClaudePullbackV1._manage_open_trades'] | added: ['ClaudePullbackV1._confirm_close', 'assign (CLOSE_CONFIRM_TRIES, CLOSE_CONFIRM_DELAY)', 'import import time'] | removed: []
+  [ClaudePullbackV1.__init__] statement diff:
+     + self.sleep = time.sleep
+  [ClaudePullbackV1._close] statement diff:
+     - ok = self._send({'action': mt5.TRADE_ACTION_DEAL, 'symbol': pos.symbol, 'volume': volume, 'type': otype}, pos.symbol, d, position=pos.ticket) is not None
+     - self.log(f'[{NAME}] {pos.symbol} #{pos.ticket} {reason} {volume} lot')
+     + before = float(pos.volume)
+     + sent = self._send({'action': mt5.TRADE_ACTION_DEAL, 'symbol': pos.symbol, 'volume': volume, 'type': otype}, pos.symbol, d, position=pos.ticket) is not None
+     + if not sent:
+     + return False
+     + ok, state = self._confirm_close(int(pos.ticket), before, float(volume))
+     + self.log(f'[{NAME}] {pos.symbol} #{pos.ticket} {reason} {volume} lot — confirmed ({state})')
+     + else:
+     + self.log(f'[{NAME}] WARNING {pos.symbol} #{pos.ticket} {reason}: broker reported success but close NOT confirmed ({state}) — not counted as done')
+     + self.notify(f'⚠️ {NAME}: {pos.symbol} #{pos.ticket} {reason} broker-এ নিশ্চিত হয়নি ({state})')
+  [ClaudePullbackV1._manage_open_trades] statement diff:
+     - self._close(pos, plan[0], 'EXIT_TP1')
+     + t['tp1_partial'] = 'ok' if self._close(pos, plan[0], 'EXIT_TP1') else 'unconfirmed'
+     + t['tp1_partial'] = 'skipped'
+SCOPE OK: True
+
+=== P6b  sha b390bf3195d7aedb…  base claude_pullback_v1.py 0516a96f508db10a…
+identical parts: 82 | changed: ['ClaudePullbackV1.__init__', 'ClaudePullbackV1._close', 'ClaudePullbackV1._manage_open_trades'] | added: ['ClaudePullbackV1._confirm_close', 'assign (CLOSE_CONFIRM_TRIES, CLOSE_CONFIRM_DELAY)', 'assign BE_MAX_TRIES', 'import import time'] | removed: []
+  [ClaudePullbackV1.__init__] statement diff:
+     + self.sleep = time.sleep
+  [ClaudePullbackV1._close] statement diff:
+     - ok = self._send({'action': mt5.TRADE_ACTION_DEAL, 'symbol': pos.symbol, 'volume': volume, 'type': otype}, pos.symbol, d, position=pos.ticket) is not None
+     - self.log(f'[{NAME}] {pos.symbol} #{pos.ticket} {reason} {volume} lot')
+     + before = float(pos.volume)
+     + sent = self._send({'action': mt5.TRADE_ACTION_DEAL, 'symbol': pos.symbol, 'volume': volume, 'type': otype}, pos.symbol, d, position=pos.ticket) is not None
+     + if not sent:
+     + return False
+     + ok, state = self._confirm_close(int(pos.ticket), before, float(volume))
+     + self.log(f'[{NAME}] {pos.symbol} #{pos.ticket} {reason} {volume} lot — confirmed ({state})')
+     + else:
+     + self.log(f'[{NAME}] WARNING {pos.symbol} #{pos.ticket} {reason}: broker reported success but close NOT confirmed ({state}) — not counted as done')
+     + self.notify(f'⚠️ {NAME}: {pos.symbol} #{pos.ticket} {reason} broker-এ নিশ্চিত হয়নি ({state})')
+  [ClaudePullbackV1._manage_open_trades] statement diff:
+     - self._close(pos, plan[0], 'EXIT_TP1')
+     - pos2 = self._position(int(key))
+     - if pos2 is not None:
+     - self._modify_sl(pos2, round(t['entry'], int(si.digits)), pos2.tp)
+     + t['tp1_partial'] = 'ok' if self._close(pos, plan[0], 'EXIT_TP1') else 'unconfirmed'
+     + t['tp1_partial'] = 'skipped'
+     + t['be_pending'], t['be_tries'] = (True, 0)
+     + self._save()
+     + if t.get('be_pending'):
+     + pos2 = self._position(int(key))
+     + if pos2 is None:
+     + t['be_pending'] = False
+     + elif self._modify_sl(pos2, round(t['entry'], int(si.digits)), pos2.tp):
+     + t['be_pending'] = False
+     + else:
+     + t['be_tries'] = int(t.get('be_tries', 0)) + 1
+     + self.log(f"[{NAME}] WARNING {t['symbol']} #{key} SL→BE failed (try {t['be_tries']}/{BE_MAX_TRIES})")
+     + if t['be_tries'] >= BE_MAX_TRIES:
+     + t['be_pending'] = False
+     + self.notify(f"⚠️ {NAME}: {t['symbol']} #{key} SL→breakeven বসানো যায়নি — হাতে দেখুন")
+     + changed = True
+SCOPE OK: True
+
+=== P5  sha bed38da8690320cb…  base demo_verification.py c708da0cf7394450…
+identical parts: 52 | changed: ['run_checks'] | added: [] | removed: []
+  [run_checks] statement diff:
+     + acc = mt5.account_info()
+     + bal = float(acc.balance) if acc else None
+     + for s in ('BTCUSDm', 'XAUUSDm'):
+     + s_i, tk = (mt5.symbol_info(s), mt5.symbol_info_tick(s))
+     + if not (s_i and tk):
+     + info(f'volume spec {s}', 'symbol/tick পাওয়া যায়নি')
+     + continue
+     + vmin_s = float(s_i.volume_min)
+     + rows = []
+     + for pct in sorted({0.0025, 0.005, 0.01, 0.02, SLTP_PCT}):
+     + loss = mt5.order_calc_profit(mt5.ORDER_TYPE_BUY, s, vmin_s, tk.ask, tk.ask * (1 - pct))
+     + if loss is None:
+     + rows.append(f'SL {pct * 100:.2f}%: order_calc_profit None')
+     + continue
+     + need = abs(float(loss)) / 0.01
+     + rows.append(f"SL {pct * 100:.2f}%{(' (এই পরীক্ষার SL)' if pct == SLTP_PCT else '')}: min-lot risk ${abs(float(loss)):.2f} → balance ≥ ${need:,.0f} লাগবে" + ('' if bal is None else ' ✓' if bal >= need else ' ✗ (GPT এই দূরত্বে ট্রেড নেবে না)'))
+     + info(f'volume spec {s}', f"min {s_i.volume_min}, step {s_i.volume_step}, max {s_i.volume_max}, contract {getattr(s_i, 'trade_contract_size', '?')}, balance {bal} | " + ' | '.join(rows))
+SCOPE OK: True
+
+ALL SCOPE OK: True

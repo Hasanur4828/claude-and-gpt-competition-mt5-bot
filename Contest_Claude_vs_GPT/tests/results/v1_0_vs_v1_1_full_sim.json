@@ -1,0 +1,19 @@
+{
+ "gpt_trades_v1_0": 11,
+ "gpt_trades_v1_1": 11,
+ "gpt_trades_identical": true,
+ "claude_trades_identical": true,
+ "gpt_net_v1_0": 389.64000000000004,
+ "gpt_net_v1_1": 389.64000000000004,
+ "v1_1_run_ownership_violations": 0,
+ "v1_1_run_counter_match": {
+  "claude": true,
+  "gpt": true
+ },
+ "v1_1_run_preflight_hash_check": {
+  "ok": false,
+  "failed": [
+   "GPT original file unchanged (SHA-256)"
+  ]
+ }
+}

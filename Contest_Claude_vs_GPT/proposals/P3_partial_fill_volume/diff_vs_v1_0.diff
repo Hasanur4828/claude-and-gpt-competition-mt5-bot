@@ -1,0 +1,30 @@
+--- v1.0/gpt_liquidity_fibonacci_scalper_v1.py
++++ P3_partial_fill_volume/gpt_liquidity_fibonacci_scalper_v1.py
+@@ -472,6 +472,17 @@
+                 mt5.TRADE_RETCODE_PLACED,
+                 mt5.TRADE_RETCODE_DONE_PARTIAL,
+             ):
++                # [P3] Report requested and actually filled volume separately.
++                # If the broker result carries no volume, the fill is reported as unknown
++                # (never assumed to be the requested volume).
++                filled = getattr(result, "volume", None)
++                filled = float(filled) if filled else None
++                if filled is None:
++                    fill_status = "UNKNOWN_FILL"
++                elif filled + 1e-9 < volume or result.retcode == mt5.TRADE_RETCODE_DONE_PARTIAL:
++                    fill_status = "PARTIAL"
++                else:
++                    fill_status = "FULL"
+                 return {
+                     "status": "OPENED",
+                     "ticket": int(result.order),
+@@ -479,6 +490,9 @@
+                     "symbol": symbol,
+                     "side": side,
+                     "volume": volume,
++                    "requested_volume": volume,
++                    "filled_volume": filled,
++                    "fill_status": fill_status,
+                     "entry": price,
+                     "sl": sl,
+                     "tp": tp,

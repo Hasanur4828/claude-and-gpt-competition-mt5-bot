@@ -1,0 +1,582 @@
+{
+ "summary": {
+  "total": 77,
+  "passed": 77,
+  "per_proposal": {
+   "P1": [
+    19,
+    19
+   ],
+   "P3": [
+    18,
+    18
+   ],
+   "COMBINED": [
+    7,
+    7
+   ],
+   "P4": [
+    31,
+    31
+   ],
+   "P2": [
+    1,
+    1
+   ],
+   "ALL": [
+    1,
+    1
+   ]
+  },
+  "sha256": {
+   "v1.0": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+   "P1": "52050515055a9758ab3a5ce4f802b65721680bb80813a3754fbc1952af9a71bd",
+   "P2": "3556dd076812f5293d5b127ccecf5686dda6e7f692af0b07c4a2df6f285efd17",
+   "P3": "3c7df70edec920807d5591dbf15caece8a13487a3037c995eddc12097b07c451",
+   "P4": "65bfcc49602799b5a6a0cc0628d800244c5f920aefaef30efb339771c6256828",
+   "COMBINED": "f49bdc0da25bb75cd446953a64b2a6552e8166060e4377614f11afc2b73e393e"
+  },
+  "SIMULATED_ONLY": true
+ },
+ "rows": [
+  {
+   "proposal": "P1",
+   "test": "[v1.0] order_send None (order আসলে খোলে) BUY",
+   "expected": "আগের অবস্থা দেখানো: v1.0 অন্য filling mode-এ আবার পাঠায় → একাধিক পজিশন (ঝুঁকি প্রমাণ)",
+   "actual": "sends=3, GPT positions=3, status=FAILED",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[v1.0] order_send None (order আসলে খোলে) SELL",
+   "expected": "আগের অবস্থা দেখানো: v1.0 অন্য filling mode-এ আবার পাঠায় → একাধিক পজিশন (ঝুঁকি প্রমাণ)",
+   "actual": "sends=3, GPT positions=3, status=FAILED",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] order_send None (order আসলে খোলে) BUY",
+   "expected": "ঠিক ১টা send, সর্বোচ্চ ১টা পজিশন, status UNKNOWN, reason ORDER_SEND_NONE, last_error আছে",
+   "actual": "sends=1, GPT positions=1, status=UNKNOWN, reason=ORDER_SEND_NONE, last_error=\"(1, 'Success')\", filling=0",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] order_send None (order আসলে খোলে) SELL",
+   "expected": "ঠিক ১টা send, সর্বোচ্চ ১টা পজিশন, status UNKNOWN, reason ORDER_SEND_NONE, last_error আছে",
+   "actual": "sends=1, GPT positions=1, status=UNKNOWN, reason=ORDER_SEND_NONE, last_error=\"(1, 'Success')\", filling=0",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[COMBINED] order_send None (order আসলে খোলে) BUY",
+   "expected": "ঠিক ১টা send, সর্বোচ্চ ১টা পজিশন, status UNKNOWN, reason ORDER_SEND_NONE, last_error আছে",
+   "actual": "sends=1, GPT positions=1, status=UNKNOWN, reason=ORDER_SEND_NONE, last_error=\"(1, 'Success')\", filling=0",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[COMBINED] order_send None (order আসলে খোলে) SELL",
+   "expected": "ঠিক ১টা send, সর্বোচ্চ ১টা পজিশন, status UNKNOWN, reason ORDER_SEND_NONE, last_error আছে",
+   "actual": "sends=1, GPT positions=1, status=UNKNOWN, reason=ORDER_SEND_NONE, last_error=\"(1, 'Success')\", filling=0",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[v1.0] সংযোগ বিচ্ছিন্ন → order_send None, কিছু খোলেনি",
+   "expected": "v1.0: আগেই SKIP_SYMBOL_INFO (সংযোগ নেই বলে) অথবা ৩ চেষ্টা · P1: আগেই SKIP_SYMBOL_INFO অথবা ১ চেষ্টা + UNKNOWN",
+   "actual": "order_send attempts=0, status=FAILED, reason=SKIP_SYMBOL_INFO",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] সংযোগ বিচ্ছিন্ন → order_send None, কিছু খোলেনি",
+   "expected": "v1.0: আগেই SKIP_SYMBOL_INFO (সংযোগ নেই বলে) অথবা ৩ চেষ্টা · P1: আগেই SKIP_SYMBOL_INFO অথবা ১ চেষ্টা + UNKNOWN",
+   "actual": "order_send attempts=0, status=FAILED, reason=SKIP_SYMBOL_INFO",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[v1.0] order_send None, কিছুই খোলেনি (সংযোগ query ঠিক আছে)",
+   "expected": "v1.0: ৩ বার পাঠায়, FAILED · P1: ১ বার, UNKNOWN (ফল অজানা — তাই আবার নয়)",
+   "actual": "attempts=3, status=FAILED",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] order_send None, কিছুই খোলেনি (সংযোগ query ঠিক আছে)",
+   "expected": "v1.0: ৩ বার পাঠায়, FAILED · P1: ১ বার, UNKNOWN (ফল অজানা — তাই আবার নয়)",
+   "actual": "attempts=1, status=UNKNOWN",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] UNKNOWN-এর পরের চক্র",
+   "expected": "খোলা পজিশন দেখা যায় → _has_position True → নতুন order নয়",
+   "actual": "_has_position=True, GPT positions=1",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[COMBINED] UNKNOWN-এর পরের চক্র",
+   "expected": "খোলা পজিশন দেখা যায় → _has_position True → নতুন order নয়",
+   "actual": "_has_position=True, GPT positions=1",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] স্বাভাবিক (FOK গ্রহণ) BUY: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=1 status=OPENED · P1 sends=1 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] স্বাভাবিক (FOK গ্রহণ) BUY: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=1 status=OPENED · P3 sends=1 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "COMBINED",
+   "test": "[COMBINED] স্বাভাবিক (FOK গ্রহণ) BUY: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=1 status=OPENED · COMBINED sends=1 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] স্বাভাবিক (FOK গ্রহণ) SELL: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=1 status=OPENED · P1 sends=1 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] স্বাভাবিক (FOK গ্রহণ) SELL: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=1 status=OPENED · P3 sends=1 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "COMBINED",
+   "test": "[COMBINED] স্বাভাবিক (FOK গ্রহণ) SELL: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=1 status=OPENED · COMBINED sends=1 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] শুধু RETURN গ্রহণ (FOK, IOC → 10030) BUY: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=OPENED · P1 sends=3 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] শুধু RETURN গ্রহণ (FOK, IOC → 10030) BUY: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=OPENED · P3 sends=3 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "COMBINED",
+   "test": "[COMBINED] শুধু RETURN গ্রহণ (FOK, IOC → 10030) BUY: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=OPENED · COMBINED sends=3 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] শুধু RETURN গ্রহণ (FOK, IOC → 10030) SELL: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=OPENED · P1 sends=3 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] শুধু RETURN গ্রহণ (FOK, IOC → 10030) SELL: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=OPENED · P3 sends=3 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "COMBINED",
+   "test": "[COMBINED] শুধু RETURN গ্রহণ (FOK, IOC → 10030) SELL: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=OPENED · COMBINED sends=3 status=OPENED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] কোনো filling গ্রহণ নয় BUY: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=FAILED · P1 sends=3 status=FAILED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] কোনো filling গ্রহণ নয় BUY: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=FAILED · P3 sends=3 status=FAILED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "COMBINED",
+   "test": "[COMBINED] কোনো filling গ্রহণ নয় BUY: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=FAILED · COMBINED sends=3 status=FAILED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] কোনো filling গ্রহণ নয় SELL: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=FAILED · P1 sends=3 status=FAILED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] কোনো filling গ্রহণ নয় SELL: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=FAILED · P3 sends=3 status=FAILED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "COMBINED",
+   "test": "[COMBINED] কোনো filling গ্রহণ নয় SELL: v1.0-এর সাথে তুলনা",
+   "expected": "একই request ক্রম (একই filling mode ক্রম), একই ফল (P3-এর নতুন তিনটা key বাদে)",
+   "actual": "v1.0 sends=3 status=FAILED · COMBINED sends=3 status=FAILED · same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[v1.0] broker অর্ধেক পূরণ করে (DONE_PARTIAL)",
+   "expected": "আগের অবস্থা দেখানো: v1.0 'volume' = অনুরোধ, আসল পূরণ জানায় না",
+   "actual": "reported volume=0.29, broker-এ আসল=0.14",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] broker অর্ধেক পূরণ করে (DONE_PARTIAL)",
+   "expected": "requested_volume = অনুরোধ, filled_volume = broker-এর আসল, fill_status PARTIAL",
+   "actual": "requested=0.29, filled=0.14, broker-এ আসল=0.14, fill_status=PARTIAL",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] result-এ volume নেই",
+   "expected": "filled_volume None (অনুরোধকে পূরণ ধরে নেয় না), fill_status UNKNOWN_FILL",
+   "actual": "requested=0.29, filled=None, broker-এ আসল=0.29, fill_status=UNKNOWN_FILL",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] আংশিক + result-এ volume নেই",
+   "expected": "filled_volume None (অনুরোধকে পূরণ ধরে নেয় না), fill_status UNKNOWN_FILL",
+   "actual": "requested=0.29, filled=None, broker-এ আসল=0.14, fill_status=UNKNOWN_FILL",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] স্বাভাবিক পূর্ণ fill",
+   "expected": "filled = requested = broker-এর আসল, fill_status FULL",
+   "actual": "requested=0.29, filled=0.29, broker-এ আসল=0.29, fill_status=FULL",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[COMBINED] broker অর্ধেক পূরণ করে (DONE_PARTIAL)",
+   "expected": "requested_volume = অনুরোধ, filled_volume = broker-এর আসল, fill_status PARTIAL",
+   "actual": "requested=0.29, filled=0.14, broker-এ আসল=0.14, fill_status=PARTIAL",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[COMBINED] result-এ volume নেই",
+   "expected": "filled_volume None (অনুরোধকে পূরণ ধরে নেয় না), fill_status UNKNOWN_FILL",
+   "actual": "requested=0.29, filled=None, broker-এ আসল=0.29, fill_status=UNKNOWN_FILL",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[COMBINED] আংশিক + result-এ volume নেই",
+   "expected": "filled_volume None (অনুরোধকে পূরণ ধরে নেয় না), fill_status UNKNOWN_FILL",
+   "actual": "requested=0.29, filled=None, broker-এ আসল=0.14, fill_status=UNKNOWN_FILL",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[COMBINED] স্বাভাবিক পূর্ণ fill",
+   "expected": "filled = requested = broker-এর আসল, fill_status FULL",
+   "actual": "requested=0.29, filled=0.29, broker-এ আসল=0.29, fill_status=FULL",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] result.volume = 0 (আসল MT5-এ 'তথ্য নেই'-এর রূপ)",
+   "expected": "UNKNOWN_FILL, filled_volume None",
+   "actual": "filled=None, fill_status=UNKNOWN_FILL",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[COMBINED] result.volume = 0 (আসল MT5-এ 'তথ্য নেই'-এর রূপ)",
+   "expected": "UNKNOWN_FILL, filled_volume None",
+   "actual": "filled=None, fill_status=UNKNOWN_FILL",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[v1.0] BTCUSDm bar 1535: BUY setup, tick None",
+   "expected": "আগের অবস্থা দেখানো: v1.0 crash করে (exception)",
+   "actual": "exception=AttributeError: 'NoneType' object has no attribute 'ask'",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] BTCUSDm bar 1535: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] BTCUSDm bar 1535: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=71433.54 sl=71183.49 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] BTCUSDm bar 1535: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] BTCUSDm bar 1535: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=71433.54 sl=71183.49 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[v1.0] BTCUSDm bar 1560: BUY setup, tick None",
+   "expected": "আগের অবস্থা দেখানো: v1.0 crash করে (exception)",
+   "actual": "exception=AttributeError: 'NoneType' object has no attribute 'ask'",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] BTCUSDm bar 1560: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] BTCUSDm bar 1560: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=71629.56 sl=71270.87 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] BTCUSDm bar 1560: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] BTCUSDm bar 1560: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=71629.56 sl=71270.87 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[v1.0] BTCUSDm bar 2322: BUY setup, tick None",
+   "expected": "আগের অবস্থা দেখানো: v1.0 crash করে (exception)",
+   "actual": "exception=AttributeError: 'NoneType' object has no attribute 'ask'",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] BTCUSDm bar 2322: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] BTCUSDm bar 2322: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=75344.76 sl=74898.28 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] BTCUSDm bar 2322: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] BTCUSDm bar 2322: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=75344.76 sl=74898.28 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[v1.0] XAUUSDm bar 515: BUY setup, tick None",
+   "expected": "আগের অবস্থা দেখানো: v1.0 crash করে (exception)",
+   "actual": "exception=AttributeError: 'NoneType' object has no attribute 'ask'",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] XAUUSDm bar 515: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] XAUUSDm bar 515: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=3088.231 sl=3076.531 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] XAUUSDm bar 515: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] XAUUSDm bar 515: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=3088.231 sl=3076.531 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[v1.0] XAUUSDm bar 1066: BUY setup, tick None",
+   "expected": "আগের অবস্থা দেখানো: v1.0 crash করে (exception)",
+   "actual": "exception=AttributeError: 'NoneType' object has no attribute 'ask'",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] XAUUSDm bar 1066: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] XAUUSDm bar 1066: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=2922.076 sl=2914.248 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] XAUUSDm bar 1066: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] XAUUSDm bar 1066: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=2922.076 sl=2914.248 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[v1.0] XAUUSDm bar 1447: BUY setup, tick None",
+   "expected": "আগের অবস্থা দেখানো: v1.0 crash করে (exception)",
+   "actual": "exception=AttributeError: 'NoneType' object has no attribute 'ask'",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] XAUUSDm bar 1447: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] XAUUSDm bar 1447: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=3125.105 sl=3110.179 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] XAUUSDm bar 1447: BUY setup, tick None",
+   "expected": "exception নয়; NO_TRADE / SKIP_NO_TICK; ০ order",
+   "actual": "result={'signal': 'NO_TRADE', 'reason': 'SKIP_NO_TICK'}, exception=None, orders=0",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[COMBINED] XAUUSDm bar 1447: tick থাকলে",
+   "expected": "v1.0-এর সাথে হুবহু এক signal (entry, SL, TP)",
+   "actual": "signal=BUY entry=3125.105 sl=3110.179 same=True",
+   "pass": true
+  },
+  {
+   "proposal": "P1",
+   "test": "[P1] আচরণগত সমতা: 13182টা _setup/evaluate_symbol কল (নকল ২,১৯৭ bar × ২ symbol)",
+   "expected": "v1.0-এর সাথে ০ পার্থক্য (tick আছে, offset 0)",
+   "actual": "পার্থক্য=0, এর মধ্যে v1.0 signal=29",
+   "pass": true
+  },
+  {
+   "proposal": "P2",
+   "test": "[P2] আচরণগত সমতা: 13182টা _setup/evaluate_symbol কল (নকল ২,১৯৭ bar × ২ symbol)",
+   "expected": "v1.0-এর সাথে ০ পার্থক্য (tick আছে, offset 0)",
+   "actual": "পার্থক্য=0, এর মধ্যে v1.0 signal=29",
+   "pass": true
+  },
+  {
+   "proposal": "P3",
+   "test": "[P3] আচরণগত সমতা: 13182টা _setup/evaluate_symbol কল (নকল ২,১৯৭ bar × ২ symbol)",
+   "expected": "v1.0-এর সাথে ০ পার্থক্য (tick আছে, offset 0)",
+   "actual": "পার্থক্য=0, এর মধ্যে v1.0 signal=29",
+   "pass": true
+  },
+  {
+   "proposal": "P4",
+   "test": "[P4] আচরণগত সমতা: 13182টা _setup/evaluate_symbol কল (নকল ২,১৯৭ bar × ২ symbol)",
+   "expected": "v1.0-এর সাথে ০ পার্থক্য (tick আছে, offset 0)",
+   "actual": "পার্থক্য=0, এর মধ্যে v1.0 signal=29",
+   "pass": true
+  },
+  {
+   "proposal": "COMBINED",
+   "test": "[COMBINED] আচরণগত সমতা: 13182টা _setup/evaluate_symbol কল (নকল ২,১৯৭ bar × ২ symbol)",
+   "expected": "v1.0-এর সাথে ০ পার্থক্য (tick আছে, offset 0)",
+   "actual": "পার্থক্য=0, এর মধ্যে v1.0 signal=29",
+   "pass": true
+  },
+  {
+   "proposal": "ALL",
+   "test": "পরীক্ষার আগে-পরে সব ফাইলের SHA-256",
+   "expected": "অপরিবর্তিত",
+   "actual": "v1.0 4d41a0ea7e751760… unchanged=True",
+   "pass": true
+  }
+ ]
+}

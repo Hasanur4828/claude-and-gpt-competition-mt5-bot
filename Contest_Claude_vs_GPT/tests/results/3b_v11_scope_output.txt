@@ -1,0 +1,34 @@
+identical parts: 29
+  = GPTLiquidityFibonacciScalper.__init__
+  = GPTLiquidityFibonacciScalper._adx
+  = GPTLiquidityFibonacciScalper._atr
+  = GPTLiquidityFibonacciScalper._calc_lot
+  = GPTLiquidityFibonacciScalper._confirmed_swings
+  = GPTLiquidityFibonacciScalper._ema
+  = GPTLiquidityFibonacciScalper._has_position
+  = GPTLiquidityFibonacciScalper._new_closed_m15_bar
+  = GPTLiquidityFibonacciScalper._normalize_volume
+  = GPTLiquidityFibonacciScalper._rates
+  = GPTLiquidityFibonacciScalper._send_order
+  = GPTLiquidityFibonacciScalper._session_allowed
+  = GPTLiquidityFibonacciScalper._setup
+  = GPTLiquidityFibonacciScalper._trend
+  = GPTLiquidityFibonacciScalper.evaluate_symbol
+  = GPTLiquidityFibonacciScalper.run_once
+  = assign MAGIC
+  = assign ORDER_COMMENT
+  = class GPTLiquidityFibonacciScalper (header + non-method body)
+  = class StrategyConfig (header + non-method body)
+  = import from __future__ import annotations
+  = import from dataclasses import dataclass
+  = import from datetime import datetime, timezone
+  = import from typing import Any, Dict, Optional, List
+  = import import MetaTrader5 as mt5
+  = import import numpy as np
+  = import import pandas as pd
+  = module docstring
+  = top-level #12 If
+changed: ['GPTLiquidityFibonacciScalper._daily_loss_count']
+added:   ['GPTLiquidityFibonacciScalper._server_offset_seconds']
+removed: []
+SCOPE OK (only allowed changes): True

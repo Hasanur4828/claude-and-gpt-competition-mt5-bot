@@ -1,0 +1,1438 @@
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006, 5008]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5010]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmpoz1a1t8x/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] সব পাস।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [S0] Baseline: normal Hedging demo
+      expected: all checks pass, 0 test positions left, journal OK, shutdown called
+      actual:   ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'UNKNOWN', 'reason': 'ORDER_SEND_NONE', 'symbol': 'BTCUSDm', 'side': 'SELL', 'requested_volume': 0.04, 'type_filling': 0, 'magic': 26102402, 'last_error': "(1, 'Success')", 'note': 'order_send returned None; not resent - check MT5 positions/history'}
+[2026-10-25 10:46:42 UTC] !!! URGENT: GPT test SELL: position নিশ্চিতভাবে শনাক্ত হয়নি (order None, deal None, সন্দেহভাজন নতুন পজিশন [5001]) — আর কোনো order পাঠানো হবে না; MT5-এ নিজে দেখুন
+[2026-10-25 10:46:42 UTC] FAIL  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position None state unresolved
+[2026-10-25 10:46:42 UTC] GPT-এর পজিশন নিশ্চিত হয়নি — আর কোনো order পাঠানো হবে না
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] !!! URGENT: নতুন পজিশন #5001 (BTCUSDm magic 26102402 0.04 lot) পরীক্ষার সময় দেখা গেছে, কিন্তু পরীক্ষার order-এর সাথে নিশ্চিত সম্পর্ক নেই — স্বয়ংক্রিয়ভাবে বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] FAIL  Cleanup: no test or unlinked positions left, journal complete  [{'label': 'GPT test SELL', 'position_id': None, 'order_ticket': None, 'deal_ticket': None, 'magic': 26102402, 'symbol': 'BTCUSDm', 'side': 'SELL', 'state': 'unresolved', 'suspect_tickets': [5001]}, {'label': 'UNLINKED new position', 'position_id': 5001, 'state': 'unlinked'}]
+[2026-10-25 10:46:42 UTC] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[2026-10-25 10:46:42 UTC] !!  সতর্কতা: নিচের পজিশন খোলা / অজানা / অনিশ্চিত — MT5-এ নিজে দেখে হাতে বন্ধ করুন  !!
+[2026-10-25 10:46:42 UTC] !!  {'label': 'GPT test SELL', 'position_id': None, 'order_ticket': None, 'deal_ticket': None, 'magic': 26102402, 'symbol': 'BTCUSDm', 'side': 'SELL', 'state': 'unresolved', 'suspect_tickets': [5001]}
+[2026-10-25 10:46:42 UTC] !!  {'label': 'UNLINKED new position', 'position_id': 5001, 'state': 'unlinked'}
+[2026-10-25 10:46:42 UTC] !!  MT5 → Trade ট্যাব → ডান-ক্লিক → Close Position।  প্রতিযোগিতা শুরু করবেন না।
+[2026-10-25 10:46:42 UTC] !!  সমাধানের পর demo_verification আবার চালালে orphan পরীক্ষা খাতা হালনাগাদ করবে।
+[2026-10-25 10:46:42 UTC] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[2026-10-25 10:46:42 UTC] ==== PASS 24 · FAIL 2 · URGENT 2 ====  /tmp/tmpzzazjlu1/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [1a] Broker returns None for the open (but the order executed)
+      expected: position cannot be linked → NOT auto-closed, urgent warning with tickets, Claude order never sent, journal INCOMPLETE (note: GPT's own _send_order retries other filling modes on None, so >1 GPT position can appear)
+      actual:   ok=False failed=['A: GPT position confirmed (deal→position, symbol, side, magic, volume)', 'Cleanup: no test or unlinked positions left, journal complete'] urgent=2 requests=1 contest_open=[5001] journal=INCOMPLETE shutdown=True | GPT positions left (unlinked, not auto-closed): [5001]
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 782778, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 782780 deal 5004
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006, 5008]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5010]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmp78b0jdz_/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] সব পাস।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [1b] Broker returns a wrong order ticket (deal ticket correct)
+      expected: resolved via deal → position_id; all pass; nothing left
+      actual:   ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 893890, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5003 deal 893892
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006, 5008]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5010]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmpq1tzeim4/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] সব পাস।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [1c] Broker returns a wrong deal ticket (order ticket correct)
+      expected: resolved via order → deal history; all pass; nothing left
+      actual:   ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 782778, 'deal': 893890, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] !!! URGENT: GPT test SELL: position নিশ্চিতভাবে শনাক্ত হয়নি (order 782778, deal 893890, সন্দেহভাজন নতুন পজিশন [5001]) — আর কোনো order পাঠানো হবে না; MT5-এ নিজে দেখুন
+[2026-10-25 10:46:42 UTC] FAIL  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position None state unresolved
+[2026-10-25 10:46:42 UTC] GPT-এর পজিশন নিশ্চিত হয়নি — আর কোনো order পাঠানো হবে না
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] !!! URGENT: নতুন পজিশন #5001 (BTCUSDm magic 26102402 0.04 lot) পরীক্ষার সময় দেখা গেছে, কিন্তু পরীক্ষার order-এর সাথে নিশ্চিত সম্পর্ক নেই — স্বয়ংক্রিয়ভাবে বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] FAIL  Cleanup: no test or unlinked positions left, journal complete  [{'label': 'GPT test SELL', 'position_id': None, 'order_ticket': 782778, 'deal_ticket': 893890, 'magic': 26102402, 'symbol': 'BTCUSDm', 'side': 'SELL', 'state': 'unresolved', 'suspect_tickets': [5001]}, {'label': 'UNLINKED new position', 'position_id': 5001, 'state': 'unlinked'}]
+[2026-10-25 10:46:42 UTC] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[2026-10-25 10:46:42 UTC] !!  সতর্কতা: নিচের পজিশন খোলা / অজানা / অনিশ্চিত — MT5-এ নিজে দেখে হাতে বন্ধ করুন  !!
+[2026-10-25 10:46:42 UTC] !!  {'label': 'GPT test SELL', 'position_id': None, 'order_ticket': 782778, 'deal_ticket': 893890, 'magic': 26102402, 'symbol': 'BTCUSDm', 'side': 'SELL', 'state': 'unresolved', 'suspect_tickets': [5001]}
+[2026-10-25 10:46:42 UTC] !!  {'label': 'UNLINKED new position', 'position_id': 5001, 'state': 'unlinked'}
+[2026-10-25 10:46:42 UTC] !!  MT5 → Trade ট্যাব → ডান-ক্লিক → Close Position।  প্রতিযোগিতা শুরু করবেন না।
+[2026-10-25 10:46:42 UTC] !!  সমাধানের পর demo_verification আবার চালালে orphan পরীক্ষা খাতা হালনাগাদ করবে।
+[2026-10-25 10:46:42 UTC] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[2026-10-25 10:46:42 UTC] ==== PASS 24 · FAIL 2 · URGENT 2 ====  /tmp/tmpuuo9365a/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [1d] Both order and deal tickets wrong
+      expected: cannot confirm → stop further orders, urgent, the 1 GPT position NOT auto-closed, journal INCOMPLETE
+      actual:   ok=False failed=['A: GPT position confirmed (deal→position, symbol, side, magic, volume)', 'Cleanup: no test or unlinked positions left, journal complete'] urgent=2 requests=1 contest_open=[5001] journal=INCOMPLETE shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006, 5008]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5010]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmphq5beu4u/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] সব পাস।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [2] Order succeeds but position not visible for the first 3 queries
+      expected: polling finds it; all pass; nothing left
+      actual:   ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.02, 'fill_status': 'PARTIAL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] GPT test SELL: partial fill 0.02 / 0.04 — গ্রহণযোগ্য, প্রকৃত volume ধরা হলো
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10010 order 5003 deal 5004
+[2026-10-25 10:46:42 UTC] Claude test BUY: partial fill 0.01 / 0.02 — গ্রহণযোগ্য, প্রকৃত volume ধরা হলো
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.02 · Claude #5003 0.01
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] PASS  E: partial close skipped — volumes would violate broker rules  close 0.0 < volume_min 0.01
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.08 history -0.08 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5008]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmpkyp1w69x/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] সব পাস।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [3] Orders only partially filled (50%)
+      expected: accepted with actual volume (logged), partial-close plan uses actual volume; all pass; nothing left
+      actual:   ok=True failed=[] urgent=0 requests=5 contest_open=[] journal=OK shutdown=True | partial-fill logged
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  সতর্কতা: অন্য strategy-র 1টা পজিশন খোলা — ঐ symbol-এ দুই বটই অপেক্ষা করবে যতক্ষণ না সেগুলো বন্ধ হয়
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5003, 'deal': 5004, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5005 deal 5006
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5005 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5003 0.04 · Claude #5005 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5005: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5005 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5005 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5003 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5003, 5005]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (claude)  [5006, 5008, 5010]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5004, 5012]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmpei0tw0zn/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] সব পাস।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [4] A manual position (magic 0) already open on BTCUSDm
+      expected: manual position untouched; all pass
+      actual:   ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  সতর্কতা: অন্য strategy-র 1টা পজিশন খোলা — ঐ symbol-এ দুই বটই অপেক্ষা করবে যতক্ষণ না সেগুলো বন্ধ হয়
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5003, 'deal': 5004, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5007 deal 5008
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5007 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5003 0.04 · Claude #5007 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5007: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5007 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5007 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5003 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5003, 5007]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (claude)  [5008, 5010, 5012]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5004, 5014]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmpv_bwbwzi/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] সব পাস।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [5] Another strategy's position (magic 777) pre-exists + a manual one is opened DURING the test
+      expected: both untouched (not contest magic, not linked), no urgent; all pass
+      actual:   ok=True failed=[] urgent=0 requests=7 contest_open=[] journal=OK shutdown=True | other positions still open: [5001, 5005]
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] FAIL  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102402
+[2026-10-25 10:46:42 UTC] ==== PASS 4 · FAIL 1 · URGENT 0 ====  /tmp/tmp8u4sdl0s/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [6a] Adapter's Claude magic wrongly equals GPT's
+      expected: guard fails, 0 orders sent
+      actual:   ok=False failed=['GUARD: magic numbers correct and distinct'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] FAIL  GUARD: magic numbers correct and distinct  Claude 26102402 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] ==== PASS 4 · FAIL 1 · URGENT 0 ====  /tmp/tmp4rw3i6l_/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [6b] Claude bot magic wrongly set to GPT's number
+      expected: guard fails, 0 orders sent
+      actual:   ok=False failed=['GUARD: magic numbers correct and distinct'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] FAIL  Unexpected error  RuntimeError: stop checks early
+[2026-10-25 10:46:42 UTC] Traceback (most recent call last):
+  File "/tmp/tmp9260m81c/pkg/demo_verification.py", line 403, in main
+    _main_body(terminal_path, assume_yes)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/tmp9260m81c/pkg/demo_verification.py", line 478, in _main_body
+    run_checks()
+    ~~~~~~~~~~^^
+  File "/tmp/tmp9260m81c/pkg/demo_verification.py", line 588, in run_checks
+    mod_ok = claude._modify_sl(cp, new_sl, cp.tp)
+  File "/tmp/claude-0/-home-claude/9013aec9-7d2d-582b-92b4-462d5ce13db8/scratchpad/v6/Contest_Claude_vs_GPT/tests/test_verification_scenarios.py", line 184, in boom
+    raise RuntimeError("stop checks early")
+RuntimeError: stop checks early
+
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1: MT5 unavailable
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 2: MT5 unavailable
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 3: MT5 unavailable
+[2026-10-25 10:46:42 UTC] cleanup #5003 attempt 1: MT5 unavailable
+[2026-10-25 10:46:42 UTC] cleanup #5003 attempt 2: MT5 unavailable
+[2026-10-25 10:46:42 UTC] cleanup #5003 attempt 3: MT5 unavailable
+[2026-10-25 10:46:42 UTC] !!! URGENT: cleanup-এর সময় MT5 উত্তর দিচ্ছে না — পজিশনের অবস্থা অজানা
+[2026-10-25 10:46:42 UTC] FAIL  Cleanup: no test or unlinked positions left, journal complete  [{'label': 'GPT test SELL', 'position_id': 5001, 'order_ticket': 5001, 'deal_ticket': 5002, 'magic': 26102402, 'symbol': 'BTCUSDm', 'side': 'SELL', 'state': 'unknown', 'suspect_tickets': None}, {'label': 'Claude test BUY', 'position_id': 5003, 'order_ticket': 5003, 'deal_ticket': 5004, 'magic': 26102401, 'symbol': 'BTCUSDm', 'side': 'BUY', 'state': 'unknown', 'suspect_tickets': None}]
+[2026-10-25 10:46:42 UTC] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[2026-10-25 10:46:42 UTC] !!  সতর্কতা: নিচের পজিশন খোলা / অজানা / অনিশ্চিত — MT5-এ নিজে দেখে হাতে বন্ধ করুন  !!
+[2026-10-25 10:46:42 UTC] !!  {'label': 'GPT test SELL', 'position_id': 5001, 'order_ticket': 5001, 'deal_ticket': 5002, 'magic': 26102402, 'symbol': 'BTCUSDm', 'side': 'SELL', 'state': 'unknown', 'suspect_tickets': None}
+[2026-10-25 10:46:42 UTC] !!  {'label': 'Claude test BUY', 'position_id': 5003, 'order_ticket': 5003, 'deal_ticket': 5004, 'magic': 26102401, 'symbol': 'BTCUSDm', 'side': 'BUY', 'state': 'unknown', 'suspect_tickets': None}
+[2026-10-25 10:46:42 UTC] !!  MT5 → Trade ট্যাব → ডান-ক্লিক → Close Position।  প্রতিযোগিতা শুরু করবেন না।
+[2026-10-25 10:46:42 UTC] !!  সমাধানের পর demo_verification আবার চালালে orphan পরীক্ষা খাতা হালনাগাদ করবে।
+[2026-10-25 10:46:42 UTC] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[2026-10-25 10:46:42 UTC] ==== PASS 29 · FAIL 2 · URGENT 1 ====  /tmp/tmp9260m81c/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  অসম্পূর্ণ পরীক্ষা: run V20261025T104642 status=incomplete; run V20261025T104642 position 5001 state=unknown; run V20261025T104642 position 5003 state=unknown
+[2026-10-25 10:46:42 UTC] আগের অসম্পূর্ণ পরীক্ষা পাওয়া গেছে — orphan পরীক্ষা চলছে
+[2026-10-25 10:46:42 UTC] orphan #5001 (GPT test SELL) খোলা — খাতায় নিশ্চিত, বন্ধ করা হচ্ছে
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] orphan #5003 (Claude test BUY) খোলা — খাতায় নিশ্চিত, বন্ধ করা হচ্ছে
+[2026-10-25 10:46:42 UTC] cleanup #5003 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no orphaned test positions from earlier runs  orphan সমাধান হয়েছে — নিরাপত্তার জন্য এই run এখানে থামছে, আবার চালান
+[2026-10-25 10:46:42 UTC] ==== PASS 7 · FAIL 0 · URGENT 0 ====  /tmp/tmp9260m81c/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] সব পাস।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [7] Connection lost during cleanup with BOTH test positions still open, then restored and re-run
+      expected: run1: states unknown → urgent, 2 test positions left open, journal INCOMPLETE; run2: orphans found via journal, both closed with their own magic, journal resolved, run stops safely
+      actual:   RUN1 ok=False failed=['Unexpected error', 'Cleanup: no test or unlinked positions left, journal complete'] urgent=1 requests=2 contest_open=[5001, 5003] journal=INCOMPLETE shutdown=True || RUN2 ok=True failed=[] urgent=0 requests=2 contest_open=[] journal=OK shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done (fake) last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] cleanup #5001: broker 'done' বললেও পজিশন এখনো খোলা — আবার চেষ্টা
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 2 filling 0: retcode 10009 done (fake) last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] cleanup #5001: broker 'done' বললেও পজিশন এখনো খোলা — আবার চেষ্টা
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 3 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006, 5008]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5014]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmpph0b1yhx/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] সব পাস।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [8a] Cleanup close returns DONE but position stays open (first 2 times)
+      expected: cleanup re-checks, sees still open, retries, finally closed; all pass
+      actual:   ok=True failed=[] urgent=0 requests=8 contest_open=[] journal=OK shutdown=True | 'still open' retry logged
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:42 UTC] FAIL  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.02 (expected 0.01)
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.02 lot
+[2026-10-25 10:46:42 UTC] FAIL  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:42 UTC] FAIL  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 0 counter None history 0.0 deals 1
+[2026-10-25 10:46:42 UTC] FAIL  D: journal has all deal IDs (claude)  []
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5010]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] cleanup #5003 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 38 · FAIL 4 · URGENT 0 ====  /tmp/tmppve8_avj/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [8b] Claude BOT's own close returns DONE but position stays open
+      expected: verification detects it (FAIL 'Claude fully closed'), cleanup still closes everything, journal OK. FINDING: Claude bot trusts retcode, no re-check
+      actual:   ok=False failed=['E: Claude partial close (close & remaining both valid)', 'Claude fully closed its position', 'Counter accuracy without exclusion (claude): counted once, net = MT5 history', 'D: journal has all deal IDs (claude)'] urgent=0 requests=7 contest_open=[] journal=OK shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] FAIL  Interrupted by Ctrl+C  ব্যবহারকারী থামিয়েছেন
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] cleanup #5003 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 30 · FAIL 1 · URGENT 0 ====  /tmp/tmpga198y8u/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [9a] Ctrl+C in the middle of the checks (before cleanup)
+      expected: cleanup runs, both test positions closed, report written, shutdown called, journal complete
+      actual:   ok=False failed=['Interrupted by Ctrl+C'] urgent=0 requests=4 contest_open=[] journal=OK shutdown=True
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] FAIL  Unexpected error  RuntimeError: stop checks early
+[2026-10-25 10:46:42 UTC] Traceback (most recent call last):
+  File "/tmp/tmp2kapanmp/pkg/demo_verification.py", line 403, in main
+    _main_body(terminal_path, assume_yes)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/tmp2kapanmp/pkg/demo_verification.py", line 478, in _main_body
+    run_checks()
+    ~~~~~~~~~~^^
+  File "/tmp/tmp2kapanmp/pkg/demo_verification.py", line 588, in run_checks
+    mod_ok = claude._modify_sl(cp, new_sl, cp.tp)
+  File "/tmp/claude-0/-home-claude/9013aec9-7d2d-582b-92b4-462d5ce13db8/scratchpad/v6/Contest_Claude_vs_GPT/tests/test_verification_scenarios.py", line 247, in boom
+    raise RuntimeError("stop checks early")
+RuntimeError: stop checks early
+
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] !!! URGENT: cleanup চলার সময় Ctrl+C (চেষ্টা 1) — cleanup আবার চালানো হচ্ছে
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] cleanup #5003 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 30 · FAIL 1 · URGENT 1 ====  /tmp/tmp2kapanmp/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [9b] Ctrl+C while cleanup is running
+      expected: cleanup restarts once and finishes, positions closed, report written, shutdown called
+      actual:   ok=False failed=['Unexpected error'] urgent=1 requests=4 contest_open=[] journal=OK shutdown=True | 'Ctrl+C during cleanup' logged
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006, 5008]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5010]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] REPORT ERROR: KeyboardInterrupt: 
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [9c] Ctrl+C while the report is being written
+      expected: shutdown still called, positions already closed, journal complete (separate file), error logged
+      actual:   ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True | REPORT ERROR logged
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] FAIL  GUARD: verification journal readable  verification_positions.json পড়া যায়নি: JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1) — ফাইলটা অন্য নামে সরিয়ে MT5-এ magic 26102401/26102402-এর পজিশন হাতে দেখুন, তারপর আবার চালান
+[2026-10-25 10:46:42 UTC] ==== PASS 5 · FAIL 1 · URGENT 0 ====  /tmp/tmpwqwczj7c/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [10a] verification_positions.json is garbage
+      expected: guard fails (0 orders); counter: data_ok False + ERROR warning; preflight fails
+      actual:   ok=False failed=['GUARD: verification journal readable'] urgent=0 requests=0 contest_open=[] journal=CORRUPT shutdown=True | counter data_ok=False warning='ERROR: verification_positions.json পড়া যায়নি: JSONDecodeEr…' preflight_ok=False
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] FAIL  GUARD: verification journal readable  verification_positions.json-এর checksum মেলেনি (নষ্ট বা হাতে বদলানো) — ফাইলটা অন্য নামে সরিয়ে MT5-এ magic 26102401/26102402-এর পজিশন হাতে দেখুন, তারপর আবার চালান
+[2026-10-25 10:46:42 UTC] ==== PASS 5 · FAIL 1 · URGENT 0 ====  /tmp/tmpnpyy360w/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [10b] verification_positions.json valid JSON but checksum wrong (tampered)
+      expected: same as 10a
+      actual:   ok=False failed=['GUARD: verification journal readable'] urgent=0 requests=0 contest_open=[] journal=CORRUPT shutdown=True | counter data_ok=False warning='ERROR: verification_positions.json-এর checksum মেলেনি (নষ্ট …' preflight_ok=False
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] FAIL  GUARD: verification journal readable  verification_positions.json পড়া যায়নি: JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 66 (char 65) — ফাইলটা অন্য নামে সরিয়ে MT5-এ magic 26102401/26102402-এর পজিশন হাতে দেখুন, তারপর আবার চালান
+[2026-10-25 10:46:42 UTC] ==== PASS 5 · FAIL 1 · URGENT 0 ====  /tmp/tmpc75z2p3j/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [10c] verification_positions.json truncated (partially written)
+      expected: same as 10a
+      actual:   ok=False failed=['GUARD: verification journal readable'] urgent=0 requests=0 contest_open=[] journal=CORRUPT shutdown=True | counter data_ok=False warning='ERROR: verification_positions.json পড়া যায়নি: JSONDecodeEr…' preflight_ok=False
+
+PASS  [10d] verification_positions.json missing
+      expected: counter not silent: NOTE warning shown
+      actual:   status=MISSING warnings=['NOTE: verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে) — এই ফোল্ডারে verification চালালে ফাইলটা এখানেই থাকার কথা']
+
+[2026-10-25 10:46:42 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:42 UTC] PASS  Account info  
+[2026-10-25 10:46:42 UTC] Account 1234567 · server ? · balance 10000.02
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:42 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:42 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:42 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:42 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:42 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:42 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:42 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:42 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:42 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:42 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5004, 'deal': 5005, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:42 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5004 state open
+[2026-10-25 10:46:42 UTC] Claude _send result: retcode 10009 order 5006 deal 5007
+[2026-10-25 10:46:42 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5006 state open
+[2026-10-25 10:46:42 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5004 0.04 · Claude #5006 0.02
+[2026-10-25 10:46:42 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:42 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:42 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:42 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:42 UTC] REFUSE #5006: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:42 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5006 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:42 UTC] [Claude Pullback v1] BTCUSDm #5006 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:42 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:42 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:42 UTC] cleanup #5004 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:42 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:42 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5004, 5006]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (claude)  [5007, 5009, 5011]
+[2026-10-25 10:46:42 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:42 UTC] PASS  D: journal has all deal IDs (gpt)  [5005, 5013]
+[2026-10-25 10:46:42 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:42 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:42 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmpqh9wnwrh/pkg/demo_verification_report.txt
+[2026-10-25 10:46:42 UTC] সব পাস।
+[2026-10-25 10:46:42 UTC] mt5.shutdown() called
+PASS  [11] Counter after restart + D both directions (contest trades before AND after verification)
+      expected: both real contest trades counted exactly once, both verification trades excluded, new counter instance gives identical result
+      actual:   counted [5001, 5014] (contest trades before=5001, after=5014); excluded verification [5004, 5006]; second counter instance identical=True
+
+[2026-10-25 10:46:43 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:43 UTC] PASS  Account info  
+[2026-10-25 10:46:43 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:43 UTC] FAIL  GUARD: account is HEDGING  Netting — কোনো order নয়
+[2026-10-25 10:46:43 UTC] ==== PASS 3 · FAIL 1 · URGENT 0 ====  /tmp/tmpw8bd5jbv/pkg/demo_verification_report.txt
+[2026-10-25 10:46:43 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:43 UTC] mt5.shutdown() called
+PASS  [12a] Netting account
+      expected: stops before any order (0 requests)
+      actual:   ok=False failed=['GUARD: account is HEDGING'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True
+
+[2026-10-25 10:46:43 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:43 UTC] PASS  Account info  
+[2026-10-25 10:46:43 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:43 UTC] FAIL  GUARD: account is DEMO  আসল অ্যাকাউন্ট — কোনো order নয়
+[2026-10-25 10:46:43 UTC] ==== PASS 2 · FAIL 1 · URGENT 0 ====  /tmp/tmpi5x20otf/pkg/demo_verification_report.txt
+[2026-10-25 10:46:43 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:43 UTC] mt5.shutdown() called
+PASS  [12b] Real account
+      expected: stops before any order (0 requests)
+      actual:   ok=False failed=['GUARD: account is DEMO'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True
+
+[2026-10-25 10:46:43 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:43 UTC] PASS  Account info  
+[2026-10-25 10:46:43 UTC] Account 1234567 · server ? · balance 100000.0
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:43 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:43 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:43 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:43 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:43 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.1, step 0.1, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:43 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:43 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:43 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.4, 'requested_volume': 0.4, 'filled_volume': 0.4, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:43 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:43 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:43 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:43 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.4 · Claude #5003 0.2
+[2026-10-25 10:46:43 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:43 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:43 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:43 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:43 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:43 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:43 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.1 lot
+[2026-10-25 10:46:43 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.2 → close 0.1, remaining 0.1 (expected 0.1)
+[2026-10-25 10:46:43 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.1 lot
+[2026-10-25 10:46:43 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:43 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:43 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:43 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:43 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:43 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -1.6 history -1.6 deals 3
+[2026-10-25 10:46:43 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006, 5008]
+[2026-10-25 10:46:43 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -3.2 history -3.2 deals 2
+[2026-10-25 10:46:43 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5010]
+[2026-10-25 10:46:43 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:43 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:43 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmp9py_i2sv/pkg/demo_verification_report.txt
+[2026-10-25 10:46:43 UTC] সব পাস।
+[2026-10-25 10:46:43 UTC] mt5.shutdown() called
+PASS  [13a] Unusual volume rules: min 0.1, step 0.1 (balance 100,000)
+      expected: Claude test volume 0.2 → close 0.1 / remain 0.1 (both valid); all pass
+      actual:   ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True
+
+[2026-10-25 10:46:43 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:43 UTC] PASS  Account info  
+[2026-10-25 10:46:43 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:43 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:43 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:43 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:43 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:43 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.1, step 0.1, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:43 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:43 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:43 UTC] GPT _send_order result: {'status': 'SKIPPED', 'reason': 'SKIP_LOT_TOO_SMALL_OR_CALC_FAILED'}
+[2026-10-25 10:46:43 UTC] GPT test SELL: order ব্যর্থ, কোনো নতুন পজিশন দেখা যায়নি
+[2026-10-25 10:46:43 UTC] FAIL  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position None state none_opened
+[2026-10-25 10:46:43 UTC] GPT-এর পজিশন নিশ্চিত হয়নি — আর কোনো order পাঠানো হবে না
+[2026-10-25 10:46:43 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:43 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:43 UTC] ==== PASS 25 · FAIL 1 · URGENT 0 ====  /tmp/tmpy__h9snz/pkg/demo_verification_report.txt
+[2026-10-25 10:46:43 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:43 UTC] mt5.shutdown() called
+PASS  [13a2] min lot 0.1 with balance 10,000: GPT's 1%-risk lot < min lot
+      expected: GPT's own rule refuses the order (SKIP_LOT_TOO_SMALL), verification reports it, 0 orders, nothing left. FINDING: on such accounts GPT would never trade
+      actual:   ok=False failed=['A: GPT position confirmed (deal→position, symbol, side, magic, volume)'] urgent=0 requests=0 contest_open=[] journal=OK shutdown=True | GPT SKIPPED (lot too small) logged
+
+[2026-10-25 10:46:43 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:43 UTC] PASS  Account info  
+[2026-10-25 10:46:43 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:43 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:43 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:43 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:43 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:43 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 0.01, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:43 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:43 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:43 UTC] E: এই symbol-এ বৈধ আংশিক বন্ধ সম্ভব নয় (min 0.01, step 0.01, max 0.01) — partial পরীক্ষা বাদ
+[2026-10-25 10:46:43 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.01, 'requested_volume': 0.01, 'filled_volume': 0.01, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:43 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:43 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:43 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:43 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.01 · Claude #5003 0.01
+[2026-10-25 10:46:43 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:43 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:43 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:43 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:43 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:43 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:43 UTC] PASS  E: partial close skipped — volumes would violate broker rules  close 0.0 < volume_min 0.01
+[2026-10-25 10:46:43 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:43 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:43 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:43 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:43 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:43 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:43 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.08 history -0.08 deals 2
+[2026-10-25 10:46:43 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006]
+[2026-10-25 10:46:43 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.08 history -0.08 deals 2
+[2026-10-25 10:46:43 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5008]
+[2026-10-25 10:46:43 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:43 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:43 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmpsobhmuy8/pkg/demo_verification_report.txt
+[2026-10-25 10:46:43 UTC] সব পাস।
+[2026-10-25 10:46:43 UTC] mt5.shutdown() called
+PASS  [13b] volume_max 0.01 (no valid partial close possible)
+      expected: partial close skipped with reason; full close works; all pass
+      actual:   ok=True failed=[] urgent=0 requests=5 contest_open=[] journal=OK shutdown=True | partial skipped & logged
+
+[2026-10-25 10:46:43 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:43 UTC] PASS  Account info  
+[2026-10-25 10:46:43 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:43 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:43 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:43 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:43 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:43 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:43 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:43 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:43 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:43 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:43 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:43 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:43 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:43 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:43 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:43 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:43 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:43 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:43 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:43 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:43 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:43 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:43 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:43 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:43 UTC] cleanup #5001 attempt 1 filling 0: retcode 10030 Unsupported filling mode last_error (1, 'Success')
+[2026-10-25 10:46:43 UTC] cleanup #5001 attempt 1 filling 1: retcode 10030 Unsupported filling mode last_error (1, 'Success')
+[2026-10-25 10:46:43 UTC] cleanup #5001 attempt 1 filling 2: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:43 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:43 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:43 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:43 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006, 5008]
+[2026-10-25 10:46:43 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:43 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5010]
+[2026-10-25 10:46:43 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:43 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:43 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmp9oxbnrrp/pkg/demo_verification_report.txt
+[2026-10-25 10:46:43 UTC] সব পাস।
+[2026-10-25 10:46:43 UTC] mt5.shutdown() called
+PASS  [13c] Broker accepts only RETURN filling mode
+      expected: both bots fall back FOK→IOC→RETURN; all pass
+      actual:   ok=True failed=[] urgent=0 requests=16 contest_open=[] journal=OK shutdown=True
+
+[2026-10-25 10:46:43 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:43 UTC] PASS  Account info  
+[2026-10-25 10:46:43 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:43 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 0.00
+[2026-10-25 10:46:43 UTC] PASS  Static: GPT code never sends close/modify requests (no 'position' key, no SLTP)  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: MT5 terminal connected  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Algo trading allowed in terminal  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account allows trading  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol ETHUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Symbol XAUUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: GPT original file unchanged (SHA-256)  
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Magic numbers distinct  {'claude': 26102401, 'gpt': 26102402}
+[2026-10-25 10:46:43 UTC] PASS  Preflight: Verification journal OK (no orphaned test positions)  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  Preflight: No leftover positions from other strategies  
+[2026-10-25 10:46:43 UTC] INFO  server_offset_minutes_by_symbol = {'BTCUSDm': 179.3, 'ETHUSDm': 179.3, 'XAUUSDm': 179.3}
+[2026-10-25 10:46:43 UTC] INFO  server_offset_hours_estimate = 3.0
+[2026-10-25 10:46:43 UTC] INFO  symbol BTCUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 8.0
+[2026-10-25 10:46:43 UTC] INFO  symbol ETHUSDm = digits 2, contract 1.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.4
+[2026-10-25 10:46:43 UTC] INFO  symbol XAUUSDm = digits 3, contract 100.0, min 0.01, step 0.01, max 100.0, stops_level 0, filling_mode 3, spread 0.12
+[2026-10-25 10:46:43 UTC] GPT _send_order result: {'status': 'OPENED', 'ticket': 5001, 'deal': 5002, 'symbol': 'BTCUSDm', 'side': 'SELL', 'volume': 0.04, 'requested_volume': 0.04, 'filled_volume': 0.04, 'fill_status': 'FULL', 'entry': 66788.43, 'sl': 68792.08, 'tp': 62781.13, 'risk_percent': 1.0, 'magic': 26102402}
+[2026-10-25 10:46:43 UTC] PASS  A: GPT position confirmed (deal→position, symbol, side, magic, volume)  position 5001 state open
+[2026-10-25 10:46:43 UTC] Claude _send result: retcode 10009 order 5003 deal 5004
+[2026-10-25 10:46:43 UTC] PASS  A: Claude position confirmed (deal→position, symbol, side, magic, volume)  position 5003 state open
+[2026-10-25 10:46:43 UTC] PASS  Both positions open together on same symbol (hedging)  GPT #5001 0.04 · Claude #5003 0.02
+[2026-10-25 10:46:43 UTC] PASS  GPT SL/TP set at broker  sl 68792.08 tp 62781.13
+[2026-10-25 10:46:43 UTC] PASS  Claude SL/TP set at broker  sl 64792.54 tp 68800.32
+[2026-10-25 10:46:43 UTC] PASS  Claude modified its own SL  new sl 65794.48
+[2026-10-25 10:46:43 UTC] PASS  GPT position unchanged after Claude's modify  
+[2026-10-25 10:46:43 UTC] REFUSE #5003: magic/symbol খাতার সাথে মেলে না (26102401/BTCUSDm বনাম 26102402/BTCUSDm) — বন্ধ করা হলো না
+[2026-10-25 10:46:43 UTC] PASS  Claude code refuses GPT position; GPT-magic cleanup refuses Claude position  
+[2026-10-25 10:46:43 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_PARTIAL 0.01 lot
+[2026-10-25 10:46:43 UTC] PASS  E: Claude partial close (close & remaining both valid)  0.02 → close 0.01, remaining 0.01 (expected 0.01)
+[2026-10-25 10:46:43 UTC] [Claude Pullback v1] BTCUSDm #5003 VERIFY_CLOSE 0.01 lot
+[2026-10-25 10:46:43 UTC] PASS  Claude fully closed its position  
+[2026-10-25 10:46:43 UTC] PASS  GPT position still open & unchanged after Claude closed  
+[2026-10-25 10:46:43 UTC] cleanup #5001 attempt 1 filling 0: retcode 10009 done last_error (1, 'Success')
+[2026-10-25 10:46:43 UTC] PASS  GPT test position closed with GPT magic  
+[2026-10-25 10:46:43 UTC] PASS  D: counter EXCLUDES both verification trades  excluded [5001, 5003]
+[2026-10-25 10:46:43 UTC] PASS  Counter accuracy without exclusion (claude): counted once, net = MT5 history  rows 1 counter -0.16 history -0.16 deals 3
+[2026-10-25 10:46:43 UTC] PASS  D: journal has all deal IDs (claude)  [5004, 5006, 5008]
+[2026-10-25 10:46:43 UTC] PASS  Counter accuracy without exclusion (gpt): counted once, net = MT5 history  rows 1 counter -0.32 history -0.32 deals 2
+[2026-10-25 10:46:43 UTC] PASS  D: journal has all deal IDs (gpt)  [5002, 5010]
+[2026-10-25 10:46:43 UTC] ---- CLEANUP ----
+[2026-10-25 10:46:43 UTC] PASS  Cleanup: no test or unlinked positions left, journal complete  
+[2026-10-25 10:46:43 UTC] ==== PASS 42 · FAIL 0 · URGENT 0 ====  /tmp/tmp2_2m_18j/pkg/demo_verification_report.txt
+[2026-10-25 10:46:43 UTC] সব পাস।
+[2026-10-25 10:46:43 UTC] mt5.shutdown() called
+PASS  [14] Claude's close/modify on GPT position refused, and the reverse
+      expected: both refusal checks PASS; GPT code has no close/modify path (static check)
+      actual:   ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True | refusal-both-ways PASS=True static-GPT PASS=True
+
+[2026-10-25 10:46:43 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:43 UTC] PASS  Account info  
+[2026-10-25 10:46:43 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:43 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:43 UTC] FAIL  GUARD: symbol BTCUSDm available  Market Watch-এ নাম দেখুন
+[2026-10-25 10:46:43 UTC] ==== PASS 8 · FAIL 1 · URGENT 0 ====  /tmp/tmp31b1h3p9/pkg/demo_verification_report.txt
+[2026-10-25 10:46:43 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:43 UTC] mt5.shutdown() called
+PASS  [15a] Symbol name not found
+      expected: guard fails, 0 orders
+      actual:   ok=False failed=['GUARD: symbol BTCUSDm available'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True
+
+[2026-10-25 10:46:43 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:43 UTC] PASS  Account info  
+[2026-10-25 10:46:43 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:43 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] FAIL  GUARD: BTCUSDm has a tick  (1, 'Success')
+[2026-10-25 10:46:43 UTC] ==== PASS 9 · FAIL 1 · URGENT 0 ====  /tmp/tmpu_tw5v60/pkg/demo_verification_report.txt
+[2026-10-25 10:46:43 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:43 UTC] mt5.shutdown() called
+PASS  [15b] No tick for the symbol
+      expected: guard fails, 0 orders
+      actual:   ok=False failed=['GUARD: BTCUSDm has a tick'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True
+
+[2026-10-25 10:46:43 UTC] PASS  MT5 initialize  
+[2026-10-25 10:46:43 UTC] PASS  Account info  
+[2026-10-25 10:46:43 UTC] Account 1234567 · server ? · balance 10000.0
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is DEMO  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: account is HEDGING  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: magic numbers correct and distinct  Claude 26102401 · GPT 26102402 · adapter's Claude 26102401
+[2026-10-25 10:46:43 UTC] PASS  GUARD: verification journal readable  verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে)
+[2026-10-25 10:46:43 UTC] PASS  GUARD: positions readable  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: no contest positions already open  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: symbol BTCUSDm available  
+[2026-10-25 10:46:43 UTC] PASS  GUARD: BTCUSDm has a tick  
+[2026-10-25 10:46:43 UTC] FAIL  GUARD: test SL/TP respect broker stop level  SL distance 2003.65 vs stops_level 10000000.00
+[2026-10-25 10:46:43 UTC] ==== PASS 10 · FAIL 1 · URGENT 0 ====  /tmp/tmpi408rgfg/pkg/demo_verification_report.txt
+[2026-10-25 10:46:43 UTC] কিছু চেক ব্যর্থ / জরুরি সতর্কতা — প্রতিযোগিতা শুরু করবেন না। রিপোর্ট ও log পাঠান।
+[2026-10-25 10:46:43 UTC] mt5.shutdown() called
+PASS  [15c] SL/TP would break broker stop level
+      expected: guard fails, 0 orders
+      actual:   ok=False failed=['GUARD: test SL/TP respect broker stop level'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True
+
+======================================================================
+SCENARIOS (SIMULATED): 32/32 behaved as expected
+
+--- stderr ---

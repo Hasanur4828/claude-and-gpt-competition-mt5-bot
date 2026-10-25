@@ -1,0 +1,85 @@
+PASS T1 [P6] স্বাভাবিক TP1 (lot 0.04)
+      expected: বাকি 0.02, SL→BE, tp1_partial 'ok', log 'confirmed (remaining 0.02)', সতর্কবার্তা নেই, v5-এর সাথে broker-এ একই ফল
+      actual:   volume 0.02, BE True, tp1_partial ok, confirmed-log True, warnings 0, v5 (0.02, True, True, 3) vs P6 (0.02, True, True, 3)
+PASS T1 [P6b] স্বাভাবিক TP1 (lot 0.04)
+      expected: বাকি 0.02, SL→BE, tp1_partial 'ok', log 'confirmed (remaining 0.02)', সতর্কবার্তা নেই, v5-এর সাথে broker-এ একই ফল
+      actual:   volume 0.02, BE True, tp1_partial ok, confirmed-log True, warnings 0, v5 (0.02, True, True, 3) vs P6b (0.02, True, True, 3)
+PASS T2 [v5] TP1-এ নকল 'done'
+      expected: আগের অবস্থা দেখানো: v5 সফল ধরে নেয় (কোনো সতর্কবার্তা নেই), volume আসলে 0.04-ই
+      actual:   volume 0.04, warnings 0, log '['[Claude Pullback v1] BTCUSDm #5001 EXIT_TP1 0.02 lot']'
+PASS T2 [P6] TP1-এ নকল 'done'
+      expected: নিশ্চিত হয় না → WARNING log + notify, tp1_partial 'unconfirmed'; SL তবুও BE-তে; ৫ বার যাচাই (৪ বিরতি); নতুন close order নয়
+      actual:   volume 0.04, BE True, tp1_partial unconfirmed, tp1_done True, warning True, notify True, sleeps 4, close requests 1
+PASS T2 [P6b] TP1-এ নকল 'done'
+      expected: নিশ্চিত হয় না → WARNING log + notify, tp1_partial 'unconfirmed'; SL তবুও BE-তে; ৫ বার যাচাই (৪ বিরতি); নতুন close order নয়
+      actual:   volume 0.04, BE True, tp1_partial unconfirmed, tp1_done True, warning True, notify True, sleeps 4, close requests 1
+PASS T3 [v5] time-stop-এ নকল 'done'
+      expected: আগের অবস্থা দেখানো: প্রথম চক্রে 'EXIT_TIME' সফল ধরে নেয় (exit_hint বসে) অথচ পজিশন খোলা; পরের চক্রে শর্ত থাকায় আবার বন্ধ
+      actual:   after cycle1 open=True exit_hint=EXIT_TIME; after cycle2 open=False; recorded=True
+PASS T3 [P6] time-stop-এ নকল 'done'
+      expected: প্রথম চক্রে নিশ্চিত হয় না → False, exit_hint বসে না, WARNING; পরের চক্রে আবার বন্ধ → confirmed; তারপর বন্ধ লেখা
+      actual:   after cycle1 open=True exit_hint=None warning=True; after cycle2 open=False confirmed-log=True; recorded=True
+PASS T3 [P6b] time-stop-এ নকল 'done'
+      expected: প্রথম চক্রে নিশ্চিত হয় না → False, exit_hint বসে না, WARNING; পরের চক্রে আবার বন্ধ → confirmed; তারপর বন্ধ লেখা
+      actual:   after cycle1 open=True exit_hint=None warning=True; after cycle2 open=False confirmed-log=True; recorded=True
+PASS T4 [v5] time-stop close broker প্রত্যাখ্যান করে (10018)
+      expected: পজিশন খোলা, exit_hint নেই, যাচাই-বিরতি ০ (send-ই ব্যর্থ)
+      actual:   open=True exit_hint=None sleeps=0
+PASS T4 [P6] time-stop close broker প্রত্যাখ্যান করে (10018)
+      expected: পজিশন খোলা, exit_hint নেই, যাচাই-বিরতি ০ (send-ই ব্যর্থ)
+      actual:   open=True exit_hint=None sleeps=0
+PASS T4 [P6b] time-stop close broker প্রত্যাখ্যান করে (10018)
+      expected: পজিশন খোলা, exit_hint নেই, যাচাই-বিরতি ০ (send-ই ব্যর্থ)
+      actual:   open=True exit_hint=None sleeps=0
+PASS T5 [P6] স্বাভাবিক EXIT_TIME
+      expected: বন্ধ, exit_hint বসে, log 'confirmed (closed)', v5-এর সাথে একই
+      actual:   v5 (False, 'EXIT_TIME', 2) vs P6 (False, 'EXIT_TIME', 2), confirmed True
+PASS T5 [P6b] স্বাভাবিক EXIT_TIME
+      expected: বন্ধ, exit_hint বসে, log 'confirmed (closed)', v5-এর সাথে একই
+      actual:   v5 (False, 'EXIT_TIME', 2) vs P6b (False, 'EXIT_TIME', 2), confirmed True
+PASS T5 [P6] স্বাভাবিক EXIT_MAXHOLD
+      expected: বন্ধ, exit_hint বসে, log 'confirmed (closed)', v5-এর সাথে একই
+      actual:   v5 (False, 'EXIT_MAXHOLD', 2) vs P6 (False, 'EXIT_MAXHOLD', 2), confirmed True
+PASS T5 [P6b] স্বাভাবিক EXIT_MAXHOLD
+      expected: বন্ধ, exit_hint বসে, log 'confirmed (closed)', v5-এর সাথে একই
+      actual:   v5 (False, 'EXIT_MAXHOLD', 2) vs P6b (False, 'EXIT_MAXHOLD', 2), confirmed True
+PASS T6 [v5] TP1: broker 0.04-এর বদলে 0.02 বন্ধ করে 'done' বলে
+      expected: আগের অবস্থা: v5 ধরতে পারে না (সতর্কবার্তা নেই)
+      actual:   remaining 0.06 (expected 0.04), warnings 0
+PASS T6 [P6] TP1: broker 0.04-এর বদলে 0.02 বন্ধ করে 'done' বলে
+      expected: বাকি volume মেলে না (0.06 ≠ 0.04) → WARNING, tp1_partial 'unconfirmed', state-এ আসল বাকি volume দেখায়
+      actual:   remaining 0.06, tp1_partial unconfirmed, warning ['[Claude Pullback v1] WARNING BTCUSDm #5001 EXIT_TP1: broker reported success but close NOT confirmed (still open, volume 0.06 (expected 0.04)) — not counted as done']
+PASS T6 [P6b] TP1: broker 0.04-এর বদলে 0.02 বন্ধ করে 'done' বলে
+      expected: বাকি volume মেলে না (0.06 ≠ 0.04) → WARNING, tp1_partial 'unconfirmed', state-এ আসল বাকি volume দেখায়
+      actual:   remaining 0.06, tp1_partial unconfirmed, warning ['[Claude Pullback v1] WARNING BTCUSDm #5001 EXIT_TP1: broker reported success but close NOT confirmed (still open, volume 0.06 (expected 0.04)) — not counted as done']
+PASS T7 [v5] TP1 close যাওয়ার পরেই সংযোগ বিচ্ছিন্ন, তারপর সংযোগ ফেরা
+      expected: জানা দুর্বলতা দেখানো: সংযোগ ফেরার পরে দ্বিতীয়বার আংশিক বন্ধ (0.04 → 0.02 → 0.01), তারপর BE
+      actual:   after close 0.02, tp1_done False, tp1_partial None; after reconnect cycle volume 0.01, BE now True
+PASS T7 [P6] TP1 close যাওয়ার পরেই সংযোগ বিচ্ছিন্ন, তারপর সংযোগ ফেরা
+      expected: জানা দুর্বলতা দেখানো: সংযোগ ফেরার পরে দ্বিতীয়বার আংশিক বন্ধ (0.04 → 0.02 → 0.01), তারপর BE
+      actual:   after close 0.02, tp1_done False, tp1_partial unconfirmed; after reconnect cycle volume 0.01, BE now True, warnings ["[Claude Pullback v1] WARNING BTCUSDm #5001 EXIT_TP1: broker reported success but close NOT confirmed (MT5 unavailable (-10004, 'No IPC connection')) — not counted as done"]
+PASS T7 [P6b] TP1 close যাওয়ার পরেই সংযোগ বিচ্ছিন্ন, তারপর সংযোগ ফেরা
+      expected: দ্বিতীয়বার আংশিক বন্ধ নয় (0.02-ই থাকে); tp1_done আগেই লেখা; সংযোগ ফেরার পরে SL→BE বসে
+      actual:   after close 0.02, tp1_done True, tp1_partial unconfirmed; after reconnect cycle volume 0.02, BE now True, warnings ["[Claude Pullback v1] WARNING BTCUSDm #5001 EXIT_TP1: broker reported success but close NOT confirmed (MT5 unavailable (-10004, 'No IPC connection')) — not counted as done"]
+PASS T8 [P6b] SL→BE প্রথম ২ বার প্রত্যাখ্যাত
+      expected: পরের চক্রগুলোতে আবার চেষ্টা → তৃতীয়বারে BE বসে, be_pending False, ২টা WARNING
+      actual:   BE True, be_pending False, be_tries 2, warnings 2
+PASS T8 [P6b] SL→BE সবসময় প্রত্যাখ্যাত
+      expected: ৫ বার চেষ্টা, তারপর থামে + notify 'হাতে দেখুন' (প্রতি সেকেন্ডে অসীম request নয়)
+      actual:   BE False, tries 5, rejected 5, notify True
+PASS T8 [v5] SL→BE প্রথম ২ বার প্রত্যাখ্যাত
+      expected: আগের অবস্থা: v5 একবারই চেষ্টা করে, আর করে না — SL BE-তে যায় না
+      actual:   BE False, accepted SLTP requests 0, rejected 1
+PASS ALL পরীক্ষার আগে-পরে ফাইল SHA-256
+      expected: অপরিবর্তিত
+      actual:   {'v5': '0516a96f508db10a', 'P6': '0d3dc29da2b11e67', 'P6b': 'b390bf3195d7aedb'} unchanged=True
+{
+ "total": 25,
+ "passed": 25,
+ "sha256": {
+  "v5": "0516a96f508db10a94b56c40ec68c719855882cf8d237a2dded2d5c90265bb96",
+  "P6": "0d3dc29da2b11e67f5ab478b2f94cfa0b6d0ab05da9c45b2b69716c8b51307ae",
+  "P6b": "b390bf3195d7aedbff13a81e3b98bd23b76287217aae76ee8108994a0b0758be"
+ },
+ "SIMULATED_ONLY": true
+}

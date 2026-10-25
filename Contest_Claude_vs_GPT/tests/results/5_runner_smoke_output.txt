@@ -1,0 +1,2 @@
+PREFLIGHT lines: 12 | FAIL lines: 0 | LOOP ERROR: 0 | running: True
+requests sent: 0 positions: 0

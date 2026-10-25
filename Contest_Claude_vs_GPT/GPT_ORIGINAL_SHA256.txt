@@ -1,0 +1,11 @@
+GPT ORIGINAL v1.0 — ACTIVE in the contest, UNCHANGED
+  File Hasanur sent (2026-10-25)                  : 4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160
+  gpt_liquidity_fibonacci_scalper_v1.py (runs)    : 4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160
+  gpt_original_unchanged/ (reference copy)        : 4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160
+  Verified: cmp byte-identical, diff no differences, hash before/after every test (v5 re-verified 2026-10-25).
+  contest_preflight.py GPT_SHA256                 : 4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160
+
+GPT v1.1 — PROPOSAL ONLY, NOT ACTIVE, awaiting GPT approval
+  proposals/gpt_liquidity_fibonacci_scalper_v1_1_PROPOSED.py : 3556dd076812f5293d5b127ccecf5686dda6e7f692af0b07c4a2df6f285efd17
+  Scope: only _daily_loss_count() changed + _server_offset_seconds() added (AST-verified, tests/results/v11_scope_check.json)
+  Full diff: proposals/gpt_v1_to_v1_1.diff

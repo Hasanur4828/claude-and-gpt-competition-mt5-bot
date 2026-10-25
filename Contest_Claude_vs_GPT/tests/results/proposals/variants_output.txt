@@ -1,0 +1,382 @@
+{
+ "package_files_unchanged": true,
+ "hashes": {
+  "gpt_liquidity_fibonacci_scalper_v1.py": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+  "claude_pullback_v1.py": "0516a96f508db10a94b56c40ec68c719855882cf8d237a2dded2d5c90265bb96",
+  "contest_preflight.py": "b22d98fb92cd731d8ffec1dfb8b9a3f898651a4a99aa212a32c916eccf7f121e",
+  "gpt_contest_adapter.py": "bfb2b4aef7626c7bc65752c2fbb994a775d7df629fd3c71c4405571f4529f436"
+ },
+ "SIMULATED_ONLY": true,
+ "variants": {
+  "v5_active": {
+   "files": {
+    "gpt_liquidity_fibonacci_scalper_v1.py": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+    "claude_pullback_v1.py": "0516a96f508db10a94b56c40ec68c719855882cf8d237a2dded2d5c90265bb96"
+   },
+   "e2e_rc": 0,
+   "ownership_violations": 0,
+   "unknown_magic_requests": 0,
+   "preflight_hedging_demo": {
+    "ok": true,
+    "failed": []
+   },
+   "counter_vs_broker": {
+    "claude": {
+     "ids_match": true,
+     "count": 18,
+     "truth_count": 18,
+     "net": 773.8,
+     "truth_net": 773.8,
+     "net_match": true,
+     "symbol_net_match": true,
+     "no_duplicate_ids": true
+    },
+    "gpt": {
+     "ids_match": true,
+     "count": 11,
+     "truth_count": 11,
+     "net": 389.64,
+     "truth_net": 389.64,
+     "net_match": true,
+     "symbol_net_match": true,
+     "no_duplicate_ids": true
+    }
+   },
+   "restart_ok": true,
+   "sim_results": {
+    "claude": {
+     "trades": 18,
+     "wins": 11,
+     "losses": 7,
+     "breakeven": 0,
+     "net_profit": 773.8,
+     "gross_profit": 1376.0700000000002,
+     "gross_loss": 602.27,
+     "win_rate": 61.111111111111114,
+     "profit_factor": 2.28480581798861,
+     "avg_r": 0.39983625190947125,
+     "max_drawdown": 449.38000000000005
+    },
+    "gpt": {
+     "trades": 11,
+     "wins": 5,
+     "losses": 6,
+     "breakeven": 0,
+     "net_profit": 389.64000000000004,
+     "gross_profit": 982.7600000000001,
+     "gross_loss": 593.12,
+     "win_rate": 45.45454545454545,
+     "profit_factor": 1.6569328297814947,
+     "avg_r": 0.36362316261372885,
+     "max_drawdown": 194.56
+    }
+   },
+   "claude_regression": "17/17",
+   "verification_scenarios": "32/32",
+   "counter_unit_rc": 0,
+   "counter_unit_tail": [
+    "RESULT: ALL PASS",
+    "",
+    "--- stderr ---"
+   ],
+   "trades_identical_to_v5": true,
+   "n_trades": 29
+  },
+  "P6": {
+   "files": {
+    "gpt_liquidity_fibonacci_scalper_v1.py": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+    "claude_pullback_v1.py": "0d3dc29da2b11e67f5ab478b2f94cfa0b6d0ab05da9c45b2b69716c8b51307ae"
+   },
+   "e2e_rc": 0,
+   "ownership_violations": 0,
+   "unknown_magic_requests": 0,
+   "preflight_hedging_demo": {
+    "ok": true,
+    "failed": []
+   },
+   "counter_vs_broker": {
+    "claude": {
+     "ids_match": true,
+     "count": 18,
+     "truth_count": 18,
+     "net": 773.8,
+     "truth_net": 773.8,
+     "net_match": true,
+     "symbol_net_match": true,
+     "no_duplicate_ids": true
+    },
+    "gpt": {
+     "ids_match": true,
+     "count": 11,
+     "truth_count": 11,
+     "net": 389.64,
+     "truth_net": 389.64,
+     "net_match": true,
+     "symbol_net_match": true,
+     "no_duplicate_ids": true
+    }
+   },
+   "restart_ok": true,
+   "sim_results": {
+    "claude": {
+     "trades": 18,
+     "wins": 11,
+     "losses": 7,
+     "breakeven": 0,
+     "net_profit": 773.8,
+     "gross_profit": 1376.0700000000002,
+     "gross_loss": 602.27,
+     "win_rate": 61.111111111111114,
+     "profit_factor": 2.28480581798861,
+     "avg_r": 0.39983625190947125,
+     "max_drawdown": 449.38000000000005
+    },
+    "gpt": {
+     "trades": 11,
+     "wins": 5,
+     "losses": 6,
+     "breakeven": 0,
+     "net_profit": 389.64000000000004,
+     "gross_profit": 982.7600000000001,
+     "gross_loss": 593.12,
+     "win_rate": 45.45454545454545,
+     "profit_factor": 1.6569328297814947,
+     "avg_r": 0.36362316261372885,
+     "max_drawdown": 194.56
+    }
+   },
+   "claude_regression": "17/17",
+   "verification_scenarios": "32/32",
+   "counter_unit_rc": 0,
+   "counter_unit_tail": [
+    "RESULT: ALL PASS",
+    "",
+    "--- stderr ---"
+   ],
+   "trades_identical_to_v5": true,
+   "n_trades": 29
+  },
+  "P6b": {
+   "files": {
+    "gpt_liquidity_fibonacci_scalper_v1.py": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+    "claude_pullback_v1.py": "b390bf3195d7aedbff13a81e3b98bd23b76287217aae76ee8108994a0b0758be"
+   },
+   "e2e_rc": 0,
+   "ownership_violations": 0,
+   "unknown_magic_requests": 0,
+   "preflight_hedging_demo": {
+    "ok": true,
+    "failed": []
+   },
+   "counter_vs_broker": {
+    "claude": {
+     "ids_match": true,
+     "count": 18,
+     "truth_count": 18,
+     "net": 773.8,
+     "truth_net": 773.8,
+     "net_match": true,
+     "symbol_net_match": true,
+     "no_duplicate_ids": true
+    },
+    "gpt": {
+     "ids_match": true,
+     "count": 11,
+     "truth_count": 11,
+     "net": 389.64,
+     "truth_net": 389.64,
+     "net_match": true,
+     "symbol_net_match": true,
+     "no_duplicate_ids": true
+    }
+   },
+   "restart_ok": true,
+   "sim_results": {
+    "claude": {
+     "trades": 18,
+     "wins": 11,
+     "losses": 7,
+     "breakeven": 0,
+     "net_profit": 773.8,
+     "gross_profit": 1376.0700000000002,
+     "gross_loss": 602.27,
+     "win_rate": 61.111111111111114,
+     "profit_factor": 2.28480581798861,
+     "avg_r": 0.39983625190947125,
+     "max_drawdown": 449.38000000000005
+    },
+    "gpt": {
+     "trades": 11,
+     "wins": 5,
+     "losses": 6,
+     "breakeven": 0,
+     "net_profit": 389.64000000000004,
+     "gross_profit": 982.7600000000001,
+     "gross_loss": 593.12,
+     "win_rate": 45.45454545454545,
+     "profit_factor": 1.6569328297814947,
+     "avg_r": 0.36362316261372885,
+     "max_drawdown": 194.56
+    }
+   },
+   "claude_regression": "17/17",
+   "verification_scenarios": "32/32",
+   "counter_unit_rc": 0,
+   "counter_unit_tail": [
+    "RESULT: ALL PASS",
+    "",
+    "--- stderr ---"
+   ],
+   "trades_identical_to_v5": true,
+   "n_trades": 29
+  },
+  "GPT_COMBINED": {
+   "files": {
+    "gpt_liquidity_fibonacci_scalper_v1.py": "f49bdc0da25bb75cd446953a64b2a6552e8166060e4377614f11afc2b73e393e",
+    "claude_pullback_v1.py": "0516a96f508db10a94b56c40ec68c719855882cf8d237a2dded2d5c90265bb96"
+   },
+   "e2e_rc": 0,
+   "ownership_violations": 0,
+   "unknown_magic_requests": 0,
+   "preflight_hedging_demo": {
+    "ok": true,
+    "failed": []
+   },
+   "counter_vs_broker": {
+    "claude": {
+     "ids_match": true,
+     "count": 18,
+     "truth_count": 18,
+     "net": 773.8,
+     "truth_net": 773.8,
+     "net_match": true,
+     "symbol_net_match": true,
+     "no_duplicate_ids": true
+    },
+    "gpt": {
+     "ids_match": true,
+     "count": 11,
+     "truth_count": 11,
+     "net": 389.64,
+     "truth_net": 389.64,
+     "net_match": true,
+     "symbol_net_match": true,
+     "no_duplicate_ids": true
+    }
+   },
+   "restart_ok": true,
+   "sim_results": {
+    "claude": {
+     "trades": 18,
+     "wins": 11,
+     "losses": 7,
+     "breakeven": 0,
+     "net_profit": 773.8,
+     "gross_profit": 1376.0700000000002,
+     "gross_loss": 602.27,
+     "win_rate": 61.111111111111114,
+     "profit_factor": 2.28480581798861,
+     "avg_r": 0.39983625190947125,
+     "max_drawdown": 449.38000000000005
+    },
+    "gpt": {
+     "trades": 11,
+     "wins": 5,
+     "losses": 6,
+     "breakeven": 0,
+     "net_profit": 389.64000000000004,
+     "gross_profit": 982.7600000000001,
+     "gross_loss": 593.12,
+     "win_rate": 45.45454545454545,
+     "profit_factor": 1.6569328297814947,
+     "avg_r": 0.36362316261372885,
+     "max_drawdown": 194.56
+    }
+   },
+   "claude_regression": "17/17",
+   "verification_scenarios": "32/32",
+   "counter_unit_rc": 0,
+   "counter_unit_tail": [
+    "RESULT: ALL PASS",
+    "",
+    "--- stderr ---"
+   ],
+   "trades_identical_to_v5": true,
+   "n_trades": 29
+  },
+  "GPT_COMBINED+P6b": {
+   "files": {
+    "gpt_liquidity_fibonacci_scalper_v1.py": "f49bdc0da25bb75cd446953a64b2a6552e8166060e4377614f11afc2b73e393e",
+    "claude_pullback_v1.py": "b390bf3195d7aedbff13a81e3b98bd23b76287217aae76ee8108994a0b0758be"
+   },
+   "e2e_rc": 0,
+   "ownership_violations": 0,
+   "unknown_magic_requests": 0,
+   "preflight_hedging_demo": {
+    "ok": true,
+    "failed": []
+   },
+   "counter_vs_broker": {
+    "claude": {
+     "ids_match": true,
+     "count": 18,
+     "truth_count": 18,
+     "net": 773.8,
+     "truth_net": 773.8,
+     "net_match": true,
+     "symbol_net_match": true,
+     "no_duplicate_ids": true
+    },
+    "gpt": {
+     "ids_match": true,
+     "count": 11,
+     "truth_count": 11,
+     "net": 389.64,
+     "truth_net": 389.64,
+     "net_match": true,
+     "symbol_net_match": true,
+     "no_duplicate_ids": true
+    }
+   },
+   "restart_ok": true,
+   "sim_results": {
+    "claude": {
+     "trades": 18,
+     "wins": 11,
+     "losses": 7,
+     "breakeven": 0,
+     "net_profit": 773.8,
+     "gross_profit": 1376.0700000000002,
+     "gross_loss": 602.27,
+     "win_rate": 61.111111111111114,
+     "profit_factor": 2.28480581798861,
+     "avg_r": 0.39983625190947125,
+     "max_drawdown": 449.38000000000005
+    },
+    "gpt": {
+     "trades": 11,
+     "wins": 5,
+     "losses": 6,
+     "breakeven": 0,
+     "net_profit": 389.64000000000004,
+     "gross_profit": 982.7600000000001,
+     "gross_loss": 593.12,
+     "win_rate": 45.45454545454545,
+     "profit_factor": 1.6569328297814947,
+     "avg_r": 0.36362316261372885,
+     "max_drawdown": 194.56
+    }
+   },
+   "claude_regression": "17/17",
+   "verification_scenarios": "32/32",
+   "counter_unit_rc": 0,
+   "counter_unit_tail": [
+    "RESULT: ALL PASS",
+    "",
+    "--- stderr ---"
+   ],
+   "trades_identical_to_v5": true,
+   "n_trades": 29
+  }
+ }
+}

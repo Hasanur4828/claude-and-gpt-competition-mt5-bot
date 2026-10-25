@@ -1,0 +1,87 @@
+case                                                           off  age exp v1.0 v1.1
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi    -5    5   3    2✗    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi    -5  180   3    2✗    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi     0    5   3    3    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi     0  180   3    3    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi     2    5   3    2✗    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi     2  180   3    2✗    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi     3    5   3    2✗    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi     3  180   3    2✗    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi   5.5    5   3    2✗    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi   5.5  180   3    2✗    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi    10    5   3    1✗    3
+09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi    10  180   3    1✗    3
+00:30 UTC, losses yday 22:30 + today 00:20                      -5    5   1    0✗    1
+00:30 UTC, losses yday 22:30 + today 00:20                      -5  180   1    0✗    1
+00:30 UTC, losses yday 22:30 + today 00:20                       0    5   1    1    1
+00:30 UTC, losses yday 22:30 + today 00:20                       0  180   1    1    1
+00:30 UTC, losses yday 22:30 + today 00:20                       2    5   1    1    1
+00:30 UTC, losses yday 22:30 + today 00:20                       2  180   1    1    1
+00:30 UTC, losses yday 22:30 + today 00:20                       3    5   1    0✗    1
+00:30 UTC, losses yday 22:30 + today 00:20                       3  180   1    0✗    1
+00:30 UTC, losses yday 22:30 + today 00:20                     5.5    5   1    0✗    1
+00:30 UTC, losses yday 22:30 + today 00:20                     5.5  180   1    0✗    1
+00:30 UTC, losses yday 22:30 + today 00:20                      10    5   1    0✗    1
+00:30 UTC, losses yday 22:30 + today 00:20                      10  180   1    0✗    1
+23:50 UTC, losses today 21:00 + 23:40                           -5    5   2    2    2
+23:50 UTC, losses today 21:00 + 23:40                           -5  180   2    2    2
+23:50 UTC, losses today 21:00 + 23:40                            0    5   2    2    2
+23:50 UTC, losses today 21:00 + 23:40                            0  180   2    2    2
+23:50 UTC, losses today 21:00 + 23:40                            2    5   2    1✗    2
+23:50 UTC, losses today 21:00 + 23:40                            2  180   2    1✗    2
+23:50 UTC, losses today 21:00 + 23:40                            3    5   2    0✗    2
+23:50 UTC, losses today 21:00 + 23:40                            3  180   2    0✗    2
+23:50 UTC, losses today 21:00 + 23:40                          5.5    5   2    0✗    2
+23:50 UTC, losses today 21:00 + 23:40                          5.5  180   2    0✗    2
+23:50 UTC, losses today 21:00 + 23:40                           10    5   2    0✗    2
+23:50 UTC, losses today 21:00 + 23:40                           10  180   2    0✗    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)             -5    5   2    2    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)             -5  180   2    2    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)              0    5   2    2    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)              0  180   2    2    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)              2    5   2    0✗    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)              2  180   2    0✗    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)              3    5   2    0✗    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)              3  180   2    0✗    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)            5.5    5   2    0✗    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)            5.5  180   2    0✗    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)             10    5   2    0✗    2
+14:10 UTC, two losses in last 30 min (13:45, 14:05)             10  180   2    0✗    2
+
+stale tick (offset unknown -> conservative):
+  09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi off    -5 exp 3 got 4 OK (not under)
+  09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi off     0 exp 3 got 4 OK (not under)
+  09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi off     2 exp 3 got 4 OK (not under)
+  09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi off     3 exp 3 got 4 OK (not under)
+  09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi off   5.5 exp 3 got 4 OK (not under)
+  09:40 UTC, losses yday 22:30 + today 00:20, 09:00, 09:20, wi off    10 exp 3 got 4 OK (not under)
+  00:30 UTC, losses yday 22:30 + today 00:20                   off    -5 exp 1 got 2 OK (not under)
+  00:30 UTC, losses yday 22:30 + today 00:20                   off     0 exp 1 got 2 OK (not under)
+  00:30 UTC, losses yday 22:30 + today 00:20                   off     2 exp 1 got 2 OK (not under)
+  00:30 UTC, losses yday 22:30 + today 00:20                   off     3 exp 1 got 2 OK (not under)
+  00:30 UTC, losses yday 22:30 + today 00:20                   off   5.5 exp 1 got 2 OK (not under)
+  00:30 UTC, losses yday 22:30 + today 00:20                   off    10 exp 1 got 2 OK (not under)
+  23:50 UTC, losses today 21:00 + 23:40                        off    -5 exp 2 got 2 OK (not under)
+  23:50 UTC, losses today 21:00 + 23:40                        off     0 exp 2 got 2 OK (not under)
+  23:50 UTC, losses today 21:00 + 23:40                        off     2 exp 2 got 2 OK (not under)
+  23:50 UTC, losses today 21:00 + 23:40                        off     3 exp 2 got 2 OK (not under)
+  23:50 UTC, losses today 21:00 + 23:40                        off   5.5 exp 2 got 2 OK (not under)
+  23:50 UTC, losses today 21:00 + 23:40                        off    10 exp 2 got 2 OK (not under)
+  14:10 UTC, two losses in last 30 min (13:45, 14:05)          off    -5 exp 2 got 2 OK (not under)
+  14:10 UTC, two losses in last 30 min (13:45, 14:05)          off     0 exp 2 got 2 OK (not under)
+  14:10 UTC, two losses in last 30 min (13:45, 14:05)          off     2 exp 2 got 2 OK (not under)
+  14:10 UTC, two losses in last 30 min (13:45, 14:05)          off     3 exp 2 got 2 OK (not under)
+  14:10 UTC, two losses in last 30 min (13:45, 14:05)          off   5.5 exp 2 got 2 OK (not under)
+  14:10 UTC, two losses in last 30 min (13:45, 14:05)          off    10 exp 2 got 2 OK (not under)
+{
+ "v1.0_correct": 14,
+ "v1.1_correct": 48,
+ "total": 48,
+ "v1.1_never_undercounts": true,
+ "stale_tick_cases": 24,
+ "stale_tick_overcount_cases": 12,
+ "original_sha256_before": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+ "original_sha256_after": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+ "original_unchanged": true,
+ "proposed_sha256": "3556dd076812f5293d5b127ccecf5686dda6e7f692af0b07c4a2df6f285efd17"
+}

@@ -1,0 +1,23 @@
+--- v1.0/gpt_liquidity_fibonacci_scalper_v1.py
++++ P1_order_send_none/gpt_liquidity_fibonacci_scalper_v1.py
+@@ -467,6 +467,20 @@
+             }
+             result = mt5.order_send(request)
+             last_result = result
++            if result is None:
++                # [P1] Outcome unknown (the order may have reached the broker).
++                # Never resend with another filling mode - that could open a duplicate position.
++                return {
++                    "status": "UNKNOWN",
++                    "reason": "ORDER_SEND_NONE",
++                    "symbol": symbol,
++                    "side": side,
++                    "requested_volume": volume,
++                    "type_filling": filling,
++                    "magic": MAGIC,
++                    "last_error": str(mt5.last_error()),
++                    "note": "order_send returned None; not resent - check MT5 positions/history",
++                }
+             if result is not None and result.retcode in (
+                 mt5.TRADE_RETCODE_DONE,
+                 mt5.TRADE_RETCODE_PLACED,

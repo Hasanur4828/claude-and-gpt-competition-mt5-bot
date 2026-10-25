@@ -1,0 +1,42 @@
+OK   claude trades 5 expected 5
+OK   claude wins 2 expected 2
+OK   claude losses 2 expected 2
+OK   claude BE 1 expected 1
+OK   claude net 8.7 expected 8.7
+OK   claude PF 1.6444444444444444 expected 1.6444444444444444
+OK   claude totalR 0.87 expected 0.87
+OK   claude avgR 0.174 expected 0.174
+OK   claude maxDD 10.0 expected 10.0
+OK   claude consec L 1 expected 1
+OK   claude streak 1L expected 1L
+OK   claude win_rate 40.0 expected 40.0
+OK   claude ETH symbol trades 1 expected 1
+OK   gpt trades 4 expected 4
+OK   gpt wins 2 expected 2
+OK   gpt losses 2 expected 2
+OK   gpt net 20.0 expected 20.0
+OK   gpt PF 2.0 expected 2.0
+OK   gpt avgR 0.5 expected 0.5
+OK   gpt maxDD 20.0 expected 20.0
+OK   gpt consec L 2 expected 2
+OK   gpt streak 1W expected 1W
+OK   gpt open 1 expected 1
+OK   gpt floating 3.0 expected 3.0
+OK   claude open 0 expected 0
+OK   verdict waits (<50) WAIT expected WAIT
+OK   lead net gpt expected gpt
+OK   lead DD (lower better) claude expected claude
+OK   exit reasons GPT ['SL', 'SL', 'TP', 'TP'] expected ['SL', 'SL', 'TP', 'TP']
+OK   claude per-symbol BTC trades 3 expected 3
+OK   claude per-symbol BTC net -5.8 expected -5.8
+OK   claude per-symbol GOLD PF inf expected inf
+OK   gpt per-symbol GOLD losses 2 expected 2
+OK   gpt per-symbol BTC win_rate 100.0 expected 100.0
+OK   claude gross profit 22.2 expected 22.2
+OK   claude gross loss 13.5 expected 13.5
+OK   pre-start trade excluded (no +50) True expected True
+OK   duplicate deals -> same claude trades 5 expected 5
+OK   duplicate deals -> same gpt net 20.0 expected 20.0
+OK   common-only claude trades (no ETH) 4 expected 4
+
+RESULT: ALL PASS

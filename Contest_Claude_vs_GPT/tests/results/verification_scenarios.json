@@ -1,0 +1,226 @@
+[
+ {
+  "id": "S0",
+  "scenario": "Baseline: normal Hedging demo",
+  "expected": "all checks pass, 0 test positions left, journal OK, shutdown called",
+  "actual": "ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "1a",
+  "scenario": "Broker returns None for the open (but the order executed)",
+  "expected": "position cannot be linked → NOT auto-closed, urgent warning with tickets, Claude order never sent, journal INCOMPLETE (note: GPT's own _send_order retries other filling modes on None, so >1 GPT position can appear)",
+  "actual": "ok=False failed=['A: GPT position confirmed (deal→position, symbol, side, magic, volume)', 'Cleanup: no test or unlinked positions left, journal complete'] urgent=4 requests=3 contest_open=[5001, 5003, 5005] journal=INCOMPLETE shutdown=True | GPT positions left (unlinked, not auto-closed): [5001, 5003, 5005]",
+  "pass": true
+ },
+ {
+  "id": "1b",
+  "scenario": "Broker returns a wrong order ticket (deal ticket correct)",
+  "expected": "resolved via deal → position_id; all pass; nothing left",
+  "actual": "ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "1c",
+  "scenario": "Broker returns a wrong deal ticket (order ticket correct)",
+  "expected": "resolved via order → deal history; all pass; nothing left",
+  "actual": "ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "1d",
+  "scenario": "Both order and deal tickets wrong",
+  "expected": "cannot confirm → stop further orders, urgent, the 1 GPT position NOT auto-closed, journal INCOMPLETE",
+  "actual": "ok=False failed=['A: GPT position confirmed (deal→position, symbol, side, magic, volume)', 'Cleanup: no test or unlinked positions left, journal complete'] urgent=2 requests=1 contest_open=[5001] journal=INCOMPLETE shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "2",
+  "scenario": "Order succeeds but position not visible for the first 3 queries",
+  "expected": "polling finds it; all pass; nothing left",
+  "actual": "ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "3",
+  "scenario": "Orders only partially filled (50%)",
+  "expected": "accepted with actual volume (logged), partial-close plan uses actual volume; all pass; nothing left",
+  "actual": "ok=True failed=[] urgent=0 requests=5 contest_open=[] journal=OK shutdown=True | partial-fill logged",
+  "pass": true
+ },
+ {
+  "id": "4",
+  "scenario": "A manual position (magic 0) already open on BTCUSDm",
+  "expected": "manual position untouched; all pass",
+  "actual": "ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "5",
+  "scenario": "Another strategy's position (magic 777) pre-exists + a manual one is opened DURING the test",
+  "expected": "both untouched (not contest magic, not linked), no urgent; all pass",
+  "actual": "ok=True failed=[] urgent=0 requests=7 contest_open=[] journal=OK shutdown=True | other positions still open: [5001, 5005]",
+  "pass": true
+ },
+ {
+  "id": "6a",
+  "scenario": "Adapter's Claude magic wrongly equals GPT's",
+  "expected": "guard fails, 0 orders sent",
+  "actual": "ok=False failed=['GUARD: magic numbers correct and distinct'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "6b",
+  "scenario": "Claude bot magic wrongly set to GPT's number",
+  "expected": "guard fails, 0 orders sent",
+  "actual": "ok=False failed=['GUARD: magic numbers correct and distinct'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "7",
+  "scenario": "Connection lost during cleanup with BOTH test positions still open, then restored and re-run",
+  "expected": "run1: states unknown → urgent, 2 test positions left open, journal INCOMPLETE; run2: orphans found via journal, both closed with their own magic, journal resolved, run stops safely",
+  "actual": "RUN1 ok=False failed=['Unexpected error', 'Cleanup: no test or unlinked positions left, journal complete'] urgent=1 requests=2 contest_open=[5001, 5003] journal=INCOMPLETE shutdown=True || RUN2 ok=True failed=[] urgent=0 requests=2 contest_open=[] journal=OK shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "8a",
+  "scenario": "Cleanup close returns DONE but position stays open (first 2 times)",
+  "expected": "cleanup re-checks, sees still open, retries, finally closed; all pass",
+  "actual": "ok=True failed=[] urgent=0 requests=8 contest_open=[] journal=OK shutdown=True | 'still open' retry logged",
+  "pass": true
+ },
+ {
+  "id": "8b",
+  "scenario": "Claude BOT's own close returns DONE but position stays open",
+  "expected": "verification detects it (FAIL 'Claude fully closed'), cleanup still closes everything, journal OK. FINDING: Claude bot trusts retcode, no re-check",
+  "actual": "ok=False failed=['E: Claude partial close (close & remaining both valid)', 'Claude fully closed its position', 'Counter accuracy without exclusion (claude): counted once, net = MT5 history', 'D: journal has all deal IDs (claude)'] urgent=0 requests=7 contest_open=[] journal=OK shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "9a",
+  "scenario": "Ctrl+C in the middle of the checks (before cleanup)",
+  "expected": "cleanup runs, both test positions closed, report written, shutdown called, journal complete",
+  "actual": "ok=False failed=['Interrupted by Ctrl+C'] urgent=0 requests=4 contest_open=[] journal=OK shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "9b",
+  "scenario": "Ctrl+C while cleanup is running",
+  "expected": "cleanup restarts once and finishes, positions closed, report written, shutdown called",
+  "actual": "ok=False failed=['Unexpected error'] urgent=1 requests=4 contest_open=[] journal=OK shutdown=True | 'Ctrl+C during cleanup' logged",
+  "pass": true
+ },
+ {
+  "id": "9c",
+  "scenario": "Ctrl+C while the report is being written",
+  "expected": "shutdown still called, positions already closed, journal complete (separate file), error logged",
+  "actual": "ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True | REPORT ERROR logged",
+  "pass": true
+ },
+ {
+  "id": "10a",
+  "scenario": "verification_positions.json is garbage",
+  "expected": "guard fails (0 orders); counter: data_ok False + ERROR warning; preflight fails",
+  "actual": "ok=False failed=['GUARD: verification journal readable'] urgent=0 requests=0 contest_open=[] journal=CORRUPT shutdown=True | counter data_ok=False warning='ERROR: verification_positions.json পড়া যায়নি: JSONDecodeEr…' preflight_ok=False",
+  "pass": true
+ },
+ {
+  "id": "10b",
+  "scenario": "verification_positions.json valid JSON but checksum wrong (tampered)",
+  "expected": "same as 10a",
+  "actual": "ok=False failed=['GUARD: verification journal readable'] urgent=0 requests=0 contest_open=[] journal=CORRUPT shutdown=True | counter data_ok=False warning='ERROR: verification_positions.json-এর checksum মেলেনি (নষ্ট …' preflight_ok=False",
+  "pass": true
+ },
+ {
+  "id": "10c",
+  "scenario": "verification_positions.json truncated (partially written)",
+  "expected": "same as 10a",
+  "actual": "ok=False failed=['GUARD: verification journal readable'] urgent=0 requests=0 contest_open=[] journal=CORRUPT shutdown=True | counter data_ok=False warning='ERROR: verification_positions.json পড়া যায়নি: JSONDecodeEr…' preflight_ok=False",
+  "pass": true
+ },
+ {
+  "id": "10d",
+  "scenario": "verification_positions.json missing",
+  "expected": "counter not silent: NOTE warning shown",
+  "actual": "status=MISSING warnings=['NOTE: verification_positions.json নেই — demo_verification এখনো চালানো হয়নি (বা ফাইল সরানো হয়েছে) — এই ফোল্ডারে verification চালালে ফাইলটা এখানেই থাকার কথা']",
+  "pass": true
+ },
+ {
+  "id": "11",
+  "scenario": "Counter after restart + D both directions (contest trades before AND after verification)",
+  "expected": "both real contest trades counted exactly once, both verification trades excluded, new counter instance gives identical result",
+  "actual": "counted [5001, 5014] (contest trades before=5001, after=5014); excluded verification [5004, 5006]; second counter instance identical=True",
+  "pass": true
+ },
+ {
+  "id": "12a",
+  "scenario": "Netting account",
+  "expected": "stops before any order (0 requests)",
+  "actual": "ok=False failed=['GUARD: account is HEDGING'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "12b",
+  "scenario": "Real account",
+  "expected": "stops before any order (0 requests)",
+  "actual": "ok=False failed=['GUARD: account is DEMO'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "13a",
+  "scenario": "Unusual volume rules: min 0.1, step 0.1 (balance 100,000)",
+  "expected": "Claude test volume 0.2 → close 0.1 / remain 0.1 (both valid); all pass",
+  "actual": "ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "13a2",
+  "scenario": "min lot 0.1 with balance 10,000: GPT's 1%-risk lot < min lot",
+  "expected": "GPT's own rule refuses the order (SKIP_LOT_TOO_SMALL), verification reports it, 0 orders, nothing left. FINDING: on such accounts GPT would never trade",
+  "actual": "ok=False failed=['A: GPT position confirmed (deal→position, symbol, side, magic, volume)'] urgent=0 requests=0 contest_open=[] journal=OK shutdown=True | GPT SKIPPED (lot too small) logged",
+  "pass": true
+ },
+ {
+  "id": "13b",
+  "scenario": "volume_max 0.01 (no valid partial close possible)",
+  "expected": "partial close skipped with reason; full close works; all pass",
+  "actual": "ok=True failed=[] urgent=0 requests=5 contest_open=[] journal=OK shutdown=True | partial skipped & logged",
+  "pass": true
+ },
+ {
+  "id": "13c",
+  "scenario": "Broker accepts only RETURN filling mode",
+  "expected": "both bots fall back FOK→IOC→RETURN; all pass",
+  "actual": "ok=True failed=[] urgent=0 requests=16 contest_open=[] journal=OK shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "14",
+  "scenario": "Claude's close/modify on GPT position refused, and the reverse",
+  "expected": "both refusal checks PASS; GPT code has no close/modify path (static check)",
+  "actual": "ok=True failed=[] urgent=0 requests=6 contest_open=[] journal=OK shutdown=True | refusal-both-ways PASS=True static-GPT PASS=True",
+  "pass": true
+ },
+ {
+  "id": "15a",
+  "scenario": "Symbol name not found",
+  "expected": "guard fails, 0 orders",
+  "actual": "ok=False failed=['GUARD: symbol BTCUSDm available'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "15b",
+  "scenario": "No tick for the symbol",
+  "expected": "guard fails, 0 orders",
+  "actual": "ok=False failed=['GUARD: BTCUSDm has a tick'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True",
+  "pass": true
+ },
+ {
+  "id": "15c",
+  "scenario": "SL/TP would break broker stop level",
+  "expected": "guard fails, 0 orders",
+  "actual": "ok=False failed=['GUARD: test SL/TP respect broker stop level'] urgent=0 requests=0 contest_open=[] journal=MISSING shutdown=True",
+  "pass": true
+ }
+]

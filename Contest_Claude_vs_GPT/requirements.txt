@@ -1,0 +1,5 @@
+MetaTrader5
+customtkinter
+pandas
+numpy
+requests

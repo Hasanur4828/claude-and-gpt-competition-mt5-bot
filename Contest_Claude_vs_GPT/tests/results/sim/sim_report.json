@@ -1,0 +1,162 @@
+{
+ "requests_total": 52,
+ "close_or_modify_requests": 23,
+ "ownership_violations": 0,
+ "unknown_magic_requests": 0,
+ "per_symbol_or_lock_violations": 0,
+ "claude_blocked_by_gpt_only": 0,
+ "gpt_position_checks": {
+  "calls": 4864,
+  "claude_only_present": 119,
+  "blocked_when_claude_only": 0
+ },
+ "positions_opened": {
+  "claude": 18,
+  "gpt": 11
+ },
+ "risk_over_1pct": 0,
+ "sl_tp_wrong_side": 0,
+ "gpt_tp_not_2R": 0,
+ "claude_partial_tp1_trades": 10,
+ "claude_breakeven_moves": 10,
+ "claude_time_stops": 2,
+ "claude_maxhold_stops": 1,
+ "claude_log_codes": {
+  "WAIT_REARM": 3679,
+  "ARMED": 3348,
+  "ADX_LOW": 2255,
+  "NO_TREND": 1459,
+  "NO_TRIGGER": 1288,
+  "PB_SHALLOW": 345,
+  "IN_TRADE": 199,
+  "PB_EXPIRED": 105,
+  "PB_INVALID_EMA50": 97,
+  "SKIP_SESSION": 34,
+  "SKIP_LOCATION": 31,
+  "SKIP_SL_BIG": 19,
+  "ENTRY": 18,
+  "PB_INVALID_RSI": 6,
+  "SKIP_SESSION+PB_EXPIRED": 4,
+  "SKIP_CORRELATION": 4,
+  "SKIP_NEWS": 3,
+  "SKIP_SL_BIG+PB_EXPIRED": 2,
+  "SKIP_LOCATION+PB_EXPIRED": 1
+ },
+ "gpt_eval_codes": {
+  "SKIP_SESSION": 3734,
+  "WAIT_FIB_SWEEP_CONFIRM": 2020,
+  "NO_RECENT_BOS": 1171,
+  "ADX_LOW": 1028,
+  "NO_TREND": 520,
+  "SKIP_POSITION_EXISTS": 114,
+  "BUY": 9,
+  "SELL": 2
+ },
+ "counter_vs_broker": {
+  "claude": {
+   "ids_match": true,
+   "count": 18,
+   "truth_count": 18,
+   "net": 773.8,
+   "truth_net": 773.8,
+   "net_match": true,
+   "symbol_net_match": true,
+   "no_duplicate_ids": true
+  },
+  "gpt": {
+   "ids_match": true,
+   "count": 11,
+   "truth_count": 11,
+   "net": 389.64,
+   "truth_net": 389.64,
+   "net_match": true,
+   "symbol_net_match": true,
+   "no_duplicate_ids": true
+  }
+ },
+ "open_positions_at_end": {
+  "claude": 0,
+  "gpt": 0
+ },
+ "duplicate_deals_same_result": true,
+ "report_twice_same": true,
+ "server_offset_hours": 3.0,
+ "closing_deals_in_last_3h": 0,
+ "naive_utc_window_would_miss": 0,
+ "recent_closed_positions_counted": true,
+ "server_ahead_2_5h_test": {
+  "trade_counted_by_counter": true,
+  "naive_window_to_utc_now_would_count_it": false
+ },
+ "start_ticket_filter_ok": true,
+ "restart": {
+  "bar": 5428,
+  "gpt_open_at_restart": [
+   5054
+  ],
+  "claude_open_at_restart": [
+   5056
+  ],
+  "claude_trades_reloaded": [
+   5056
+  ],
+  "counter_same_after_restart": true,
+  "claude_open_trades_reloaded_ok": true,
+  "pre_restart_trades_closed_after_restart": 1,
+  "their_results_recorded_by_new_bot": true
+ },
+ "gpt_sha256_before": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+ "gpt_sha256_after": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+ "gpt_sha256_expected": "4d41a0ea7e75176002f1fc90a1530f77893c47e964f1420f91c1ba58bdd81160",
+ "gpt_unchanged": true,
+ "preflight_hedging_demo": {
+  "ok": true,
+  "failed": []
+ },
+ "preflight_netting": {
+  "ok": false,
+  "failed": [
+   "Account is HEDGING"
+  ]
+ },
+ "preflight_real_account": {
+  "ok": false,
+  "failed": [
+   "Account is DEMO"
+  ]
+ },
+ "note_gpt_daily_loss_window_uses_utc_vs_server_time": true,
+ "SIMULATED_RESULTS_NOT_REAL": {
+  "claude": {
+   "trades": 18,
+   "wins": 11,
+   "losses": 7,
+   "breakeven": 0,
+   "net_profit": 773.8,
+   "gross_profit": 1376.0700000000002,
+   "gross_loss": 602.27,
+   "win_rate": 61.111111111111114,
+   "profit_factor": 2.28480581798861,
+   "avg_r": 0.39983625190947125,
+   "max_drawdown": 449.38000000000005
+  },
+  "gpt": {
+   "trades": 11,
+   "wins": 5,
+   "losses": 6,
+   "breakeven": 0,
+   "net_profit": 389.64000000000004,
+   "gross_profit": 982.7600000000001,
+   "gross_loss": 593.12,
+   "win_rate": 45.45454545454545,
+   "profit_factor": 1.6569328297814947,
+   "avg_r": 0.36362316261372885,
+   "max_drawdown": 194.56
+  }
+ },
+ "sim_period": {
+  "from_utc": "2026-03-30T03:00:00+00:00",
+  "to_utc": "2026-05-13T21:30:00+00:00",
+  "m15_bars": 4298
+ }
+}
