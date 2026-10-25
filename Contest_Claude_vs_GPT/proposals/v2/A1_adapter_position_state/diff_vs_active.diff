@@ -1,0 +1,30 @@
+--- active/gpt_contest_adapter.py
++++ A1/gpt_contest_adapter.py
+@@ -10,10 +10,13 @@
+    অন্য যেকোনো strategy-র (Personal ইত্যাদি) পুরনো পজিশন থাকলে আটকাবে।
+ 2. নিরাপত্তা: কোনো symbol-এ অপ্রত্যাশিত error হলে পুরো সফটওয়্যার crash না করে
+    সেটা log-এ ফেরত দেয় (মূল কোডে BUY-এর সময় tick None হলে crash হতে পারত)।
++3. [A1 প্রস্তাব] MT5 positions_get() None দিলে (API/সংযোগ error) "পজিশন নেই" ধরা হয় না:
++   _has_position() None ফেরত দেয় = অবস্থা অজানা। GPT core v2 (G2) তখন এই চক্রে order দেয় না
++   (SKIP_POSITION_STATE_UNKNOWN)। এই adapter শুধু G2-এর সাথে একসাথে চালু করতে হবে।
+ """
+ from __future__ import annotations
+ 
+-from typing import Any, Dict, List
++from typing import Any, Dict, List, Optional
+ 
+ import MetaTrader5 as mt5
+ 
+@@ -24,8 +27,10 @@
+ 
+ 
+ class GPTContestAdapter(GPTLiquidityFibonacciScalper):
+-    def _has_position(self, symbol: str) -> bool:
+-        positions = mt5.positions_get(symbol=symbol) or ()
++    def _has_position(self, symbol: str) -> Optional[bool]:
++        positions = mt5.positions_get(symbol=symbol)
++        if positions is None:
++            return None                     # [A1] query ব্যর্থ = অবস্থা অজানা, "পজিশন নেই" নয়
+         for p in positions:
+             if p.magic == CLAUDE_MAGIC:
+                 continue                    # প্রতিযোগীর পজিশন — উপেক্ষা

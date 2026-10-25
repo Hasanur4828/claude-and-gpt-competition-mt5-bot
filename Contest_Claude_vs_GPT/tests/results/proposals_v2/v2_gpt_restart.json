@@ -1,0 +1,44 @@
+{
+ "summary": {
+  "total": 5,
+  "passed": 5,
+  "SIMULATED_ONLY": true
+ },
+ "rows": [
+  {
+   "group": "restart",
+   "test": "[G2] None অথচ খোলে → restart → evaluate",
+   "expected": "নিরাপদ: SKIP_POSITION_EXISTS (broker-এ পজিশন দেখা যায়)",
+   "actual": "first=OPENED_RECONCILED after restart=SKIP_POSITION_EXISTS positions=1",
+   "pass": true
+  },
+  {
+   "group": "restart",
+   "test": "[G2] None, order তখনো দেখা যায় না → restart → পরে order খোলে",
+   "expected": "block ফাইলে থাকে → restart-এর পরেও SKIP_EXECUTION_UNKNOWN, নতুন send নয়; খোলার পরে RESOLVED_OPENED → SKIP_POSITION_EXISTS; মোট ১ পজিশন; ফাইল মুছে যায়",
+   "actual": "first=UNKNOWN file=True → SKIP_EXECUTION_UNKNOWN / send=SKIP_EXECUTION_UNKNOWN → EXECUTION_UNKNOWN_RESOLVED_OPENED → SKIP_POSITION_EXISTS positions=1 file_after=False",
+   "pass": true
+  },
+  {
+   "group": "restart",
+   "test": "[G2] None, কিছুই খোলেনি → restart → সময় পেরোনো",
+   "expected": "restart-এর পরে SKIP_EXECUTION_UNKNOWN; ≥৬০ সেকেন্ডে RESOLVED_NOT_EXECUTED; ফাইল মুছে যায়",
+   "actual": "SKIP_EXECUTION_UNKNOWN → EXECUTION_UNKNOWN_RESOLVED_NOT_EXECUTED file_after=False",
+   "pass": true
+  },
+  {
+   "group": "restart",
+   "test": "[G2] exec-state ফাইল নষ্ট (অর্ধেক লেখা/ভুল JSON)",
+   "expected": "evaluate ও send দুটোই SKIP_EXEC_STATE_UNREADABLE, ০ order",
+   "actual": "evaluate=SKIP_EXEC_STATE_UNREADABLE send=SKIP_EXEC_STATE_UNREADABLE orders=0",
+   "pass": true
+  },
+  {
+   "group": "restart",
+   "test": "[G2] ফাইল নেই, স্বাভাবিক order",
+   "expected": "OPENED, কোনো ফাইল লেখা হয় না",
+   "actual": "status=OPENED file=False",
+   "pass": true
+  }
+ ]
+}

@@ -1,0 +1,116 @@
+[
+ {
+  "test": "R1 plan_partial_close(vol=0.02, min=0.01, step=0.01, max=100)",
+  "expected": [
+   0.01,
+   0.01
+  ],
+  "actual": "(0.01, 0.01)",
+  "pass": true
+ },
+ {
+  "test": "R1 plan_partial_close(vol=0.03, min=0.01, step=0.01, max=100)",
+  "expected": [
+   0.01,
+   0.02
+  ],
+  "actual": "(0.01, 0.02)",
+  "pass": true
+ },
+ {
+  "test": "R1 plan_partial_close(vol=0.01, min=0.01, step=0.01, max=100)",
+  "expected": null,
+  "actual": "None close 0.0 < volume_min 0.01",
+  "pass": true
+ },
+ {
+  "test": "R1 plan_partial_close(vol=0.1, min=0.1, step=0.1, max=100)",
+  "expected": null,
+  "actual": "None close 0.0 < volume_min 0.1",
+  "pass": true
+ },
+ {
+  "test": "R1 plan_partial_close(vol=0.3, min=0.1, step=0.1, max=100)",
+  "expected": [
+   0.1,
+   0.2
+  ],
+  "actual": "(0.1, 0.2)",
+  "pass": true
+ },
+ {
+  "test": "R1 plan_partial_close(vol=0.25, min=0.1, step=0.05, max=100)",
+  "expected": [
+   0.1,
+   0.15
+  ],
+  "actual": "(0.1, 0.15)",
+  "pass": true
+ },
+ {
+  "test": "R1 plan_partial_close(vol=0.15, min=0.1, step=0.05, max=100)",
+  "expected": null,
+  "actual": "None close 0.05 < volume_min 0.1",
+  "pass": true
+ },
+ {
+  "test": "R1 plan_partial_close(vol=5.0, min=0.01, step=0.01, max=2.0)",
+  "expected": null,
+  "actual": "None close 2.5 / remaining 2.5 > volume_max 2.0",
+  "pass": true
+ },
+ {
+  "test": "R1 plan_partial_close(vol=0.02, min=0.01, step=0.0, max=100)",
+  "expected": null,
+  "actual": "None volume_step 0.0 <= 0",
+  "pass": true
+ },
+ {
+  "test": "R2a TP1 with min 0.1 / step 0.1, lot 0.1 → partial skipped, SL moved to entry",
+  "expected": "volume 0.1, sl == entry, tp1_done, log says skipped",
+  "actual": "volume 0.1, sl==entry True, tp1_done True, logged True",
+  "pass": true
+ },
+ {
+  "test": "R2b TP1 with min 0.1 / step 0.1, lot 0.3 → close 0.1, keep 0.2, SL→entry",
+  "expected": "volume 0.2, sl == entry",
+  "actual": "volume 0.2, sl==entry True",
+  "pass": true
+ },
+ {
+  "test": "R2c TP1 normal rules (min 0.01 / step 0.01), lot 0.04 → half closed (same as v4)",
+  "expected": "volume 0.02, sl == entry",
+  "actual": "volume 0.02, sl==entry True",
+  "pass": true
+ },
+ {
+  "test": "R2d TP1 not reached → nothing changes",
+  "expected": "volume 0.04, sl unchanged, tp1_done False",
+  "actual": "volume 0.04, tp1_done False",
+  "pass": true
+ },
+ {
+  "test": "R3a MT5 disconnected → open trade NOT recorded as closed, kept in management",
+  "expected": "trade still tracked, 0 closed records, log 'MT5 unavailable'",
+  "actual": "tracked True, closed 0, logged True",
+  "pass": true
+ },
+ {
+  "test": "R3b connection back, position closed by SL → recorded once with correct net",
+  "expected": "1 closed record, net -2.32",
+  "actual": "1 record(s), net -2.32",
+  "pass": true
+ },
+ {
+  "test": "R4 positions_get → None raises MT5Unavailable (never treated as 'no positions')",
+  "expected": "MT5Unavailable",
+  "actual": true,
+  "pass": true
+ },
+ {
+  "test": "R5 order_send returns None (outcome unknown) → Claude does NOT resend with other filling modes",
+  "expected": "1 send, result None, 1 position at most",
+  "actual": "sends 1, result None, positions 1",
+  "pass": true
+ }
+]
